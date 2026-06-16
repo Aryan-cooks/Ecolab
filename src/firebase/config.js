@@ -4,7 +4,7 @@ export const auth = {
   onAuthStateChanged: (callback) => {
     // Return unsubscribe function
     return () => {};
-  }
+  },
 };
 
 export const db = {};

@@ -7,7 +7,7 @@
     @apply bg-black text-neon-green font-body uppercase tracking-wider;
     letter-spacing: 0.05em;
   }
-  
+
   /* Remove default arrows for numeric inputs */
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"]::-webkit-outer-spin-button {
@@ -20,8 +20,12 @@
 }
 
 .material-symbols-outlined {
-  font-family: 'Material Symbols Outlined', sans-serif !important;
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-family: "Material Symbols Outlined", sans-serif !important;
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
   vertical-align: middle;
 }
 
@@ -39,20 +43,24 @@
 }
 
 @keyframes scanline-anim {
-  0% { top: 0; }
-  100% { top: 100%; }
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 100%;
+  }
 }
 
 .brutalist-border {
-  border: 1px solid #00FF41;
+  border: 1px solid #00ff41;
 }
 
 .brutalist-border-amber {
-  border: 1px solid #FFB100;
+  border: 1px solid #ffb100;
 }
 
 .brutalist-border-red {
-  border: 1px solid #FF3131;
+  border: 1px solid #ff3131;
 }
 
 .terminal-glow {
@@ -68,7 +76,7 @@
 }
 
 .grid-bg {
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(0, 255, 65, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
   background-size: 20px 20px;
@@ -83,26 +91,36 @@
   background: #000;
 }
 ::-webkit-scrollbar-thumb {
-  background: #00FF41;
+  background: #00ff41;
 }
 
 .telemetry-scroll {
-  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    black 15%,
+    black 85%,
+    transparent
+  );
 }
 
 /* Cyberpunk terminal style buttons and inputs */
-input, select, textarea {
+input,
+select,
+textarea {
   background-color: #050505 !important;
-  border: 1px solid #00FF41 !important;
-  color: #00FF41 !important;
-  font-family: 'JetBrains Mono', monospace !important;
+  border: 1px solid #00ff41 !important;
+  color: #00ff41 !important;
+  font-family: "JetBrains Mono", monospace !important;
   border-radius: 0px !important;
 }
 
-input:focus, select:focus, textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
   outline: none !important;
   box-shadow: 0 0 8px rgba(0, 255, 65, 0.5) !important;
-  border-color: #00FF41 !important;
+  border-color: #00ff41 !important;
 }
 
 button {

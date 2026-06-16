@@ -53,9 +53,7 @@
       "level": "tree",
       "streakDays": 2,
       "lastStreakDate": "2026-06-12T10:27:55.587Z",
-      "badges": [
-        "first_step"
-      ],
+      "badges": ["first_step"],
       "createdAt": "2026-06-12T10:06:28.762Z",
       "lastActiveAt": "2026-06-12T10:19:19.975Z",
       "weeklyChallenge": {
@@ -84,11 +82,7 @@
       "level": "tree",
       "streakDays": 9,
       "lastStreakDate": "2026-06-12T15:21:40.958Z",
-      "badges": [
-        "first_step",
-        "streak_master",
-        "action_taker"
-      ],
+      "badges": ["first_step", "streak_master", "action_taker"],
       "createdAt": "2026-06-12T14:57:22.678Z",
       "lastActiveAt": "2026-06-13T12:09:13.985Z",
       "weeklyChallenge": {
@@ -125,11 +119,7 @@
       "level": "sapling",
       "streakDays": 9,
       "lastStreakDate": "2026-06-13T13:09:55.047Z",
-      "badges": [
-        "first_step",
-        "streak_master",
-        "action_taker"
-      ],
+      "badges": ["first_step", "streak_master", "action_taker"],
       "createdAt": "2026-06-13T13:07:50.567Z",
       "lastActiveAt": "2026-06-14T13:18:54.149Z",
       "weeklyChallenge": {

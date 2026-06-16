@@ -1,6 +1,6 @@
-import React from 'react';
-import { useStore } from '../store/useStore';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { useStore } from "../store/useStore";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const { user, offlineMode } = useStore();
@@ -24,26 +24,44 @@ export default function Header() {
 
       <div className="flex items-center gap-4 md:gap-8">
         {user.streakDays > 0 && (
-          <Link to="/achievements" className="flex items-center gap-1.5 border border-neon-amber px-2.5 py-0.5 hover:bg-neon-amber/20 hover:scale-105 cursor-pointer transition-all group">
-            <span className="material-symbols-outlined text-neon-amber text-xs group-hover:animate-pulse">bolt</span>
+          <Link
+            to="/achievements"
+            className="flex items-center gap-1.5 border border-neon-amber px-2.5 py-0.5 hover:bg-neon-amber/20 hover:scale-105 cursor-pointer transition-all group"
+          >
+            <span className="material-symbols-outlined text-neon-amber text-xs group-hover:animate-pulse">
+              bolt
+            </span>
             <span className="text-[10px] md:text-xs font-bold text-neon-amber">
-              {user.streakDays}<span className="hidden md:inline">_DAY_STREAK</span><span className="md:hidden">D_STREAK</span>
+              {user.streakDays}
+              <span className="hidden md:inline">_DAY_STREAK</span>
+              <span className="md:hidden">D_STREAK</span>
             </span>
           </Link>
         )}
 
-        <Link to="/achievements" className="flex items-center gap-3 border-l border-neon-green/30 pl-4 md:pl-8 hover:bg-neon-green/10 p-2 -my-2 cursor-pointer transition-all group">
+        <Link
+          to="/achievements"
+          className="flex items-center gap-3 border-l border-neon-green/30 pl-4 md:pl-8 hover:bg-neon-green/10 p-2 -my-2 cursor-pointer transition-all group"
+        >
           <div className="text-right">
-            <p className="text-xs font-bold text-neon-green group-hover:brightness-125 transition-all truncate max-w-[60px] md:max-w-[120px]">{user.displayName.toUpperCase()}</p>
+            <p className="text-xs font-bold text-neon-green group-hover:brightness-125 transition-all truncate max-w-[60px] md:max-w-[120px]">
+              {user.displayName.toUpperCase()}
+            </p>
             <p className="text-[9px] text-neon-amber group-hover:animate-pulse">
-              LVL_{Math.max(1, Math.round(user.greenScore / 70))}<span className="hidden md:inline">_{user.level.toUpperCase()}</span>
+              LVL_{Math.max(1, Math.round(user.greenScore / 70))}
+              <span className="hidden md:inline">
+                _{user.level.toUpperCase()}
+              </span>
             </p>
           </div>
           <div className="w-10 h-10 border-2 border-neon-green p-0.5 bg-black group-hover:shadow-[0_0_8px_#00FF41] group-hover:scale-110 transition-all">
             <img
               alt="User Node"
               className="w-full h-full object-cover grayscale brightness-125 contrast-125 group-hover:grayscale-0 transition-all duration-500"
-              src={user.photoURL || `https://placehold.co/40x40/000000/00FF41?text=${user.displayName[0].toUpperCase()}`}
+              src={
+                user.photoURL ||
+                `https://placehold.co/40x40/000000/00FF41?text=${user.displayName[0].toUpperCase()}`
+              }
               onError={(e) => {
                 e.target.src = `https://placehold.co/40x40/000000/00FF41?text=${user.displayName[0].toUpperCase()}`;
               }}
