@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ECO-IMPACT // DATA LAB VARIANT</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "terminal-bg": "#000000",
+                        "neon-green": "#00FF41",
+                        "neon-amber": "#FFB100",
+                        "neon-red": "#FF3131",
+                        "matrix-dim": "#003B00",
+                        "surface": "#050505",
+                        "outline-variant": "#00FF41"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "max-width": "1400px",
+                        "margin-desktop": "24px",
+                        "space-6": "24px",
+                        "space-4": "16px",
+                        "space-8": "32px",
+                        "space-5": "20px",
+                        "gutter": "16px",
+                        "space-2": "8px",
+                        "space-3": "12px",
+                        "space-1": "4px",
+                        "space-12": "48px"
+                    },
+                    fontFamily: {
+                        "label": ["JetBrains Mono"],
+                        "body": ["JetBrains Mono"],
+                        "display": ["JetBrains Mono"],
+                        "h2": ["JetBrains Mono"],
+                        "caption": ["JetBrains Mono"],
+                        "mono-data": ["JetBrains Mono"],
+                        "h3": ["JetBrains Mono"],
+                        "h1": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body {
+            background-color: #000000;
+            color: #00FF41;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 255, 65, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            pointer-events: none;
+            animation: scanline 8s linear infinite;
+        }
+        @keyframes scanline {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+        .brutalist-border {
+            border: 1px solid #00FF41;
+        }
+        .terminal-glow {
+            text-shadow: 0 0 8px rgba(0, 255, 65, 0.6);
+        }
+        .telemetry-scroll {
+            mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+        }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #00FF41; }
+        .grid-bg {
+            background-image: 
+                linear-gradient(to right, rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="font-body selection:bg-neon-green selection:text-black grid-bg">
+<div class="scanline"></div>
+<!-- System Navigation -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col py-space-6 px-space-4 bg-black border-r-2 border-neon-green z-50">
+<div class="mb-space-8 px-2">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-neon-green">terminal</span>
+<h1 class="font-bold text-xl text-neon-green terminal-glow">ECO-LAB V2.4</h1>
+</div>
+<p class="text-[10px] text-neon-green opacity-60">SYSTEM STATUS: OPERATIONAL</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 bg-neon-green text-black font-bold border-l-4 border-neon-amber" href="#">
+<span class="material-symbols-outlined text-sm">dashboard</span>
+<span class="text-sm">MAIN_DASHBOARD</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-neon-green hover:bg-matrix-dim transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">calculate</span>
+<span class="text-sm">CALC_ENGINE</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-neon-green hover:bg-matrix-dim transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">energy_savings_leaf</span>
+<span class="text-sm">NEUTRAL_PROTOCOLS</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-neon-green hover:bg-matrix-dim transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span class="text-sm">VECTOR_ANALYTICS</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-neon-green hover:bg-matrix-dim transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">forum</span>
+<span class="text-sm">NODE_SYNC_CHAT</span>
+</a>
+</nav>
+<div class="mt-auto space-y-4 pt-4 border-t border-neon-green/30">
+<div class="text-[10px] space-y-1">
+<p class="flex justify-between"><span>UPTIME:</span> <span>124:32:01</span></p>
+<p class="flex justify-between"><span>CPU LOAD:</span> <span class="text-neon-amber">42%</span></p>
+<p class="flex justify-between"><span>NODE ID:</span> <span>AR-992-X</span></p>
+</div>
+<button class="w-full border-2 border-neon-green text-neon-green py-3 px-4 font-bold flex items-center justify-center gap-2 hover:bg-neon-green hover:text-black transition-all">
+<span class="material-symbols-outlined">add_box</span>
+        INIT_LOG_ENTRY
+    </button>
+</div>
+</aside>
+<!-- Command Header -->
+<header class="flex justify-between items-center h-16 ml-64 px-space-8 w-[calc(100%-256px)] sticky top-0 bg-black border-b-2 border-neon-green z-40 backdrop-blur-md bg-opacity-90">
+<div class="flex items-center gap-4">
+<span class="text-neon-green opacity-40">&gt;&gt;</span>
+<div class="text-xs font-bold tracking-widest text-neon-green">
+        SEARCH_INSIGHTS: <span class="animate-pulse">_</span>
+</div>
+</div>
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 border border-neon-amber px-3 py-1">
+<span class="material-symbols-outlined text-neon-amber text-sm">bolt</span>
+<span class="text-xs font-bold text-neon-amber">5_DAY_STREAK_ACTIVE</span>
+</div>
+<div class="flex items-center gap-3 border-l border-neon-green/30 pl-8">
+<div class="text-right">
+<p class="text-xs font-bold text-neon-green">ALEX_RIVERA</p>
+<p class="text-[9px] text-neon-amber">LVL_12_ECO_WARRIOR</p>
+</div>
+<div class="w-10 h-10 border-2 border-neon-green p-0.5">
+<img alt="User" class="w-full h-full grayscale brightness-125 contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq7sDnM3r90hbhgTFNsiJSbOWkfozNI4FrgQynIt3v08Sr3866SqttCYYRJT_JpVNBik4wmmVMeQknsu3QTkdRR7sLF_HNlHKFSEGCJnzqA9PoTf_rKyjr4PqQO-Ylx2H_D0RMMvuGhS53tu8KxFzKcTt6kN47ZFqf-mvnW45zyHzie-9a8ICpthiXFClQh4cJI4a6v2H-ijh4wvkiQDivIia4S6N3U_90SZ2mQcumduxIQ-uvcN5uhSRMxgQdZVqPnL2DLk7DZLU"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Command Center -->
+<main class="ml-64 p-space-8 min-h-screen">
+<div class="max-w-[1400px] mx-auto space-y-gutter">
+<!-- Top Telemetry Row -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Monolithic Metric -->
+<div class="col-span-12 lg:col-span-8 border-2 border-neon-green p-space-6 bg-surface relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]">hub</span>
+</div>
+<div class="flex justify-between items-start mb-12">
+<div>
+<h2 class="text-xs font-bold text-neon-amber mb-2">[ EMISSION_VECTOR_ANALYTICS ]</h2>
+<div class="flex items-baseline gap-4">
+<span class="text-8xl font-black terminal-glow">4.2</span>
+<span class="text-xl opacity-60">TONS_CO2E / ANNUM</span>
+</div>
+</div>
+<div class="text-right border border-neon-green p-2 bg-matrix-dim">
+<p class="text-[9px] mb-1">CURRENT_STATUS</p>
+<p class="text-sm font-bold animate-pulse text-neon-green">LOW_FOOTPRINT_CONFIRMED</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between text-xs">
+<span>GLOBAL_VARIANCE: -15% [OPTIMAL]</span>
+<span>TARGET_THRESHOLD: 3.8T</span>
+</div>
+<div class="w-full h-8 border border-neon-green relative">
+<div class="bg-neon-green h-full" style="width: 82%;"></div>
+<div class="absolute inset-0 flex items-center justify-center text-[10px] font-bold text-black mix-blend-difference">
+                        COMPLIANCE_LEVEL: 82.00%
+                    </div>
+</div>
+</div>
+</div>
+<!-- System Logs & Metrics -->
+<div class="col-span-12 lg:col-span-4 grid grid-rows-2 gap-gutter">
+<div class="border-2 border-neon-green p-6 bg-surface flex flex-col justify-center items-center">
+<p class="text-xs mb-4 text-neon-amber">GREEN_SCORE_COEFFICIENT</p>
+<div class="relative w-28 h-28 border-4 border-neon-green rounded-full flex items-center justify-center">
+<span class="text-5xl font-black terminal-glow">82</span>
+<svg class="absolute inset-[-4px] w-[calc(100%+8px)] h-[calc(100%+8px)] rotate-[-90deg]">
+<circle class="text-matrix-dim" cx="58" cy="58" fill="transparent" r="54" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-neon-green" cx="58" cy="58" fill="transparent" r="54" stroke="currentColor" stroke-dasharray="339" stroke-dashoffset="61" stroke-width="4"></circle>
+</svg>
+</div>
+</div>
+<div class="border-2 border-neon-green p-6 bg-surface flex items-center gap-6">
+<div class="w-16 h-16 border-2 border-neon-green flex items-center justify-center bg-matrix-dim">
+<span class="material-symbols-outlined text-3xl text-neon-green">shield</span>
+</div>
+<div>
+<p class="text-[10px] text-neon-amber">SECURITY_RANK</p>
+<h3 class="text-xl font-bold">ECO-WARRIOR</h3>
+<p class="text-xs font-bold text-neon-green">NODE_LEVEL: 12.00</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Data Matrix Grid -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Breakdown Matrix -->
+<div class="col-span-12 md:col-span-7 border-2 border-neon-green p-6 bg-surface">
+<div class="flex justify-between items-center mb-8 border-b border-neon-green pb-2">
+<h3 class="text-sm font-bold">[ SUB-SECTOR_TELEMETRY ]</h3>
+<span class="text-[10px] text-neon-green animate-pulse">STREAMING LIVE...</span>
+</div>
+<div class="space-y-6 telemetry-scroll max-h-[300px] overflow-y-auto pr-4">
+<!-- Transport -->
+<div class="group cursor-crosshair">
+<div class="flex justify-between items-center mb-1">
+<div class="flex items-center gap-3">
+<span class="text-xs font-bold">01_TRANSPORT</span>
+<span class="text-[9px] opacity-40">V_ID: CAR_99</span>
+</div>
+<span class="text-xs font-bold text-neon-green">1.47T [35%]</span>
+</div>
+<div class="flex gap-1 h-3">
+<div class="bg-neon-green w-[35%]"></div>
+<div class="bg-matrix-dim flex-1"></div>
+</div>
+</div>
+<!-- Food -->
+<div class="group cursor-crosshair">
+<div class="flex justify-between items-center mb-1">
+<div class="flex items-center gap-3">
+<span class="text-xs font-bold">02_NUTRITION</span>
+<span class="text-[9px] opacity-40">V_ID: NUT_12</span>
+</div>
+<span class="text-xs font-bold text-neon-green">1.05T [25%]</span>
+</div>
+<div class="flex gap-1 h-3">
+<div class="bg-neon-green w-[25%]"></div>
+<div class="bg-matrix-dim flex-1"></div>
+</div>
+</div>
+<!-- Home -->
+<div class="group cursor-crosshair">
+<div class="flex justify-between items-center mb-1">
+<div class="flex items-center gap-3">
+<span class="text-xs font-bold">03_RESIDENTIAL</span>
+<span class="text-[9px] opacity-40">V_ID: DOM_04</span>
+</div>
+<span class="text-xs font-bold text-neon-green">1.26T [30%]</span>
+</div>
+<div class="flex gap-1 h-3">
+<div class="bg-neon-green w-[30%]"></div>
+<div class="bg-matrix-dim flex-1"></div>
+</div>
+</div>
+<!-- Lifestyle -->
+<div class="group cursor-crosshair">
+<div class="flex justify-between items-center mb-1">
+<div class="flex items-center gap-3">
+<span class="text-xs font-bold">04_EXTERNALS</span>
+<span class="text-[9px] opacity-40">V_ID: EXT_01</span>
+</div>
+<span class="text-xs font-bold text-neon-green">0.42T [10%]</span>
+</div>
+<div class="flex gap-1 h-3">
+<div class="bg-neon-green w-[10%]"></div>
+<div class="bg-matrix-dim flex-1"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-4 border-t border-neon-green/30 text-[9px] flex gap-4 text-neon-amber">
+<span>[LOG] CALC_CRC: OK</span>
+<span>[LOG] VECTOR_SYNC: 100%</span>
+<span>[LOG] DATA_FETCH: 0.002ms</span>
+</div>
+</div>
+<!-- Comparative Engine -->
+<div class="col-span-12 md:col-span-5 border-2 border-neon-green p-6 bg-surface flex flex-col">
+<h3 class="text-sm font-bold mb-8 border-b border-neon-green pb-2">[ PEER_NODE_COMPARISON ]</h3>
+<div class="flex-1 flex items-end justify-around gap-4 pb-4 px-4">
+<div class="flex flex-col items-center gap-2 w-full max-w-[60px]">
+<div class="text-[9px] font-bold">4.2</div>
+<div class="w-full bg-neon-green transition-all duration-1000 border border-neon-green" style="height: 120px;"></div>
+<span class="text-[8px] font-bold">NODE_01</span>
+</div>
+<div class="flex flex-col items-center gap-2 w-full max-w-[60px]">
+<div class="text-[9px] font-bold text-neon-amber">6.8</div>
+<div class="w-full border-2 border-neon-green border-dashed transition-all duration-1000" style="height: 190px;"></div>
+<span class="text-[8px] font-bold opacity-60">AVG_NET</span>
+</div>
+</div>
+<div class="mt-6 p-3 border border-neon-green bg-matrix-dim/50">
+<p class="text-[10px] leading-relaxed">
+                    SYSTEM_INSIGHT: DELTA DETECTED [<span class="text-neon-amber">-2.6 TONS</span>]. 
+                    SUSTAINABILITY_PROTOCOL_ENFORCED. CURRENT_EFFICIENCY: OPTIMAL.
+                </p>
+</div>
+</div>
+</div>
+<!-- Optimization Protocols -->
+<section class="mt-8">
+<h3 class="text-sm font-bold mb-4">[ CARBON_NEUTRALIZATION_PROTOCOL ]</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Protocol 1 -->
+<div class="border-2 border-neon-green p-5 bg-surface hover:bg-matrix-dim transition-all group">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-neon-green">pedal_bike</span>
+<span class="border border-neon-green px-2 py-0.5 text-[8px] font-bold text-neon-green">LVL_01_EASY</span>
+</div>
+<h4 class="text-xs font-bold mb-3">INIT: E-BIKE_COMMUTE</h4>
+<p class="text-[10px] opacity-70 mb-6 min-h-[40px]">REDIRECT 03 VEHICLE_TRIPS TO CYCLING_NODE. MINIMIZE COMBUSTION_LATENCY.</p>
+<div class="flex items-center gap-2 mb-6 text-neon-amber">
+<span class="material-symbols-outlined text-xs">reduction</span>
+<span class="text-[9px] font-bold">REDUCTION_EST: -0.4T/YR</span>
+</div>
+<div class="flex flex-col gap-2">
+<button class="w-full border border-neon-green py-2 text-[9px] font-bold hover:bg-neon-green hover:text-black transition-colors">EXECUTE_PROTOCOL</button>
+<button class="w-full border border-neon-green/30 py-2 text-[9px] font-bold opacity-40 hover:opacity-100 transition-opacity">ABORT_PATH</button>
+</div>
+</div>
+<!-- Protocol 2 -->
+<div class="border-2 border-neon-amber p-5 bg-surface hover:bg-matrix-dim transition-all group">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-neon-amber">nest_eco_leaf</span>
+<span class="border border-neon-amber px-2 py-0.5 text-[8px] font-bold text-neon-amber">LVL_02_MED</span>
+</div>
+<h4 class="text-xs font-bold mb-3 text-neon-amber">INIT: SMART_THERMO_SYNC</h4>
+<p class="text-[10px] opacity-70 mb-6 min-h-[40px]">THERMAL_OPTIMIZATION_OVERRIDE. AUTOMATE HVAC_LATENCY SCHEDULES.</p>
+<div class="flex items-center gap-2 mb-6 text-neon-amber">
+<span class="material-symbols-outlined text-xs">reduction</span>
+<span class="text-[9px] font-bold">REDUCTION_EST: -0.2T/YR</span>
+</div>
+<div class="flex flex-col gap-2">
+<button class="w-full border border-neon-amber py-2 text-[9px] font-bold hover:bg-neon-amber hover:text-black transition-colors">EXECUTE_PROTOCOL</button>
+<button class="w-full border border-neon-amber/30 py-2 text-[9px] font-bold opacity-40 hover:opacity-100 transition-opacity">ABORT_PATH</button>
+</div>
+</div>
+<!-- Protocol 3 -->
+<div class="border-2 border-neon-green p-5 bg-surface hover:bg-matrix-dim transition-all group">
+<div class="flex justify-between items-start mb-4">
+<span class="material-symbols-outlined text-neon-green">restaurant</span>
+<span class="border border-neon-green px-2 py-0.5 text-[8px] font-bold text-neon-green">LVL_01_EASY</span>
+</div>
+<h4 class="text-xs font-bold mb-3">INIT: MEATLESS_OVERRIDE</h4>
+<p class="text-[10px] opacity-70 mb-6 min-h-[40px]">SWAP_BEEF_COEFFICIENT FOR PLANT_BASED_LOGIC. WEEKLY_NODE_REDUNDANCY.</p>
+<div class="flex items-center gap-2 mb-6 text-neon-amber">
+<span class="material-symbols-outlined text-xs">reduction</span>
+<span class="text-[9px] font-bold">REDUCTION_EST: -0.1T/YR</span>
+</div>
+<div class="flex flex-col gap-2">
+<button class="w-full border border-neon-green py-2 text-[9px] font-bold hover:bg-neon-green hover:text-black transition-colors">EXECUTE_PROTOCOL</button>
+<button class="w-full border border-neon-green/30 py-2 text-[9px] font-bold opacity-40 hover:opacity-100 transition-opacity">ABORT_PATH</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<script>
+    // Console typewriting effect for status logs
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("ECO-LAB SYSTEM INITIALIZED");
+        console.log("NODE: ALEX_RIVERA_12_SECURE");
+        console.log("READY FOR INPUT...");
+    });
+</script>
+</body></html>

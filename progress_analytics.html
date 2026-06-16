@@ -1,0 +1,527 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Protocol - Tactical Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&amp;family=JetBrains+Mono:wght@400;500;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "midnight": "#050505",
+                        "terminal-bg": "#0a0a0a",
+                        "neon-green": "#39ff14",
+                        "neon-green-dim": "#1a4d0f",
+                        "surface-container": "#121212",
+                        "on-surface": "#e0e0e0",
+                        "primary": "#39ff14",
+                        "background": "#050505",
+                        "outline": "#1f2937",
+                        "alert-red": "#ff3131",
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-desktop": "32px",
+                        "space-4": "16px",
+                        "space-1": "4px",
+                        "max-width": "1400px",
+                        "space-6": "32px",
+                        "space-8": "48px",
+                        "space-2": "8px",
+                        "space-3": "12px",
+                        "space-5": "24px",
+                        "space-12": "64px"
+                    },
+                    "fontFamily": {
+                        "body": ["JetBrains Mono"],
+                        "h1": ["JetBrains Mono"],
+                        "display": ["JetBrains Mono"],
+                        "h3": ["JetBrains Mono"],
+                        "h2": ["JetBrains Mono"],
+                        "label": ["JetBrains Mono"],
+                        "caption": ["JetBrains Mono"],
+                        "mono-data": ["JetBrains Mono"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #050505;
+            background-image: 
+                linear-gradient(rgba(57, 255, 20, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(57, 255, 20, 0.03) 1px, transparent 1px);
+            background-size: 32px 32px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chart-path-animate {
+            stroke-dasharray: 2000;
+            stroke-dashoffset: 2000;
+            animation: dash 3s linear forwards;
+        }
+        @keyframes dash {
+            to { stroke-dashoffset: 0; }
+        }
+        .hud-border {
+            border: 1px solid #1a4d0f;
+            position: relative;
+        }
+        .hud-border::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 10px;
+            height: 10px;
+            border-top: 2px solid #39ff14;
+            border-left: 2px solid #39ff14;
+        }
+        .hud-border::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            right: -1px;
+            width: 10px;
+            height: 10px;
+            border-bottom: 2px solid #39ff14;
+            border-right: 2px solid #39ff14;
+        }
+        .glow-text {
+            text-shadow: 0 0 8px rgba(57, 255, 20, 0.6);
+        }
+        .glow-border {
+            box-shadow: inset 0 0 15px rgba(57, 255, 20, 0.05), 0 0 10px rgba(57, 255, 20, 0.05);
+        }
+        .terminal-scroll::-webkit-scrollbar { width: 2px; }
+        .terminal-scroll::-webkit-scrollbar-thumb { background: #39ff14; }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(57, 255, 20, 0.1);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 50;
+            pointer-events: none;
+            animation: scan 4s linear infinite;
+        }
+        @keyframes scan {
+            from { top: 0; }
+            to { top: 100%; }
+        }
+    </style>
+</head>
+<body class="text-neon-green font-body selection:bg-neon-green selection:text-black antialiased overflow-x-hidden">
+<div class="scanline"></div>
+<!-- Technical Status Bar (Collapsed Sidebar) -->
+<aside class="w-16 h-screen fixed left-0 top-0 bg-black/80 flex flex-col items-center py-6 border-r border-neon-green-dim z-50">
+<div class="mb-8">
+<span class="material-symbols-outlined text-neon-green text-3xl glow-text">radar</span>
+</div>
+<nav class="flex-1 flex flex-col gap-6">
+<a class="p-2 hover:bg-neon-green-dim/20 transition-colors group relative" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="absolute left-full ml-2 px-2 py-1 bg-black border border-neon-green text-[10px] hidden group-hover:block whitespace-nowrap">DASHBOARD</span>
+</a>
+<a class="p-2 hover:bg-neon-green-dim/20 transition-colors group relative" href="#">
+<span class="material-symbols-outlined" data-icon="functions">functions</span>
+<span class="absolute left-full ml-2 px-2 py-1 bg-black border border-neon-green text-[10px] hidden group-hover:block whitespace-nowrap">CALCULATOR</span>
+</a>
+<a class="p-2 text-neon-green bg-neon-green-dim/20 border-l-2 border-neon-green group relative" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="absolute left-full ml-2 px-2 py-1 bg-black border border-neon-green text-[10px] hidden group-hover:block whitespace-nowrap">TELEMETRY</span>
+</a>
+<a class="p-2 hover:bg-neon-green-dim/20 transition-colors group relative" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="absolute left-full ml-2 px-2 py-1 bg-black border border-neon-green text-[10px] hidden group-hover:block whitespace-nowrap">PROTOCOLS</span>
+</a>
+<a class="p-2 hover:bg-neon-green-dim/20 transition-colors group relative" href="#">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+<span class="absolute left-full ml-2 px-2 py-1 bg-black border border-neon-green text-[10px] hidden group-hover:block whitespace-nowrap">NETWORK</span>
+</a>
+</nav>
+<div class="mt-auto space-y-4">
+<button class="p-2 hover:text-white transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 border border-neon-green p-0.5">
+<img alt="User" class="w-full h-full grayscale contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaYcPD2ZUjKOCuOv1Mcpi3tYQF8DwA07vZqodtIH29yYvBpNCAKePJwPfPGLRgNgA0ayQ3fJXpgIBClZBudg_65NX0nhEkuN692lcrVCQdAs3hO7lgOtRXthnk7WQLyCUk5kxXr1YITu9C-i0NFy0XtgkfqGN7K5a_G3vjTLrx7GkRo4xCuzvEW80sHSI98fbYLxnzDyIA1XwZN-MrPsQPA7QZIEuvYcV1-t6gGtWQPpD7qZ_fs2Lnx-GDFr7QJA0QC0izTsSPf0A">
+</div>
+</div>
+</aside>
+<!-- Header / HUD Header -->
+<header class="h-16 fixed top-0 right-0 left-16 flex items-center justify-between px-8 bg-black/60 backdrop-blur-sm border-b border-neon-green-dim z-40">
+<div class="flex items-center gap-4 text-[12px] tracking-widest font-bold">
+<span class="text-neon-green-dim">SYS_STATUS:</span>
+<span class="animate-pulse">ACTIVE_OPTIMIZED</span>
+<span class="mx-2 text-neon-green-dim">|</span>
+<span class="text-neon-green-dim">LAST_SYNC:</span>
+<span>2024-05-24_14:30:02</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 px-3 py-1 border border-neon-green-dim bg-neon-green-dim/5">
+<span class="material-symbols-outlined text-sm" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-[10px] w-40 placeholder:text-neon-green-dim uppercase" placeholder="QUERY_SYSTEM..." type="text">
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-neon-green animate-bounce" data-icon="emergency">emergency</span>
+<span class="material-symbols-outlined text-neon-green" data-icon="notifications">notifications</span>
+</div>
+</div>
+</header>
+<!-- Main Command Center -->
+<main class="ml-16 pt-24 px-margin-desktop pb-12 max-w-screen-2xl mx-auto">
+<!-- Main Title / Protocol Header -->
+<div class="mb-10 flex justify-between items-end">
+<div>
+<div class="flex items-center gap-2 text-[10px] tracking-widest text-neon-green-dim mb-2">
+<span>ROOT</span>
+<span class="material-symbols-outlined text-[10px]" data-icon="chevron_right">chevron_right</span>
+<span>ANALYTICS</span>
+<span class="material-symbols-outlined text-[10px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-neon-green">MISSION_PROGRESS</span>
+</div>
+<h1 class="text-4xl font-extrabold tracking-tighter glow-text">EMISSION REDUCTION PROTOCOL</h1>
+<p class="text-neon-green-dim text-[12px] mt-2 max-w-3xl uppercase tracking-wider">Strategic deployment of carbon mitigation vectors. Global environmental impact telemetry streaming in real-time.</p>
+</div>
+<div class="text-right hidden xl:block">
+<div class="text-[10px] text-neon-green-dim mb-1">DATA_INTEGRITY_CHECK</div>
+<div class="flex gap-1">
+<div class="h-1 w-8 bg-neon-green"></div>
+<div class="h-1 w-8 bg-neon-green"></div>
+<div class="h-1 w-8 bg-neon-green"></div>
+<div class="h-1 w-8 bg-neon-green/30"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-12 gap-6">
+<!-- Telemetry Vector Analysis (Main Chart) -->
+<div class="col-span-12 lg:col-span-8 hud-border bg-terminal-bg p-6 glow-border">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="text-lg font-bold tracking-tight mb-1 flex items-center gap-2">
+<span class="w-2 h-2 bg-neon-green"></span>
+                            TELEMETRY: VECTOR ANALYSIS
+                        </h3>
+<p class="text-[10px] text-neon-green-dim uppercase">Net CO2e attenuation index [6-month cycle]</p>
+</div>
+<div class="flex gap-2 text-[10px]">
+<button class="px-3 py-1 bg-neon-green text-black font-bold border border-neon-green">6M_CYCLE</button>
+<button class="px-3 py-1 border border-neon-green-dim hover:bg-neon-green-dim/10 transition-colors">12M_CYCLE</button>
+</div>
+</div>
+<div class="h-[340px] w-full relative">
+<svg class="w-full h-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 1200 320">
+<defs>
+<linearGradient id="neonGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#39ff14" stop-opacity="0.15"></stop>
+<stop offset="100%" stop-color="#39ff14" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+<!-- Grid Lines HUD style -->
+<line stroke="#1a4d0f" stroke-width="0.5" x1="0" x2="1200" y1="0" y2="0"></line>
+<line stroke="#1a4d0f" stroke-width="0.5" x1="0" x2="1200" y1="80" y2="80"></line>
+<line stroke="#1a4d0f" stroke-width="0.5" x1="0" x2="1200" y1="160" y2="160"></line>
+<line stroke="#1a4d0f" stroke-width="0.5" x1="0" x2="1200" y1="240" y2="240"></line>
+<line stroke="#1a4d0f" stroke-width="0.5" x1="0" x2="1200" y1="320" y2="320"></line>
+<!-- Glow Path -->
+<path d="M0,280 L150,260 L300,290 L450,220 L600,240 L750,180 L900,160 L1050,120 L1200,80 L1200,320 L0,320 Z" fill="url(#neonGradient)"></path>
+<!-- Main Glowing Line -->
+<polyline class="chart-path-animate" fill="none" points="0,280 150,260 300,290 450,220 600,240 750,180 900,160 1050,120 1200,80" stroke="#39ff14" stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" style="filter: drop-shadow(0 0 4px #39ff14);"></polyline>
+<rect fill="#39ff14" height="8" width="8" x="1046" y="116"></rect>
+</svg>
+<div class="flex justify-between mt-6 text-[10px] text-neon-green-dim font-bold tracking-widest uppercase">
+<span>JAN_STATION</span>
+<span>FEB_STATION</span>
+<span>MAR_STATION</span>
+<span>APR_STATION</span>
+<span>MAY_STATION</span>
+<span>JUN_STATION</span>
+</div>
+</div>
+</div>
+<!-- Footprint Decomposition (Donut) -->
+<div class="col-span-12 lg:col-span-4 hud-border bg-terminal-bg p-6 flex flex-col glow-border">
+<h3 class="text-lg font-bold tracking-tight mb-1 flex items-center gap-2">
+<span class="w-2 h-2 bg-neon-green"></span>
+                    SEGMENT_DECOMP
+                </h3>
+<p class="text-[10px] text-neon-green-dim uppercase mb-10">Footprint categorization [Monthly Aggregate]</p>
+<div class="relative w-56 h-56 mx-auto mb-10">
+<svg class="w-full h-full transform -rotate-90">
+<circle cx="50%" cy="50%" fill="transparent" r="85" stroke="#1a4d0f" stroke-width="12"></circle>
+<circle class="chart-path-animate" cx="50%" cy="50%" fill="transparent" r="85" stroke="#39ff14" stroke-dasharray="213 534" stroke-width="12"></circle>
+<circle class="chart-path-animate" cx="50%" cy="50%" fill="transparent" r="85" stroke="#26a611" stroke-dasharray="133 534" stroke-dashoffset="-213" stroke-width="12"></circle>
+<circle class="chart-path-animate" cx="50%" cy="50%" fill="transparent" r="85" stroke="#135208" stroke-dasharray="106 534" stroke-dashoffset="-346" stroke-width="12"></circle>
+<circle class="chart-path-animate" cx="50%" cy="50%" fill="transparent" r="85" stroke="#092904" stroke-dasharray="80 534" stroke-dashoffset="-452" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl font-black text-neon-green glow-text leading-none">2.4</span>
+<span class="text-[9px] text-neon-green-dim uppercase tracking-[0.2em] font-bold mt-1">METRIC_TONS</span>
+</div>
+</div>
+<div class="grid grid-cols-1 gap-y-3 mt-auto">
+<div class="flex items-center justify-between text-[11px] border-b border-neon-green-dim/20 pb-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-neon-green"></span>
+<span class="uppercase tracking-wider">LOGISTICS</span>
+</div>
+<span class="font-bold">40.0%</span>
+</div>
+<div class="flex items-center justify-between text-[11px] border-b border-neon-green-dim/20 pb-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-[#26a611]"></span>
+<span class="uppercase tracking-wider">BIO_RESOURCES</span>
+</div>
+<span class="font-bold">25.0%</span>
+</div>
+<div class="flex items-center justify-between text-[11px] border-b border-neon-green-dim/20 pb-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-[#135208]"></span>
+<span class="uppercase tracking-wider">HABITAT_CORE</span>
+</div>
+<span class="font-bold">20.0%</span>
+</div>
+<div class="flex items-center justify-between text-[11px]">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-[#092904]"></span>
+<span class="uppercase tracking-wider">LIFESTYLE_OP</span>
+</div>
+<span class="font-bold">15.0%</span>
+</div>
+</div>
+</div>
+<!-- Impact Conversion Metrics -->
+<div class="col-span-12 md:col-span-6 lg:col-span-4 hud-border bg-black p-6 glow-border relative group overflow-hidden">
+<div class="absolute top-0 right-0 p-2 opacity-20">
+<span class="material-symbols-outlined text-6xl" data-icon="forest">forest</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="px-2 py-0.5 bg-neon-green text-black text-[9px] font-bold">BIO_CONVERSION</span>
+<span class="text-[9px] text-neon-green-dim">ID: ARBOR_52</span>
+</div>
+<h4 class="text-sm font-bold uppercase tracking-widest text-neon-green-dim mb-1">Tree Matrix Equivalent</h4>
+<div class="flex items-baseline gap-3 mb-6">
+<span class="text-6xl font-black text-neon-green leading-none glow-text">52</span>
+<span class="text-lg font-bold uppercase">UNITS</span>
+</div>
+<div class="text-[11px] leading-relaxed uppercase opacity-80 border-l border-neon-green-dim pl-3">
+                        Biomass sequestration capacity equivalent to 52 mature forestry units over 120 months.
+                    </div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-6 lg:col-span-4 hud-border bg-black p-6 glow-border relative group overflow-hidden">
+<div class="absolute top-0 right-0 p-2 opacity-20">
+<span class="material-symbols-outlined text-6xl" data-icon="electric_bolt">electric_bolt</span>
+</div>
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="px-2 py-0.5 bg-neon-green text-black text-[9px] font-bold">ENERGY_FLUX</span>
+<span class="text-[9px] text-neon-green-dim">ID: WATT_128</span>
+</div>
+<h4 class="text-sm font-bold uppercase tracking-widest text-neon-green-dim mb-1">Grid Load Offset</h4>
+<div class="flex items-baseline gap-3 mb-6">
+<span class="text-6xl font-black text-neon-green leading-none glow-text">128</span>
+<span class="text-lg font-bold uppercase">NODES</span>
+</div>
+<div class="text-[11px] leading-relaxed uppercase opacity-80 border-l border-neon-green-dim pl-3">
+                        Mitigated load equivalent to 128 high-efficiency LED nodes active 24/7/30.
+                    </div>
+</div>
+</div>
+<div class="col-span-12 md:col-span-12 lg:col-span-4 hud-border bg-neon-green/5 p-6 glow-border flex flex-col justify-center border-neon-green">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 bg-neon-green text-black flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl font-bold" data-icon="shield">shield</span>
+</div>
+<div>
+<div class="text-[10px] text-neon-green uppercase font-bold tracking-tighter">Current_Rank:</div>
+<div class="text-xl font-black glow-text uppercase tracking-widest">ECO_SENTINEL</div>
+</div>
+</div>
+<div class="text-[11px] uppercase tracking-tight mb-4 text-center">
+                    Collect <span class="text-neon-green font-bold">450XP</span> to unlock <span class="text-white border-b border-white">PLANET_GUARDIAN</span> tier.
+                </div>
+<div class="w-full bg-neon-green-dim/20 h-4 border border-neon-green-dim relative mb-2">
+<div class="bg-neon-green h-full" style="width: 75%"></div>
+<div class="absolute inset-0 flex items-center justify-center text-[9px] font-bold text-black mix-blend-difference uppercase">Progress_75%</div>
+</div>
+<div class="flex justify-between text-[10px] font-bold uppercase text-neon-green-dim">
+<span>1,550_XP</span>
+<span>2,000_XP</span>
+</div>
+</div>
+<!-- Milestone Extraction (Key Achievements) -->
+<div class="col-span-12 lg:col-span-7 hud-border bg-terminal-bg p-6 glow-border">
+<div class="flex items-center justify-between mb-8 pb-4 border-b border-neon-green-dim/30">
+<h3 class="text-lg font-bold tracking-tight uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-neon-green" data-icon="token">token</span>
+                        MILESTONE EXTRACTION
+                    </h3>
+<button class="text-[10px] border border-neon-green px-3 py-1 hover:bg-neon-green hover:text-black transition-all uppercase font-bold">EXPORT_BADGE_ARRAY</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="border border-neon-green-dim p-4 hover:bg-neon-green/5 transition-all group cursor-crosshair">
+<div class="flex items-center gap-4 mb-3">
+<div class="w-10 h-10 border border-neon-green flex items-center justify-center bg-neon-green/10">
+<span class="material-symbols-outlined text-neon-green" data-icon="pedal_bike">pedal_bike</span>
+</div>
+<div class="text-[12px] font-bold glow-text uppercase tracking-wider">COMMUTE_OP_ZERO</div>
+</div>
+<div class="text-[10px] text-neon-green-dim uppercase mb-3">50km zero-emission mobility protocol executed.</div>
+<span class="inline-block px-2 py-0.5 border border-neon-green bg-neon-green text-black text-[9px] font-bold uppercase tracking-tighter">STATUS: VERIFIED</span>
+</div>
+<div class="border border-neon-green-dim p-4 hover:bg-neon-green/5 transition-all group cursor-crosshair">
+<div class="flex items-center gap-4 mb-3">
+<div class="w-10 h-10 border border-neon-green flex items-center justify-center bg-neon-green/10">
+<span class="material-symbols-outlined text-neon-green" data-icon="eco">eco</span>
+</div>
+<div class="text-[12px] font-bold glow-text uppercase tracking-wider">BIO_LOAD_MINIMIZER</div>
+</div>
+<div class="text-[10px] text-neon-green-dim uppercase mb-3">15-day plant-based resource allocation cycle.</div>
+<span class="inline-block px-2 py-0.5 border border-neon-green bg-neon-green text-black text-[9px] font-bold uppercase tracking-tighter">STATUS: VERIFIED</span>
+</div>
+<div class="border border-neon-green-dim/40 p-4 bg-black/40 opacity-70">
+<div class="flex items-center gap-4 mb-3">
+<div class="w-10 h-10 border border-neon-green-dim flex items-center justify-center">
+<span class="material-symbols-outlined text-neon-green-dim" data-icon="solar_power">solar_power</span>
+</div>
+<div class="text-[12px] font-bold text-neon-green-dim uppercase tracking-wider">SOLAR_VECTOR_INIT</div>
+</div>
+<div class="text-[10px] text-neon-green-dim uppercase mb-2">Transition to high-yield renewable power node.</div>
+<div class="w-full bg-neon-green-dim/20 h-1 mb-2">
+<div class="bg-neon-green h-full" style="width: 30%"></div>
+</div>
+<span class="text-[9px] text-neon-green font-bold uppercase">INITIATING: 30%</span>
+</div>
+<div class="border border-neon-green-dim/40 p-4 bg-black/40 opacity-70">
+<div class="flex items-center gap-4 mb-3">
+<div class="w-10 h-10 border border-neon-green-dim flex items-center justify-center">
+<span class="material-symbols-outlined text-neon-green-dim" data-icon="delete_sweep">delete_sweep</span>
+</div>
+<div class="text-[12px] font-bold text-neon-green-dim uppercase tracking-wider">WASTE_ISOLATION</div>
+</div>
+<div class="text-[10px] text-neon-green-dim uppercase mb-2">Zero single-use polymer containment protocol.</div>
+<div class="w-full bg-neon-green-dim/20 h-1 mb-2">
+<div class="bg-neon-green h-full" style="width: 60%"></div>
+</div>
+<span class="text-[9px] text-neon-green font-bold uppercase">INITIATING: 60%</span>
+</div>
+</div>
+</div>
+<!-- Terminal Report Feed -->
+<div class="col-span-12 lg:col-span-5 hud-border bg-terminal-bg p-6 glow-border">
+<div class="flex items-center justify-between mb-8 pb-4 border-b border-neon-green-dim/30">
+<h3 class="text-lg font-bold tracking-tight uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-neon-green" data-icon="list_alt">list_alt</span>
+                        DATA_LOG_MANIFEST
+                    </h3>
+<div class="flex gap-2">
+<span class="w-2 h-2 bg-red-600 animate-pulse"></span>
+<span class="text-[9px] uppercase font-bold tracking-widest text-red-600">LIVE_FEED</span>
+</div>
+</div>
+<div class="space-y-4 terminal-scroll overflow-y-auto max-h-[340px] pr-4">
+<!-- Report Item Terminal Style -->
+<div class="p-3 border-l-4 border-neon-green bg-neon-green/5 hover:bg-neon-green/10 transition-colors cursor-pointer group flex items-start justify-between">
+<div class="font-mono text-[11px] space-y-1 uppercase">
+<div class="flex gap-2 text-neon-green font-bold">
+<span>[2024-05-31]</span>
+<span>REP_ID: IMPACT_MAY</span>
+</div>
+<div class="text-white opacity-90">Summary of net emission reduction telemetry for Q2-MAY cycle.</div>
+<div class="text-[9px] text-neon-green-dim flex gap-4">
+<span>SIZE: 1.2MB</span>
+<span>MIME: APPLICATION/PDF</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-sm group-hover:animate-bounce" data-icon="download">download</span>
+</div>
+<div class="p-3 border-l-4 border-neon-green-dim bg-black/40 hover:bg-neon-green/10 transition-colors cursor-pointer group flex items-start justify-between">
+<div class="font-mono text-[11px] space-y-1 uppercase">
+<div class="flex gap-2 text-neon-green-dim">
+<span>[2024-04-30]</span>
+<span>REP_ID: IMPACT_APR</span>
+</div>
+<div class="text-white opacity-90">Summary of net emission reduction telemetry for Q2-APR cycle.</div>
+<div class="text-[9px] text-neon-green-dim flex gap-4">
+<span>SIZE: 1.1MB</span>
+<span>MIME: APPLICATION/PDF</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-sm group-hover:animate-bounce" data-icon="download">download</span>
+</div>
+<div class="p-3 border-l-4 border-neon-green-dim bg-black/40 hover:bg-neon-green/10 transition-colors cursor-pointer group flex items-start justify-between">
+<div class="font-mono text-[11px] space-y-1 uppercase">
+<div class="flex gap-2 text-neon-green-dim">
+<span>[2024-03-31]</span>
+<span>REP_ID: IMPACT_MAR</span>
+</div>
+<div class="text-white opacity-90">Summary of net emission reduction telemetry for Q1-MAR cycle.</div>
+<div class="text-[9px] text-neon-green-dim flex gap-4">
+<span>SIZE: 0.9MB</span>
+<span>MIME: APPLICATION/PDF</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-sm group-hover:animate-bounce" data-icon="download">download</span>
+</div>
+<div class="text-[9px] text-center uppercase tracking-widest text-neon-green-dim py-4">
+                        -- END OF DATA STREAM --
+                    </div>
+</div>
+</div>
+</div>
+</main>
+<!-- Mobile HUD Bottom Nav -->
+<nav class="fixed bottom-0 left-0 right-0 h-16 bg-black border-t border-neon-green-dim flex items-center justify-around md:hidden z-50">
+<button class="flex flex-col items-center text-neon-green-dim">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="text-[8px] font-bold mt-1 uppercase">CMD</span>
+</button>
+<button class="flex flex-col items-center text-neon-green">
+<span class="material-symbols-outlined glow-text" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="text-[8px] font-bold mt-1 uppercase">TELEM</span>
+</button>
+<button class="flex flex-col items-center text-neon-green-dim">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+<span class="text-[8px] font-bold mt-1 uppercase">NET</span>
+</button>
+<button class="flex flex-col items-center text-neon-green-dim">
+<span class="material-symbols-outlined" data-icon="shield">shield</span>
+<span class="text-[8px] font-bold mt-1 uppercase">SEC</span>
+</button>
+</nav>
+<script>
+        // Data integrity check simulation
+        setInterval(() => {
+            const time = new Date().toISOString().replace('T', '_').split('.')[0];
+            const timeElements = document.querySelectorAll('span:contains("2024-05-24_14:30:02")');
+            // Normally I'd update time here, but keeping it simple for the template
+        }, 1000);
+
+        // Simple observer for chart animation re-triggering
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('chart-path-animate');
+                    void entry.target.offsetWidth; // trigger reflow
+                    entry.target.classList.add('chart-path-animate');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.chart-path-animate').forEach(el => observer.observe(el));
+    </script>
+</body></html>

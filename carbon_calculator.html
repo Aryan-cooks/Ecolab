@@ -1,0 +1,331 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#00FF41", // Matrix Green
+                        "secondary": "#F4A261", // Earth Amber
+                        "background": "#0A0A0B", // Deep Void
+                        "surface": "#121214", // Tech Grey
+                        "on-surface": "#D1D1D1",
+                        "outline": "#333333",
+                        "accent-blue": "#00F0FF",
+                        "alert-red": "#FF3131"
+                    },
+                    "fontFamily": {
+                        "body": ["JetBrains Mono"],
+                        "h1": ["JetBrains Mono"],
+                        "h2": ["JetBrains Mono"],
+                        "h3": ["JetBrains Mono"],
+                        "mono": ["JetBrains Mono"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'JetBrains Mono', monospace; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .grid-line {
+            background-image: linear-gradient(to right, #333 1px, transparent 1px), linear-gradient(to bottom, #333 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 255, 65, 0.1);
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            pointer-events: none;
+            animation: scan 8s linear infinite;
+        }
+        @keyframes scan {
+            0% { top: 0%; }
+            100% { top: 100%; }
+        }
+        input, select {
+            background: #121214 !important;
+            border: 1px solid #333 !important;
+            color: #00FF41 !important;
+            font-family: 'JetBrains Mono', monospace !important;
+        }
+        input:focus, select:focus {
+            outline: 1px solid #00FF41 !important;
+            border-color: #00FF41 !important;
+        }
+        .wave-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+            height: 40px;
+        }
+        .bar {
+            width: 3px;
+            background: #00FF41;
+            animation: bounce 1s ease-in-out infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { height: 10%; }
+            50% { height: 100%; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface selection:bg-primary selection:text-background overflow-hidden h-screen flex">
+<div class="scanline"></div>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto p-6 grid-line relative">
+<header class="flex justify-between items-end border-b border-outline pb-4 mb-6">
+<div>
+<h1 class="text-3xl font-extrabold text-primary tracking-tighter">[SYSTEM.DATA_ANALYSIS_LAB]</h1>
+<p class="text-xs text-secondary mt-1 opacity-80 uppercase tracking-widest">Global Emissions Monitoring // Node: 0x244-EcoImpact</p>
+</div>
+<div class="flex gap-8 text-[10px] text-primary/60">
+<div>LAT: 37.7749° N</div>
+<div>LONG: 122.4194° W</div>
+<div class="text-primary font-bold animate-pulse">STATUS: LIVE_FEED_ACTIVE</div>
+</div>
+</header>
+<!-- Mission Control Grid -->
+<div class="grid grid-cols-12 gap-4">
+<!-- MODULE: TRANSPORT -->
+<section class="col-span-6 border border-outline bg-surface p-4 relative">
+<div class="absolute top-0 right-0 p-2 text-[10px] text-outline">MOD_01</div>
+<h2 class="text-sm font-bold text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">settings_input_antenna</span>
+                    TRANSPORT_LOGISTICS_MATRIX
+                </h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-[10px] uppercase text-on-surface/60">Kilo_Travel_Variable (Weekly)</label>
+<input class="w-full text-sm py-2 px-3" type="number" value="142">
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase text-on-surface/60">Public_Transit_Cycles</label>
+<input class="w-full text-sm py-2 px-3" type="number" value="12">
+</div>
+<div class="col-span-2 mt-2">
+<div class="h-24 w-full border border-outline/50 bg-black/40 flex items-center justify-center relative overflow-hidden">
+<!-- Technical Schematic Mockup -->
+<svg class="absolute opacity-20 w-full h-full" viewBox="0 0 200 100">
+<path d="M0,50 Q50,0 100,50 T200,50" fill="none" stroke="#00FF41" stroke-width="0.5"></path>
+<path d="M0,60 Q50,10 100,60 T200,60" fill="none" stroke="#00FF41" stroke-width="0.2"></path>
+<circle cx="100" cy="50" fill="none" r="30" stroke="#00FF41" stroke-dasharray="2,2" stroke-width="0.5"></circle>
+</svg>
+<span class="text-[9px] text-primary/40 uppercase">Aero_Dynamics_Pulse</span>
+</div>
+</div>
+</div>
+</section>
+<!-- MODULE: FOOD -->
+<section class="col-span-6 border border-outline bg-surface p-4 relative">
+<div class="absolute top-0 right-0 p-2 text-[10px] text-outline">MOD_02</div>
+<h2 class="text-sm font-bold text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">biotech</span>
+                    METHANE_OUTPUT_MATRIX
+                </h2>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-[10px] uppercase text-on-surface/60">Protein_Source_Input</label>
+<select class="w-full text-sm py-2 px-3">
+<option>PLANT_BASED_ONLY</option>
+<option>LOW_BOVINE_INPUT</option>
+<option>HIGH_METHANE_DIET</option>
+</select>
+</div>
+<div class="space-y-1">
+<label class="text-[10px] uppercase text-on-surface/60">Waste_Residue_Delta (kg)</label>
+<input class="w-full text-sm py-2 px-3" type="number" value="0.8">
+</div>
+<div class="col-span-2 flex items-center gap-4 bg-black/40 p-2 border border-outline/30 mt-2">
+<div class="wave-container">
+<div class="bar" style="animation-delay: 0.1s"></div>
+<div class="bar" style="animation-delay: 0.3s"></div>
+<div class="bar" style="animation-delay: 0.2s"></div>
+<div class="bar" style="animation-delay: 0.5s"></div>
+<div class="bar" style="animation-delay: 0.4s"></div>
+</div>
+<div class="text-[9px] text-secondary leading-tight uppercase">
+                            Warning: Organic waste exceeds threshold.<br>
+<span class="text-primary">Optimizing anaerobic digestion...</span>
+</div>
+</div>
+</div>
+</section>
+<!-- MODULE: HOME & ENERGY -->
+<section class="col-span-8 border border-outline bg-surface p-4 relative">
+<div class="absolute top-0 right-0 p-2 text-[10px] text-outline">MOD_03</div>
+<h2 class="text-sm font-bold text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">bolt</span>
+                    KILOWATT_CONSUMPTION_VARIABLE
+                </h2>
+<div class="grid grid-cols-3 gap-6">
+<div class="space-y-3">
+<div class="space-y-1">
+<label class="text-[10px] uppercase text-on-surface/60">Grid_Source_Mix</label>
+<div class="flex flex-col gap-1">
+<button class="text-[10px] border border-primary bg-primary/10 text-primary py-1 px-2 text-left">100%_RENEWABLE</button>
+<button class="text-[10px] border border-outline py-1 px-2 text-left hover:border-primary">FOSSIL_HYBRID</button>
+</div>
+</div>
+</div>
+<div class="col-span-2 border-l border-outline pl-6">
+<div class="flex justify-between items-center mb-2">
+<span class="text-[10px] uppercase text-on-surface/60">Thermal_Efficiency_Index</span>
+<span class="text-xs text-primary font-bold">88.4%</span>
+</div>
+<div class="w-full h-1 bg-outline rounded-full">
+<div class="h-full bg-primary w-[88%] shadow-[0_0_8px_#00FF41]"></div>
+</div>
+<div class="mt-4 grid grid-cols-2 gap-2">
+<div class="bg-black/40 border border-outline p-2">
+<div class="text-[8px] text-on-surface/50 uppercase">HVAC_LOAD</div>
+<div class="text-xs font-bold text-secondary">2.4kW/h</div>
+</div>
+<div class="bg-black/40 border border-outline p-2">
+<div class="text-[8px] text-on-surface/50 uppercase">LUX_DEMAND</div>
+<div class="text-xs font-bold text-primary">0.1kW/h</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- MODULE: LIFESTYLE -->
+<section class="col-span-4 border border-outline bg-surface p-4 relative">
+<div class="absolute top-0 right-0 p-2 text-[10px] text-outline">MOD_04</div>
+<h2 class="text-sm font-bold text-primary mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">shopping_bag</span>
+                    CONSUMPTION_COEFFICIENT
+                </h2>
+<div class="space-y-4">
+<div class="space-y-1">
+<label class="text-[10px] uppercase text-on-surface/60">Object_Acquisition_Rate</label>
+<input class="w-full h-1 bg-outline appearance-none cursor-pointer accent-primary" type="range" value="20">
+</div>
+<div class="pt-2 border-t border-outline/30">
+<p class="text-[9px] text-on-surface/70 leading-relaxed italic">
+                            "System detected high frequency of textile acquisition. Suggesting 40% reduction in new fiber intake."
+                        </p>
+</div>
+</div>
+</section>
+<!-- LIVE CALCULATOR OUTPUT -->
+<section class="col-span-12 border-2 border-primary bg-black p-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-3 bg-primary text-background font-black text-[10px]">REAL_TIME_ANALYSIS</div>
+<div class="flex justify-between items-center">
+<div class="space-y-1">
+<div class="text-xs text-primary/60 uppercase font-bold tracking-widest">Total_Annual_CO2e_Delta</div>
+<div class="text-7xl font-black text-primary leading-none tracking-tighter">
+                            1.8<span class="text-2xl ml-2 font-normal">t</span>
+</div>
+</div>
+<div class="flex gap-12 text-right">
+<div>
+<div class="text-[10px] text-secondary uppercase">Local_Average</div>
+<div class="text-xl font-bold">4.2t</div>
+</div>
+<div>
+<div class="text-[10px] text-accent-blue uppercase">Paris_Target</div>
+<div class="text-xl font-bold">1.5t</div>
+</div>
+<div class="border-l border-outline pl-6">
+<div class="text-[10px] text-primary uppercase underline">EFFICIENCY_RANK</div>
+<div class="text-xl font-bold text-primary">#01-A</div>
+</div>
+</div>
+</div>
+<!-- Mini Visualization -->
+<div class="mt-8 flex h-4 border border-outline bg-surface">
+<div class="h-full bg-primary" style="width: 45%" title="TRANSPORT: 45%"></div>
+<div class="h-full bg-secondary" style="width: 20%" title="FOOD: 20%"></div>
+<div class="h-full bg-accent-blue" style="width: 15%" title="HOME: 15%"></div>
+<div class="h-full bg-on-surface/20" style="width: 20%" title="LIFESTYLE: 20%"></div>
+</div>
+<div class="mt-2 flex justify-between text-[8px] text-on-surface/40 uppercase font-bold">
+<span>Transport</span>
+<span>Food</span>
+<span>Energy</span>
+<span>Consumption</span>
+</div>
+</section>
+</div>
+<footer class="mt-8 flex justify-between items-center border-t border-outline pt-4 opacity-50">
+<div class="text-[10px] uppercase">Encryption: AES-256-GCM</div>
+<div class="text-[10px] uppercase">Build_Ref: 0.9.54-BETA</div>
+<div class="text-[10px] uppercase flex gap-4">
+<span class="text-primary hover:underline cursor-pointer">System_Reboot</span>
+<span class="text-alert-red hover:underline cursor-pointer">Abort_Process</span>
+</div>
+</footer>
+</main>
+<!-- RIGHT SIDEBAR: COMMAND CENTER -->
+<aside class="w-72 bg-surface border-l border-outline p-6 flex flex-col z-50">
+<div class="mb-12">
+<div class="text-xs font-black text-primary mb-1">[ COMMAND_CENTER ]</div>
+<div class="w-full h-[2px] bg-primary mb-6"></div>
+<nav class="space-y-1">
+<a class="block py-2 px-3 border border-primary text-primary bg-primary/10 text-xs font-bold" href="#">
+<span class="opacity-50">01.</span> CALCULATOR_V2
+                </a>
+<a class="block py-2 px-3 border border-transparent hover:border-outline text-on-surface/60 hover:text-primary text-xs font-bold transition-all" href="#">
+<span class="opacity-50">02.</span> EMISSION_PULSE
+                </a>
+<a class="block py-2 px-3 border border-transparent hover:border-outline text-on-surface/60 hover:text-primary text-xs font-bold transition-all" href="#">
+<span class="opacity-50">03.</span> ARCHIVED_SESSIONS
+                </a>
+<a class="block py-2 px-3 border border-transparent hover:border-outline text-on-surface/60 hover:text-primary text-xs font-bold transition-all" href="#">
+<span class="opacity-50">04.</span> NODE_NETWORK
+                </a>
+<a class="block py-2 px-3 border border-transparent hover:border-outline text-on-surface/60 hover:text-primary text-xs font-bold transition-all" href="#">
+<span class="opacity-50">05.</span> LOG_OUT
+                </a>
+</nav>
+</div>
+<div class="mt-auto space-y-6">
+<!-- User Status -->
+<div class="bg-black/40 border border-outline p-3">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-8 h-8 border border-primary p-0.5">
+<img alt="Operator" class="w-full h-full object-cover grayscale contrast-125" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu6u9ypmXLnz3JXfRRsPjAN8xjhhvoEBrL3_lCet13Dai6YFE43lbWeA5ihmONv_pxNJqwzZDMK4ljfJpA5MBJiXhmQZpSYpFIigMkpnvotvcAFALo2wh6f-RiEpBniedc9SzUUmUi5gbRRMKbdvvqBtmF-L5AAtpNS7F-9Ck5aBTKItJpd1C_vU2KVuDMBMNPSzsjj6fFTvPeoHrO4UiyWYrUqrMUDKSvqxScCPqEsgKpta0n9cbJw9u6MZiXUHy95RDP3BORGxk">
+</div>
+<div>
+<div class="text-[10px] text-primary font-bold">OPERATOR: ALPHA_7</div>
+<div class="text-[8px] text-on-surface/50 uppercase">Clearance: Level_04</div>
+</div>
+</div>
+<div class="text-[10px] text-secondary flex items-center gap-2">
+<span class="animate-ping w-1 h-1 bg-secondary rounded-full"></span>
+                    STREAK_ACTIVE: 005_DAYS
+                </div>
+</div>
+<button class="w-full py-3 bg-primary text-background font-black text-xs uppercase tracking-tighter hover:bg-white transition-colors">
+                FORCE_SAVE_SNAPSHOT
+            </button>
+<div class="text-[8px] text-on-surface/30 text-center leading-tight">
+                ECOIMPACT OS v4.0.1<br>
+                LICENSED_TO: GLOBAL_CITIZEN_LABS
+            </div>
+</div>
+</aside>
+<script>
+        // Real-time data jitter for "live" feel
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => {
+                const valueEl = document.querySelector('.text-7xl');
+                const randomShift = (Math.random() * 0.1 - 0.05).toFixed(2);
+                const current = parseFloat(valueEl.innerText);
+                valueEl.innerHTML = `${(current + parseFloat(randomShift)).toFixed(1)}<span class="text-2xl ml-2 font-normal">t</span>`;
+            });
+        });
+    </script>
+</body></html>

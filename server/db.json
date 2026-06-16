@@ -1,0 +1,1900 @@
+{
+  "users": {
+    "demo_operator_alpha": {
+      "uid": "demo_operator_alpha",
+      "createdAt": "2026-06-12T09:14:28.858Z",
+      "displayName": "Alex Rivera",
+      "greenScore": 550,
+      "level": "tree",
+      "lastActiveAt": "2026-06-12T09:58:15.497Z",
+      "streakDays": 16,
+      "lastStreakDate": "2026-06-12T10:32:51.360Z",
+      "badges": [
+        "first_step",
+        "eco_enthusiast",
+        "streak_master",
+        "carbon_neutralizer",
+        "action_taker"
+      ],
+      "email": "alex.rivera@eco-network.org",
+      "location": {
+        "city": "Durgapur",
+        "state": "West Bengal",
+        "country": "IN"
+      },
+      "householdSize": 3,
+      "homeType": "apartment",
+      "primaryCommute": "transit",
+      "dietType": "vegetarian",
+      "primaryGoal": "Reduce emissions 20% this year",
+      "weeklyChallenge": {
+        "id": "challenge_w1",
+        "title": "Swap 2 beef portions for pulses.",
+        "completed": true,
+        "targetDate": "2026-06-19T09:16:12.811Z"
+      }
+    },
+    "user_19d71f50": {
+      "uid": "user_19d71f50",
+      "displayName": "Aryan Shrivastava",
+      "email": "operater@eco-impact.net",
+      "password": "123456",
+      "location": {
+        "city": "Durgapur",
+        "state": "West Bengal",
+        "country": "IN"
+      },
+      "householdSize": 3,
+      "homeType": "apartment",
+      "primaryCommute": "car",
+      "dietType": "vegetarian",
+      "primaryGoal": "Reduce emissions 20% this calendar year",
+      "greenScore": 550,
+      "level": "tree",
+      "streakDays": 2,
+      "lastStreakDate": "2026-06-12T10:27:55.587Z",
+      "badges": [
+        "first_step"
+      ],
+      "createdAt": "2026-06-12T10:06:28.762Z",
+      "lastActiveAt": "2026-06-12T10:19:19.975Z",
+      "weeklyChallenge": {
+        "id": "challenge_w1",
+        "title": "Log your first carbon offset protocol.",
+        "completed": false,
+        "targetDate": "2026-06-19T10:06:28.762Z"
+      }
+    },
+    "user_f07d10a3": {
+      "uid": "user_f07d10a3",
+      "displayName": "max",
+      "email": "this@gmail.com",
+      "password": "12122321",
+      "location": {
+        "city": "Unknown",
+        "state": "Unknown",
+        "country": "IN"
+      },
+      "householdSize": 1,
+      "homeType": "apartment",
+      "primaryCommute": "transit",
+      "dietType": "vegetarian",
+      "primaryGoal": "Become carbon neutral",
+      "greenScore": 550,
+      "level": "tree",
+      "streakDays": 9,
+      "lastStreakDate": "2026-06-12T15:21:40.958Z",
+      "badges": [
+        "first_step",
+        "streak_master",
+        "action_taker"
+      ],
+      "createdAt": "2026-06-12T14:57:22.678Z",
+      "lastActiveAt": "2026-06-13T12:09:13.985Z",
+      "weeklyChallenge": {
+        "id": "challenge_w1",
+        "title": "Log your first carbon offset protocol.",
+        "completed": true,
+        "targetDate": "2026-06-19T14:57:22.678Z"
+      }
+    },
+    "test_user_operator_9": {
+      "uid": "test_user_operator_9",
+      "createdAt": "2026-06-12T15:01:54.169Z",
+      "displayName": "Default User",
+      "greenScore": 0,
+      "level": "seedling",
+      "lastActiveAt": "2026-06-12T15:01:54.169Z"
+    },
+    "user_4a46d773": {
+      "uid": "user_4a46d773",
+      "displayName": "sam",
+      "email": "max34@gmail.com",
+      "password": "vjaksk343",
+      "location": {
+        "city": "jaipur",
+        "state": "rajasthan",
+        "country": "IN"
+      },
+      "householdSize": 4,
+      "homeType": "house",
+      "primaryCommute": "car",
+      "dietType": "highMeat",
+      "primaryGoal": "Reduce emissions 20% this calendar year",
+      "greenScore": 309,
+      "level": "sapling",
+      "streakDays": 9,
+      "lastStreakDate": "2026-06-13T13:09:55.047Z",
+      "badges": [
+        "first_step",
+        "streak_master",
+        "action_taker"
+      ],
+      "createdAt": "2026-06-13T13:07:50.567Z",
+      "lastActiveAt": "2026-06-14T13:18:54.149Z",
+      "weeklyChallenge": {
+        "id": "challenge_w1",
+        "title": "Log your first carbon offset protocol.",
+        "completed": true,
+        "targetDate": "2026-06-20T13:07:50.567Z"
+      }
+    }
+  },
+  "footprints": {
+    "demo_operator_alpha": {
+      "logs": {
+        "2026-06-12T09:14:28.858Z": {
+          "calculatedAt": "2026-06-12T09:14:28.858Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "petrolCar",
+              "weeklyKm": 140,
+              "transitPercent": 20,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegetarian",
+              "wasteLevel": "medium",
+              "localFoodPercent": 100
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 2373,
+              "food": 821,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 6313,
+            "totalTons": 6.31,
+            "greenScore": 0,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-12T09:23:48.830Z": {
+          "calculatedAt": "2026-06-12T09:23:48.830Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "petrolCar",
+              "weeklyKm": 140,
+              "transitPercent": 20,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegetarian",
+              "wasteLevel": "medium",
+              "localFoodPercent": 30
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 2373,
+              "food": 885,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 6377,
+            "totalTons": 6.38,
+            "greenScore": 0,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-12T09:28:52.910Z": {
+          "calculatedAt": "2026-06-12T09:28:52.910Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "petrolCar",
+              "weeklyKm": 140,
+              "transitPercent": 20,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegetarian",
+              "wasteLevel": "medium",
+              "localFoodPercent": 30
+            },
+            "home": {
+              "monthlyKwh": 500,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 2373,
+              "food": 885,
+              "home": 5690,
+              "lifestyle": 184
+            },
+            "total": 9132,
+            "totalTons": 9.13,
+            "greenScore": 0,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-12T09:38:17.926Z": {
+          "calculatedAt": "2026-06-12T09:38:17.926Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "petrolCar",
+              "weeklyKm": 140,
+              "transitPercent": 20,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegetarian",
+              "wasteLevel": "medium",
+              "localFoodPercent": 30
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 2373,
+              "food": 885,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 6377,
+            "totalTons": 6.38,
+            "greenScore": 0,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-12T09:38:26.722Z": {
+          "calculatedAt": "2026-06-12T09:38:26.722Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "petrolCar",
+              "weeklyKm": 140,
+              "transitPercent": 83,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegetarian",
+              "wasteLevel": "medium",
+              "localFoodPercent": 30
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 1818,
+              "food": 885,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 5822,
+            "totalTons": 5.82,
+            "greenScore": 0,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-12T09:39:43.563Z": {
+          "calculatedAt": "2026-06-12T09:39:43.563Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "electricCar",
+              "weeklyKm": 1400,
+              "transitPercent": 100,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegetarian",
+              "wasteLevel": "medium",
+              "localFoodPercent": 30
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 7499,
+              "food": 885,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 11503,
+            "totalTons": 11.5,
+            "greenScore": 0,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-12T09:58:15.497Z": {
+          "calculatedAt": "2026-06-12T09:58:15.497Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "petrolCar",
+              "weeklyKm": 14000,
+              "transitPercent": 100,
+              "flightsPerYear": 200
+            },
+            "food": {
+              "dietType": "highMeat",
+              "wasteLevel": "high",
+              "localFoodPercent": 100
+            },
+            "home": {
+              "monthlyKwh": 22000,
+              "lpgCylindersPerMonth": 1200,
+              "homeSizeSqm": 6500
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 250000,
+              "screenHoursPerDay": 24,
+              "recyclingHabits": "none"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 166792,
+              "food": 2834,
+              "home": 1140960,
+              "lifestyle": 10945
+            },
+            "total": 1321532,
+            "totalTons": 1321.53,
+            "greenScore": 0,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        }
+      }
+    },
+    "user_19d71f50": {
+      "logs": {
+        "2026-06-12T10:07:34.285Z": {
+          "calculatedAt": "2026-06-12T10:07:34.285Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "petrolCar",
+              "weeklyKm": 140,
+              "transitPercent": 20,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegetarian",
+              "wasteLevel": "medium",
+              "localFoodPercent": 30
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 2373,
+              "food": 885,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 6377,
+            "totalTons": 6.38,
+            "greenScore": 0,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-12T10:19:19.975Z": {
+          "calculatedAt": "2026-06-12T10:19:19.975Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "dieselCar",
+              "weeklyKm": 140,
+              "transitPercent": 100,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegetarian",
+              "wasteLevel": "medium",
+              "localFoodPercent": 30
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 1668,
+              "food": 885,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 5672,
+            "totalTons": 5.67,
+            "greenScore": 0,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        }
+      }
+    },
+    "test_user_operator_9": {
+      "logs": {
+        "2026-06-12T15:01:54.169Z": {
+          "calculatedAt": "2026-06-12T15:01:54.169Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "petrolCar",
+              "weeklyKm": 150,
+              "transitPercent": 10,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegetarian",
+              "wasteLevel": "medium",
+              "localFoodPercent": 40
+            },
+            "home": {
+              "monthlyKwh": 200,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 80
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 3000,
+              "screenHoursPerDay": 5,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 2564,
+              "food": 876,
+              "home": 2738,
+              "lifestyle": 188
+            },
+            "total": 6366,
+            "totalTons": 6.37,
+            "greenScore": 0,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        }
+      }
+    },
+    "user_f07d10a3": {
+      "logs": {
+        "2026-06-12T15:19:51.564Z": {
+          "calculatedAt": "2026-06-12T15:19:51.564Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "dieselCar",
+              "weeklyKm": 140,
+              "transitPercent": 76,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegetarian",
+              "wasteLevel": "medium",
+              "localFoodPercent": 30
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 1809,
+              "food": 885,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 5813,
+            "totalTons": 5.81,
+            "greenScore": 0,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-12T15:20:20.588Z": {
+          "calculatedAt": "2026-06-12T15:20:20.588Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "petrolCar",
+              "weeklyKm": 140,
+              "transitPercent": 20,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "lowMeat",
+              "wasteLevel": "low",
+              "localFoodPercent": 69
+            },
+            "home": {
+              "monthlyKwh": 2200,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 250,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 2373,
+              "food": 1428,
+              "home": 22418,
+              "lifestyle": 97
+            },
+            "total": 26316,
+            "totalTons": 26.32,
+            "greenScore": 0,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-13T12:07:46.977Z": {
+          "calculatedAt": "2026-06-13T12:07:46.977Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "petrolCar",
+              "weeklyKm": 140,
+              "transitPercent": 60,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegetarian",
+              "wasteLevel": "medium",
+              "localFoodPercent": 30
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 2020,
+              "food": 885,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 6024,
+            "totalTons": 6.02,
+            "greenScore": 263,
+            "level": "sapling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-13T12:08:13.185Z": {
+          "calculatedAt": "2026-06-13T12:08:13.185Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "bus",
+              "weeklyKm": 140,
+              "transitPercent": 63,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "lowMeat",
+              "wasteLevel": "medium",
+              "localFoodPercent": 30
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 1668,
+              "food": 1653,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 6440,
+            "totalTons": 6.44,
+            "greenScore": 208,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-13T12:08:26.454Z": {
+          "calculatedAt": "2026-06-13T12:08:26.454Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "metro",
+              "weeklyKm": 140,
+              "transitPercent": 20,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegan",
+              "wasteLevel": "medium",
+              "localFoodPercent": 30
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 1246,
+              "food": 531,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 4896,
+            "totalTons": 4.9,
+            "greenScore": 414,
+            "level": "sapling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-13T12:09:13.985Z": {
+          "calculatedAt": "2026-06-13T12:09:13.985Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "metro",
+              "weeklyKm": 140,
+              "transitPercent": 5,
+              "flightsPerYear": 0
+            },
+            "food": {
+              "dietType": "vegan",
+              "wasteLevel": "medium",
+              "localFoodPercent": 30
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 226,
+              "food": 531,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 3876,
+            "totalTons": 3.88,
+            "greenScore": 550,
+            "level": "tree",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 3
+          }
+        }
+      }
+    },
+    "user_4a46d773": {
+      "logs": {
+        "2026-06-13T13:09:40.907Z": {
+          "calculatedAt": "2026-06-13T13:09:40.907Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "metro",
+              "weeklyKm": 140,
+              "transitPercent": 100,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "highMeat",
+              "wasteLevel": "medium",
+              "localFoodPercent": 100
+            },
+            "home": {
+              "monthlyKwh": 210,
+              "lpgCylindersPerMonth": 6,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 24,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 1246,
+              "food": 2362,
+              "home": 6689,
+              "lifestyle": 446
+            },
+            "total": 10743,
+            "totalTons": 10.74,
+            "greenScore": 0,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-13T13:10:17.757Z": {
+          "calculatedAt": "2026-06-13T13:10:17.757Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "dieselCar",
+              "weeklyKm": 140,
+              "transitPercent": 1,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegan",
+              "wasteLevel": "medium",
+              "localFoodPercent": 30
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 2252,
+              "food": 531,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 5902,
+            "totalTons": 5.9,
+            "greenScore": 280,
+            "level": "sapling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-13T13:22:59.863Z": {
+          "calculatedAt": "2026-06-13T13:22:59.863Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "petrolCar",
+              "weeklyKm": 140,
+              "transitPercent": 20,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegetarian",
+              "wasteLevel": "medium",
+              "localFoodPercent": 30
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 2373,
+              "food": 885,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 6377,
+            "totalTons": 6.38,
+            "greenScore": 216,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-14T13:18:54.149Z": {
+          "calculatedAt": "2026-06-14T13:18:54.149Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "dieselCar",
+              "weeklyKm": 140,
+              "transitPercent": 100,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegetarian",
+              "wasteLevel": "medium",
+              "localFoodPercent": 17
+            },
+            "home": {
+              "monthlyKwh": 220,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 65
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 2500,
+              "screenHoursPerDay": 6,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 1668,
+              "food": 897,
+              "home": 2935,
+              "lifestyle": 184
+            },
+            "total": 5684,
+            "totalTons": 5.68,
+            "greenScore": 309,
+            "level": "sapling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        }
+      }
+    }
+  },
+  "actions": {
+    "demo_operator_alpha": {
+      "completed": {
+        "cbca772f-2a43-451a-999a-bda255030458": {
+          "actionId": "cbca772f-2a43-451a-999a-bda255030458",
+          "title": "1 Meatless Day Per Week",
+          "category": "food",
+          "savingKgPerYear": 180,
+          "difficulty": "Medium",
+          "completedAt": "2026-06-11T20:44:28.564Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "d5a1a51c-9a8b-4a7d-be14-95f0b4a1236d": {
+          "actionId": "d5a1a51c-9a8b-4a7d-be14-95f0b4a1236d",
+          "title": "Limit Wardrobe Size",
+          "category": "lifestyle",
+          "savingKgPerYear": 340,
+          "difficulty": "Hard",
+          "completedAt": "2026-06-11T20:44:31.268Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "55d13e08-3522-4e36-bd5d-f1e098da00d4": {
+          "actionId": "55d13e08-3522-4e36-bd5d-f1e098da00d4",
+          "title": "Switch off Standby Devices",
+          "category": "home",
+          "savingKgPerYear": 150,
+          "difficulty": "Medium",
+          "completedAt": "2026-06-11T20:44:32.105Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "7df09fa8-238b-4655-8b93-53d222eb37c8": {
+          "actionId": "7df09fa8-238b-4655-8b93-53d222eb37c8",
+          "title": "Reduce Food Scraps By 50%",
+          "category": "food",
+          "savingKgPerYear": 120,
+          "difficulty": "Medium",
+          "completedAt": "2026-06-11T20:44:32.814Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "manual_lvo5ys8u0": {
+          "actionId": "manual_lvo5ys8u0",
+          "title": "this.love",
+          "category": "transport",
+          "savingKgPerYear": 150,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T09:15:00.869Z",
+          "source": "manual",
+          "notes": null
+        },
+        "manual_ioys7czzu": {
+          "actionId": "manual_ioys7czzu",
+          "title": "this",
+          "category": "transport",
+          "savingKgPerYear": 150,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T09:15:17.317Z",
+          "source": "manual",
+          "notes": null
+        },
+        "481c663b-8f44-4217-acfd-807f4866de41": {
+          "actionId": "481c663b-8f44-4217-acfd-807f4866de41",
+          "title": "Shift Commutes to Metro",
+          "category": "transport",
+          "savingKgPerYear": 480,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T09:16:05.266Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "a151d11e-d260-43f9-b5b3-d157014f3c50": {
+          "actionId": "a151d11e-d260-43f9-b5b3-d157014f3c50",
+          "title": "Shift Commutes to Metro",
+          "category": "transport",
+          "savingKgPerYear": 480,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T09:16:21.965Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "d1bc60b9-d184-4393-a1f0-6cb3fad7ef6e": {
+          "actionId": "d1bc60b9-d184-4393-a1f0-6cb3fad7ef6e",
+          "title": "Carpool with Coworkers",
+          "category": "transport",
+          "savingKgPerYear": 320,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T09:16:22.779Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "573928d8-098b-4473-b4f6-dcc5fb2a43ba": {
+          "actionId": "573928d8-098b-4473-b4f6-dcc5fb2a43ba",
+          "title": "Carpool with Coworkers",
+          "category": "transport",
+          "savingKgPerYear": 320,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T09:16:30.209Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "c19773f0-a437-4a72-88b7-d66f4ff5e792": {
+          "actionId": "c19773f0-a437-4a72-88b7-d66f4ff5e792",
+          "title": "1 Meatless Day Per Week",
+          "category": "food",
+          "savingKgPerYear": 180,
+          "difficulty": "Medium",
+          "completedAt": "2026-06-12T09:16:30.959Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "a06fdfcc-3d9a-4ab1-b30e-6272d567c520": {
+          "actionId": "a06fdfcc-3d9a-4ab1-b30e-6272d567c520",
+          "title": "Adopt Electric 2-Wheeler",
+          "category": "transport",
+          "savingKgPerYear": 750,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T09:16:31.674Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "cf17cd5d-fbf6-401e-92f6-a06be578490d": {
+          "actionId": "cf17cd5d-fbf6-401e-92f6-a06be578490d",
+          "title": "Reduce Food Scraps By 50%",
+          "category": "food",
+          "savingKgPerYear": 120,
+          "difficulty": "Medium",
+          "completedAt": "2026-06-12T09:16:31.679Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "02370446-ad22-4545-8dfb-7871bf6f1179": {
+          "actionId": "02370446-ad22-4545-8dfb-7871bf6f1179",
+          "title": "Switch off Standby Devices",
+          "category": "home",
+          "savingKgPerYear": 150,
+          "difficulty": "Medium",
+          "completedAt": "2026-06-12T09:16:31.812Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "377abc73-0b26-4dc3-a951-e725a05beeb9": {
+          "actionId": "377abc73-0b26-4dc3-a951-e725a05beeb9",
+          "title": "Install 5-Star BEE AC",
+          "category": "home",
+          "savingKgPerYear": 820,
+          "difficulty": "Hard",
+          "completedAt": "2026-06-12T09:16:32.442Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "e9d158c8-c620-4b80-978d-bb9368c973f5": {
+          "actionId": "e9d158c8-c620-4b80-978d-bb9368c973f5",
+          "title": "Limit Wardrobe Size",
+          "category": "lifestyle",
+          "savingKgPerYear": 340,
+          "difficulty": "Hard",
+          "completedAt": "2026-06-12T09:16:32.450Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "c661a10d-3eac-48c7-80e7-cd93956e2a8f": {
+          "actionId": "c661a10d-3eac-48c7-80e7-cd93956e2a8f",
+          "title": "Adopt Electric 2-Wheeler",
+          "category": "transport",
+          "savingKgPerYear": 750,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T09:16:40.806Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "manual_4s6wjbm38": {
+          "actionId": "manual_4s6wjbm38",
+          "title": "Test custom action",
+          "category": "transport",
+          "savingKgPerYear": 250,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T09:21:18.451Z",
+          "source": "manual",
+          "notes": "Notes for test"
+        },
+        "6fe7ec80-9523-4d26-bb7e-7a68362bf020": {
+          "actionId": "6fe7ec80-9523-4d26-bb7e-7a68362bf020",
+          "title": "Adopt Electric 2-Wheeler",
+          "category": "transport",
+          "savingKgPerYear": 750,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T09:27:18.400Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "manual_jzikc0yys": {
+          "actionId": "manual_jzikc0yys",
+          "title": "231er",
+          "category": "lifestyle",
+          "savingKgPerYear": 150,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T09:27:44.716Z",
+          "source": "manual",
+          "notes": null
+        },
+        "e84606ee-1e83-47a5-8b58-1f725987e053": {
+          "actionId": "e84606ee-1e83-47a5-8b58-1f725987e053",
+          "title": "Shift Commutes to Metro",
+          "category": "transport",
+          "savingKgPerYear": 480,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T09:29:37.706Z",
+          "source": "ai_suggestion",
+          "notes": null
+        },
+        "manual_cskd8mln3": {
+          "actionId": "manual_cskd8mln3",
+          "title": "Verify Custom Protocol Logging",
+          "category": "home",
+          "savingKgPerYear": 200,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T10:32:51.360Z",
+          "source": "manual",
+          "notes": "Tested and verified custom pending logging."
+        }
+      },
+      "dismissed": {}
+    },
+    "user_19d71f50": {
+      "completed": {
+        "manual_ktgshq2ff": {
+          "actionId": "manual_ktgshq2ff",
+          "title": "this ",
+          "category": "transport",
+          "savingKgPerYear": 150,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T10:27:55.587Z",
+          "source": "manual",
+          "notes": null
+        }
+      },
+      "dismissed": {}
+    },
+    "user_f07d10a3": {
+      "completed": {
+        "6bb4b1ea-e70a-4ccc-b604-957aec932b0e": {
+          "actionId": "6bb4b1ea-e70a-4ccc-b604-957aec932b0e",
+          "title": "Switch off Standby Devices",
+          "category": "home",
+          "savingKgPerYear": 150,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T15:21:38.286Z",
+          "source": "ai_suggestion",
+          "notes": "Unplug chargers and appliances when idle. Save active standby vampire load."
+        },
+        "3b998705-2328-465f-ba5b-8b05ec88811c": {
+          "actionId": "3b998705-2328-465f-ba5b-8b05ec88811c",
+          "title": "Install 5-Star BEE AC",
+          "category": "home",
+          "savingKgPerYear": 820,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T15:21:39.155Z",
+          "source": "ai_suggestion",
+          "notes": "Upgrade old inefficient cooling systems to 5-star inverter air conditioners."
+        },
+        "5525356e-8571-4206-95bc-168998301716": {
+          "actionId": "5525356e-8571-4206-95bc-168998301716",
+          "title": "Configure LED Retrofitting",
+          "category": "home",
+          "savingKgPerYear": 110,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-12T15:21:39.788Z",
+          "source": "ai_suggestion",
+          "notes": "Replace all old standard filament bulbs with 9W energy-saving LED lights."
+        },
+        "5e99a49a-3895-4d27-9745-5181fade3472": {
+          "actionId": "5e99a49a-3895-4d27-9745-5181fade3472",
+          "title": "Shift Commutes to Metro",
+          "category": "transport",
+          "savingKgPerYear": 480,
+          "difficulty": "Medium",
+          "completedAt": "2026-06-12T15:21:40.316Z",
+          "source": "ai_suggestion",
+          "notes": "Use metro instead of your petrol vehicle for standard commute schedules."
+        },
+        "73a66c96-9662-4aac-80b2-e782e0d85c02": {
+          "actionId": "73a66c96-9662-4aac-80b2-e782e0d85c02",
+          "title": "Carpool with Coworkers",
+          "category": "transport",
+          "savingKgPerYear": 320,
+          "difficulty": "Medium",
+          "completedAt": "2026-06-12T15:21:40.321Z",
+          "source": "ai_suggestion",
+          "notes": "Share rides 3 times a week, saving petrol consumption costs and emissions."
+        },
+        "5f16a5b4-4a37-404e-8c8e-79cbb68daf46": {
+          "actionId": "5f16a5b4-4a37-404e-8c8e-79cbb68daf46",
+          "title": "1 Meatless Day Per Week",
+          "category": "food",
+          "savingKgPerYear": 180,
+          "difficulty": "Medium",
+          "completedAt": "2026-06-12T15:21:40.366Z",
+          "source": "ai_suggestion",
+          "notes": "Cut out high-methane meats for vegetarian meals on Mondays."
+        },
+        "74b8f58d-b3f4-4d1e-9060-3150b5201be7": {
+          "actionId": "74b8f58d-b3f4-4d1e-9060-3150b5201be7",
+          "title": "Reduce Food Scraps By 50%",
+          "category": "food",
+          "savingKgPerYear": 120,
+          "difficulty": "Hard",
+          "completedAt": "2026-06-12T15:21:40.503Z",
+          "source": "ai_suggestion",
+          "notes": "Compost food waste locally and plan meals, avoiding landfill waste methane."
+        },
+        "9d9cb72c-b709-44eb-9965-513c31465105": {
+          "actionId": "9d9cb72c-b709-44eb-9965-513c31465105",
+          "title": "Limit Wardrobe Size",
+          "category": "lifestyle",
+          "savingKgPerYear": 340,
+          "difficulty": "Hard",
+          "completedAt": "2026-06-12T15:21:40.958Z",
+          "source": "ai_suggestion",
+          "notes": "Buy only high-quality items and skip fast fashion. Reduce synthetic manufacturing."
+        }
+      },
+      "dismissed": {}
+    },
+    "user_4a46d773": {
+      "completed": {
+        "64ef2b02-3346-4e61-8a2c-4b1e9942bbf0": {
+          "actionId": "64ef2b02-3346-4e61-8a2c-4b1e9942bbf0",
+          "title": "Switch off Standby Devices",
+          "category": "home",
+          "savingKgPerYear": 150,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-13T13:09:53.717Z",
+          "source": "ai_suggestion",
+          "notes": "Unplug chargers and appliances when idle. Save active standby vampire load."
+        },
+        "4f046f08-8058-4424-af12-f7789b65eb6f": {
+          "actionId": "4f046f08-8058-4424-af12-f7789b65eb6f",
+          "title": "Install 5-Star BEE AC",
+          "category": "home",
+          "savingKgPerYear": 820,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-13T13:09:54.333Z",
+          "source": "ai_suggestion",
+          "notes": "Upgrade old inefficient cooling systems to 5-star inverter air conditioners."
+        },
+        "f2ee25e4-22bb-45a2-b8de-0669ddfce515": {
+          "actionId": "f2ee25e4-22bb-45a2-b8de-0669ddfce515",
+          "title": "Configure LED Retrofitting",
+          "category": "home",
+          "savingKgPerYear": 110,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-13T13:09:54.339Z",
+          "source": "ai_suggestion",
+          "notes": "Replace all old standard filament bulbs with 9W energy-saving LED lights."
+        },
+        "3541be4e-e61f-48f5-a5fa-0e792f416038": {
+          "actionId": "3541be4e-e61f-48f5-a5fa-0e792f416038",
+          "title": "Shift Commutes to Metro",
+          "category": "transport",
+          "savingKgPerYear": 480,
+          "difficulty": "Medium",
+          "completedAt": "2026-06-13T13:09:54.426Z",
+          "source": "ai_suggestion",
+          "notes": "Use metro instead of your petrol vehicle for standard commute schedules."
+        },
+        "f261d70d-0cb6-48e0-828d-e90d1aeccccb": {
+          "actionId": "f261d70d-0cb6-48e0-828d-e90d1aeccccb",
+          "title": "Carpool with Coworkers",
+          "category": "transport",
+          "savingKgPerYear": 320,
+          "difficulty": "Medium",
+          "completedAt": "2026-06-13T13:09:54.903Z",
+          "source": "ai_suggestion",
+          "notes": "Share rides 3 times a week, saving petrol consumption costs and emissions."
+        },
+        "3fb4f701-c8c3-4ed8-9b67-bda05beb4dfb": {
+          "actionId": "3fb4f701-c8c3-4ed8-9b67-bda05beb4dfb",
+          "title": "1 Meatless Day Per Week",
+          "category": "food",
+          "savingKgPerYear": 180,
+          "difficulty": "Medium",
+          "completedAt": "2026-06-13T13:09:54.908Z",
+          "source": "ai_suggestion",
+          "notes": "Cut out high-methane meats for vegetarian meals on Mondays."
+        },
+        "6d0db3ff-f5f4-46a6-a75e-383fef91f5ac": {
+          "actionId": "6d0db3ff-f5f4-46a6-a75e-383fef91f5ac",
+          "title": "Reduce Food Scraps By 50%",
+          "category": "food",
+          "savingKgPerYear": 120,
+          "difficulty": "Hard",
+          "completedAt": "2026-06-13T13:09:54.911Z",
+          "source": "ai_suggestion",
+          "notes": "Compost food waste locally and plan meals, avoiding landfill waste methane."
+        },
+        "9c93d22f-1073-4b6b-a1d0-29ed72a067ae": {
+          "actionId": "9c93d22f-1073-4b6b-a1d0-29ed72a067ae",
+          "title": "Limit Wardrobe Size",
+          "category": "lifestyle",
+          "savingKgPerYear": 340,
+          "difficulty": "Hard",
+          "completedAt": "2026-06-13T13:09:55.047Z",
+          "source": "ai_suggestion",
+          "notes": "Buy only high-quality items and skip fast fashion. Reduce synthetic manufacturing."
+        }
+      },
+      "dismissed": {}
+    }
+  },
+  "suggestions": {
+    "demo_operator_alpha": {
+      "generatedAt": "2026-06-12T10:31:32.161Z",
+      "expiresAt": "2026-06-19T10:31:32.161Z",
+      "modelVersion": "rules-based-fallback",
+      "suggestions": [
+        {
+          "id": "manual_2mvzbum87",
+          "title": "makeshift",
+          "description": "manually logged custom protocol.",
+          "category": "lifestyle",
+          "savingKgPerYear": 200,
+          "difficulty": "Easy",
+          "timeToImplement": "Immediate",
+          "status": "pending",
+          "source": "manual",
+          "notes": null
+        },
+        {
+          "id": "manual_cskd8mln3",
+          "title": "Verify Custom Protocol Logging",
+          "description": "Tested and verified custom pending logging.",
+          "category": "home",
+          "savingKgPerYear": 200,
+          "difficulty": "Easy",
+          "timeToImplement": "Immediate",
+          "status": "accepted",
+          "source": "manual",
+          "notes": "Tested and verified custom pending logging."
+        },
+        {
+          "title": "Shift Commutes to Metro",
+          "description": "Use metro instead of your petrol vehicle for standard commute schedules.",
+          "difficulty": "Easy",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 480,
+          "category": "transport",
+          "id": "dc71429c-5cc9-4fb4-87ab-c82c0f4bb776",
+          "status": "pending"
+        },
+        {
+          "title": "Carpool with Coworkers",
+          "description": "Share rides 3 times a week, saving petrol consumption costs and emissions.",
+          "difficulty": "Easy",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 320,
+          "category": "transport",
+          "id": "9937cc60-5cd2-488e-b7e4-caad5b7dc4f6",
+          "status": "pending"
+        },
+        {
+          "title": "Adopt Electric 2-Wheeler",
+          "description": "Replace standard daily scooter commutes with an electric bike or scooter.",
+          "difficulty": "Easy",
+          "timeToImplement": "This Month",
+          "savingKgPerYear": 750,
+          "category": "transport",
+          "id": "926a33b8-bd32-4a81-946e-7f3c7f8ba0fd",
+          "status": "pending"
+        },
+        {
+          "title": "1 Meatless Day Per Week",
+          "description": "Cut out high-methane meats for vegetarian meals on Mondays.",
+          "difficulty": "Medium",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 180,
+          "category": "food",
+          "id": "c448f913-e3a2-48ec-97b3-5f4caa8a6427",
+          "status": "pending"
+        },
+        {
+          "title": "Reduce Food Scraps By 50%",
+          "description": "Compost food waste locally and plan meals, avoiding landfill waste methane.",
+          "difficulty": "Medium",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 120,
+          "category": "food",
+          "id": "d2024bdd-fdef-4b99-b90f-dfda8cd0a957",
+          "status": "pending"
+        },
+        {
+          "title": "Switch off Standby Devices",
+          "description": "Unplug chargers and appliances when idle. Save active standby vampire load.",
+          "difficulty": "Medium",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 150,
+          "category": "home",
+          "id": "0671a082-03dd-462e-882d-f1d8e0231bc4",
+          "status": "pending"
+        },
+        {
+          "title": "Install 5-Star BEE AC",
+          "description": "Upgrade old inefficient cooling systems to 5-star inverter air conditioners.",
+          "difficulty": "Hard",
+          "timeToImplement": "This Month",
+          "savingKgPerYear": 820,
+          "category": "home",
+          "id": "6cc42413-8777-41e4-9b69-cf68d3b71b61",
+          "status": "pending"
+        },
+        {
+          "title": "Limit Wardrobe Size",
+          "description": "Buy only high-quality items and skip fast fashion. Reduce synthetic manufacturing.",
+          "difficulty": "Hard",
+          "timeToImplement": "This Month",
+          "savingKgPerYear": 340,
+          "category": "lifestyle",
+          "id": "6bd0d562-62d8-4e3d-9258-69ad96b53e62",
+          "status": "pending"
+        }
+      ]
+    },
+    "user_19d71f50": {
+      "generatedAt": "2026-06-12T14:56:23.963Z",
+      "expiresAt": "2026-06-19T14:56:23.963Z",
+      "modelVersion": "rules-based-fallback",
+      "suggestions": [
+        {
+          "title": "Switch off Standby Devices",
+          "description": "Unplug chargers and appliances when idle. Save active standby vampire load.",
+          "difficulty": "Easy",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 150,
+          "category": "home",
+          "id": "f2e38438-14c8-4a49-a559-f1e835445067",
+          "status": "pending"
+        },
+        {
+          "title": "Install 5-Star BEE AC",
+          "description": "Upgrade old inefficient cooling systems to 5-star inverter air conditioners.",
+          "difficulty": "Easy",
+          "timeToImplement": "This Month",
+          "savingKgPerYear": 820,
+          "category": "home",
+          "id": "861d2e06-1699-4246-a035-7759a9dae6a8",
+          "status": "pending"
+        },
+        {
+          "title": "Configure LED Retrofitting",
+          "description": "Replace all old standard filament bulbs with 9W energy-saving LED lights.",
+          "difficulty": "Easy",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 110,
+          "category": "home",
+          "id": "349d6d67-da24-4d5c-a028-32e4076aac0f",
+          "status": "pending"
+        },
+        {
+          "title": "Shift Commutes to Metro",
+          "description": "Use metro instead of your petrol vehicle for standard commute schedules.",
+          "difficulty": "Medium",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 480,
+          "category": "transport",
+          "id": "95a81417-5948-4fa4-9c43-6be5ada897b9",
+          "status": "pending"
+        },
+        {
+          "title": "Carpool with Coworkers",
+          "description": "Share rides 3 times a week, saving petrol consumption costs and emissions.",
+          "difficulty": "Medium",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 320,
+          "category": "transport",
+          "id": "01357da7-c5bf-40f9-a1f7-880f1f003ea6",
+          "status": "pending"
+        },
+        {
+          "title": "1 Meatless Day Per Week",
+          "description": "Cut out high-methane meats for vegetarian meals on Mondays.",
+          "difficulty": "Medium",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 180,
+          "category": "food",
+          "id": "eff7227e-f97f-45c1-9f45-b5db1a198f72",
+          "status": "pending"
+        },
+        {
+          "title": "Reduce Food Scraps By 50%",
+          "description": "Compost food waste locally and plan meals, avoiding landfill waste methane.",
+          "difficulty": "Hard",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 120,
+          "category": "food",
+          "id": "d890fe09-e69d-41a5-9ace-090afe8a1765",
+          "status": "pending"
+        },
+        {
+          "title": "Limit Wardrobe Size",
+          "description": "Buy only high-quality items and skip fast fashion. Reduce synthetic manufacturing.",
+          "difficulty": "Hard",
+          "timeToImplement": "This Month",
+          "savingKgPerYear": 340,
+          "category": "lifestyle",
+          "id": "35d9af38-743a-4074-a492-1b00d24d362a",
+          "status": "pending"
+        }
+      ]
+    },
+    "test_user_operator_9": {
+      "generatedAt": "2026-06-12T15:01:54.175Z",
+      "expiresAt": "2026-06-19T15:01:54.175Z",
+      "modelVersion": "rules-based-fallback",
+      "suggestions": [
+        {
+          "title": "Switch off Standby Devices",
+          "description": "Unplug chargers and appliances when idle. Save active standby vampire load.",
+          "difficulty": "Easy",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 150,
+          "category": "home",
+          "id": "378746cc-c55f-4d9f-b8ee-89c3ee6cebe4",
+          "status": "pending"
+        },
+        {
+          "title": "Install 5-Star BEE AC",
+          "description": "Upgrade old inefficient cooling systems to 5-star inverter air conditioners.",
+          "difficulty": "Easy",
+          "timeToImplement": "This Month",
+          "savingKgPerYear": 820,
+          "category": "home",
+          "id": "eba6e9d2-870b-49af-aacc-6bac91cf931c",
+          "status": "pending"
+        },
+        {
+          "title": "Configure LED Retrofitting",
+          "description": "Replace all old standard filament bulbs with 9W energy-saving LED lights.",
+          "difficulty": "Easy",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 110,
+          "category": "home",
+          "id": "14b6c23d-ec72-44b3-9317-fa667f38df7c",
+          "status": "pending"
+        },
+        {
+          "title": "Shift Commutes to Metro",
+          "description": "Use metro instead of your petrol vehicle for standard commute schedules.",
+          "difficulty": "Medium",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 480,
+          "category": "transport",
+          "id": "7362cbf5-c49c-4759-9750-71494bb81f68",
+          "status": "pending"
+        },
+        {
+          "title": "Carpool with Coworkers",
+          "description": "Share rides 3 times a week, saving petrol consumption costs and emissions.",
+          "difficulty": "Medium",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 320,
+          "category": "transport",
+          "id": "0957a629-d867-4ac4-9e45-63ced6baeebe",
+          "status": "pending"
+        },
+        {
+          "title": "1 Meatless Day Per Week",
+          "description": "Cut out high-methane meats for vegetarian meals on Mondays.",
+          "difficulty": "Medium",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 180,
+          "category": "food",
+          "id": "41747055-2107-411c-8548-d92ddc77a3fd",
+          "status": "pending"
+        },
+        {
+          "title": "Reduce Food Scraps By 50%",
+          "description": "Compost food waste locally and plan meals, avoiding landfill waste methane.",
+          "difficulty": "Hard",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 120,
+          "category": "food",
+          "id": "125c175d-2318-412b-aef7-30d078e51211",
+          "status": "pending"
+        },
+        {
+          "title": "Limit Wardrobe Size",
+          "description": "Buy only high-quality items and skip fast fashion. Reduce synthetic manufacturing.",
+          "difficulty": "Hard",
+          "timeToImplement": "This Month",
+          "savingKgPerYear": 340,
+          "category": "lifestyle",
+          "id": "aeceef70-d2c1-4ffe-947e-d921b11dac72",
+          "status": "pending"
+        }
+      ]
+    },
+    "user_f07d10a3": {
+      "generatedAt": "2026-06-13T13:06:29.486Z",
+      "expiresAt": "2026-06-20T13:06:29.486Z",
+      "modelVersion": "rules-based-fallback",
+      "suggestions": [
+        {
+          "title": "Switch off Standby Devices",
+          "description": "Unplug chargers and appliances when idle. Save active standby vampire load.",
+          "difficulty": "Easy",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 150,
+          "category": "home",
+          "id": "6bb4b1ea-e70a-4ccc-b604-957aec932b0e",
+          "status": "accepted"
+        },
+        {
+          "title": "Install 5-Star BEE AC",
+          "description": "Upgrade old inefficient cooling systems to 5-star inverter air conditioners.",
+          "difficulty": "Easy",
+          "timeToImplement": "This Month",
+          "savingKgPerYear": 820,
+          "category": "home",
+          "id": "3b998705-2328-465f-ba5b-8b05ec88811c",
+          "status": "accepted"
+        },
+        {
+          "title": "Configure LED Retrofitting",
+          "description": "Replace all old standard filament bulbs with 9W energy-saving LED lights.",
+          "difficulty": "Easy",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 110,
+          "category": "home",
+          "id": "5525356e-8571-4206-95bc-168998301716",
+          "status": "accepted"
+        },
+        {
+          "title": "Shift Commutes to Metro",
+          "description": "Use metro instead of your petrol vehicle for standard commute schedules.",
+          "difficulty": "Medium",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 480,
+          "category": "transport",
+          "id": "5e99a49a-3895-4d27-9745-5181fade3472",
+          "status": "accepted"
+        },
+        {
+          "title": "Carpool with Coworkers",
+          "description": "Share rides 3 times a week, saving petrol consumption costs and emissions.",
+          "difficulty": "Medium",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 320,
+          "category": "transport",
+          "id": "73a66c96-9662-4aac-80b2-e782e0d85c02",
+          "status": "accepted"
+        },
+        {
+          "title": "1 Meatless Day Per Week",
+          "description": "Cut out high-methane meats for vegetarian meals on Mondays.",
+          "difficulty": "Medium",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 180,
+          "category": "food",
+          "id": "5f16a5b4-4a37-404e-8c8e-79cbb68daf46",
+          "status": "accepted"
+        },
+        {
+          "title": "Reduce Food Scraps By 50%",
+          "description": "Compost food waste locally and plan meals, avoiding landfill waste methane.",
+          "difficulty": "Hard",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 120,
+          "category": "food",
+          "id": "74b8f58d-b3f4-4d1e-9060-3150b5201be7",
+          "status": "accepted"
+        },
+        {
+          "title": "Limit Wardrobe Size",
+          "description": "Buy only high-quality items and skip fast fashion. Reduce synthetic manufacturing.",
+          "difficulty": "Hard",
+          "timeToImplement": "This Month",
+          "savingKgPerYear": 340,
+          "category": "lifestyle",
+          "id": "9d9cb72c-b709-44eb-9965-513c31465105",
+          "status": "accepted"
+        }
+      ]
+    },
+    "user_4a46d773": {
+      "generatedAt": "2026-06-14T13:18:54.227Z",
+      "expiresAt": "2026-06-21T13:18:54.228Z",
+      "modelVersion": "rules-based-fallback",
+      "suggestions": [
+        {
+          "title": "Switch off Standby Devices",
+          "description": "Unplug chargers and appliances when idle. Save active standby vampire load.",
+          "difficulty": "Easy",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 150,
+          "category": "home",
+          "id": "64ef2b02-3346-4e61-8a2c-4b1e9942bbf0",
+          "status": "accepted"
+        },
+        {
+          "title": "Install 5-Star BEE AC",
+          "description": "Upgrade old inefficient cooling systems to 5-star inverter air conditioners.",
+          "difficulty": "Easy",
+          "timeToImplement": "This Month",
+          "savingKgPerYear": 820,
+          "category": "home",
+          "id": "4f046f08-8058-4424-af12-f7789b65eb6f",
+          "status": "accepted"
+        },
+        {
+          "title": "Configure LED Retrofitting",
+          "description": "Replace all old standard filament bulbs with 9W energy-saving LED lights.",
+          "difficulty": "Easy",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 110,
+          "category": "home",
+          "id": "f2ee25e4-22bb-45a2-b8de-0669ddfce515",
+          "status": "accepted"
+        },
+        {
+          "title": "Shift Commutes to Metro",
+          "description": "Use metro instead of your petrol vehicle for standard commute schedules.",
+          "difficulty": "Medium",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 480,
+          "category": "transport",
+          "id": "3541be4e-e61f-48f5-a5fa-0e792f416038",
+          "status": "accepted"
+        },
+        {
+          "title": "Carpool with Coworkers",
+          "description": "Share rides 3 times a week, saving petrol consumption costs and emissions.",
+          "difficulty": "Medium",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 320,
+          "category": "transport",
+          "id": "f261d70d-0cb6-48e0-828d-e90d1aeccccb",
+          "status": "accepted"
+        },
+        {
+          "title": "1 Meatless Day Per Week",
+          "description": "Cut out high-methane meats for vegetarian meals on Mondays.",
+          "difficulty": "Medium",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 180,
+          "category": "food",
+          "id": "3fb4f701-c8c3-4ed8-9b67-bda05beb4dfb",
+          "status": "accepted"
+        },
+        {
+          "title": "Reduce Food Scraps By 50%",
+          "description": "Compost food waste locally and plan meals, avoiding landfill waste methane.",
+          "difficulty": "Hard",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 120,
+          "category": "food",
+          "id": "6d0db3ff-f5f4-46a6-a75e-383fef91f5ac",
+          "status": "accepted"
+        },
+        {
+          "title": "Limit Wardrobe Size",
+          "description": "Buy only high-quality items and skip fast fashion. Reduce synthetic manufacturing.",
+          "difficulty": "Hard",
+          "timeToImplement": "This Month",
+          "savingKgPerYear": 340,
+          "category": "lifestyle",
+          "id": "9c93d22f-1073-4b6b-a1d0-29ed72a067ae",
+          "status": "accepted"
+        }
+      ]
+    }
+  },
+  "leaderboard": {
+    "demo_operator_alpha": {
+      "uid": "demo_operator_alpha",
+      "displayName": "Alex Rivera",
+      "greenScore": 550,
+      "footprintTotal": 1321532,
+      "level": "tree",
+      "lastUpdated": "2026-06-12T10:32:51.360Z"
+    },
+    "user_19d71f50": {
+      "uid": "user_19d71f50",
+      "displayName": "Aryan Shrivastava",
+      "greenScore": 550,
+      "footprintTotal": 5672,
+      "level": "tree",
+      "lastUpdated": "2026-06-12T10:27:55.587Z"
+    },
+    "test_user_operator_9": {
+      "uid": "test_user_operator_9",
+      "displayName": "Default User",
+      "greenScore": 0,
+      "footprintTotal": 6366,
+      "level": "seedling",
+      "lastUpdated": "2026-06-12T15:01:54.169Z"
+    },
+    "user_f07d10a3": {
+      "uid": "user_f07d10a3",
+      "displayName": "max",
+      "greenScore": 550,
+      "footprintTotal": 3876,
+      "level": "tree",
+      "lastUpdated": "2026-06-13T12:09:13.985Z"
+    },
+    "user_4a46d773": {
+      "uid": "user_4a46d773",
+      "displayName": "sam",
+      "greenScore": 309,
+      "footprintTotal": 5684,
+      "level": "sapling",
+      "lastUpdated": "2026-06-14T13:18:54.149Z"
+    }
+  }
+}

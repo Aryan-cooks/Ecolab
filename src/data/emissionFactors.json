@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "sources": ["IPCC AR6", "DEFRA 2024", "CEA India 2023"],
+  "transport": {
+    "petrolCar": 0.21,
+    "dieselCar": 0.17,
+    "electricCar": 0.05,
+    "cng": 0.11,
+    "bus": 0.089,
+    "metro": 0.031,
+    "cycle": 0.0,
+    "flight_domestic": 0.255
+  },
+  "food": {
+    "vegan": 1.5,
+    "vegetarian": 2.5,
+    "lowMeat": 4.67,
+    "highMeat": 7.19
+  },
+  "energy": {
+    "electricityIndia": 0.82,
+    "lpgPerCylinder": 64.2
+  },
+  "lifestyle": {
+    "clothingPerINR1000": 3.2,
+    "screenHourPerDay": 0.04
+  }
+}
