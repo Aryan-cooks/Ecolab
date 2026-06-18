@@ -4,11 +4,11 @@
       "uid": "demo_operator_alpha",
       "createdAt": "2026-06-12T09:14:28.858Z",
       "displayName": "Alex Rivera",
-      "greenScore": 550,
+      "greenScore": 650,
       "level": "tree",
       "lastActiveAt": "2026-06-12T09:58:15.497Z",
-      "streakDays": 16,
-      "lastStreakDate": "2026-06-12T10:32:51.360Z",
+      "streakDays": 2,
+      "lastStreakDate": "2026-06-18T09:58:14.080Z",
       "badges": [
         "first_step",
         "eco_enthusiast",
@@ -53,7 +53,9 @@
       "level": "tree",
       "streakDays": 2,
       "lastStreakDate": "2026-06-12T10:27:55.587Z",
-      "badges": ["first_step"],
+      "badges": [
+        "first_step"
+      ],
       "createdAt": "2026-06-12T10:06:28.762Z",
       "lastActiveAt": "2026-06-12T10:19:19.975Z",
       "weeklyChallenge": {
@@ -82,7 +84,11 @@
       "level": "tree",
       "streakDays": 9,
       "lastStreakDate": "2026-06-12T15:21:40.958Z",
-      "badges": ["first_step", "streak_master", "action_taker"],
+      "badges": [
+        "first_step",
+        "streak_master",
+        "action_taker"
+      ],
       "createdAt": "2026-06-12T14:57:22.678Z",
       "lastActiveAt": "2026-06-13T12:09:13.985Z",
       "weeklyChallenge": {
@@ -96,9 +102,9 @@
       "uid": "test_user_operator_9",
       "createdAt": "2026-06-12T15:01:54.169Z",
       "displayName": "Default User",
-      "greenScore": 0,
+      "greenScore": 218,
       "level": "seedling",
-      "lastActiveAt": "2026-06-12T15:01:54.169Z"
+      "lastActiveAt": "2026-06-18T09:27:43.993Z"
     },
     "user_4a46d773": {
       "uid": "user_4a46d773",
@@ -119,7 +125,11 @@
       "level": "sapling",
       "streakDays": 9,
       "lastStreakDate": "2026-06-13T13:09:55.047Z",
-      "badges": ["first_step", "streak_master", "action_taker"],
+      "badges": [
+        "first_step",
+        "streak_master",
+        "action_taker"
+      ],
       "createdAt": "2026-06-13T13:07:50.567Z",
       "lastActiveAt": "2026-06-14T13:18:54.149Z",
       "weeklyChallenge": {
@@ -546,6 +556,47 @@
             "total": 6366,
             "totalTons": 6.37,
             "greenScore": 0,
+            "level": "seedling",
+            "nationalAverageIndia": 2000,
+            "percentileRank": 0
+          }
+        },
+        "2026-06-18T09:27:43.993Z": {
+          "calculatedAt": "2026-06-18T09:27:43.993Z",
+          "version": "1.0",
+          "inputs": {
+            "transport": {
+              "vehicleType": "petrolCar",
+              "weeklyKm": 150,
+              "transitPercent": 10,
+              "flightsPerYear": 2
+            },
+            "food": {
+              "dietType": "vegetarian",
+              "wasteLevel": "medium",
+              "localFoodPercent": 40
+            },
+            "home": {
+              "monthlyKwh": 200,
+              "lpgCylindersPerMonth": 1,
+              "homeSizeSqm": 80
+            },
+            "lifestyle": {
+              "monthlyClothingSpend": 3000,
+              "screenHoursPerDay": 5,
+              "recyclingHabits": "partial"
+            }
+          },
+          "results": {
+            "breakdown": {
+              "transport": 2564,
+              "food": 876,
+              "home": 2738,
+              "lifestyle": 188
+            },
+            "total": 6366,
+            "totalTons": 6.37,
+            "greenScore": 218,
             "level": "seedling",
             "nationalAverageIndia": 2000,
             "percentileRank": 0
@@ -1194,6 +1245,26 @@
           "completedAt": "2026-06-12T10:32:51.360Z",
           "source": "manual",
           "notes": "Tested and verified custom pending logging."
+        },
+        "e88e8c90-0b62-4631-8b20-403aa3ce99d4": {
+          "actionId": "e88e8c90-0b62-4631-8b20-403aa3ce99d4",
+          "title": "Switch off Standby Devices",
+          "category": "home",
+          "savingKgPerYear": 150,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-18T08:26:14.718Z",
+          "source": "ai_suggestion",
+          "notes": "Unplug chargers and appliances when idle. Save active standby vampire load."
+        },
+        "4eb88196-1f34-4483-951c-e93425f19152": {
+          "actionId": "4eb88196-1f34-4483-951c-e93425f19152",
+          "title": "Configure LED Retrofitting",
+          "category": "home",
+          "savingKgPerYear": 110,
+          "difficulty": "Easy",
+          "completedAt": "2026-06-18T09:58:14.080Z",
+          "source": "ai_suggestion",
+          "notes": "Replace all old standard filament bulbs with 9W energy-saving LED lights."
         }
       },
       "dismissed": {}
@@ -1386,8 +1457,8 @@
   },
   "suggestions": {
     "demo_operator_alpha": {
-      "generatedAt": "2026-06-12T10:31:32.161Z",
-      "expiresAt": "2026-06-19T10:31:32.161Z",
+      "generatedAt": "2026-06-18T10:24:13.670Z",
+      "expiresAt": "2026-06-25T10:24:13.670Z",
       "modelVersion": "rules-based-fallback",
       "suggestions": [
         {
@@ -1415,33 +1486,53 @@
           "notes": "Tested and verified custom pending logging."
         },
         {
+          "title": "Switch off Standby Devices",
+          "description": "Unplug chargers and appliances when idle. Save active standby vampire load.",
+          "difficulty": "Easy",
+          "timeToImplement": "Immediate",
+          "savingKgPerYear": 150,
+          "category": "home",
+          "id": "e88e8c90-0b62-4631-8b20-403aa3ce99d4",
+          "status": "accepted"
+        },
+        {
+          "title": "Configure LED Retrofitting",
+          "description": "Replace all old standard filament bulbs with 9W energy-saving LED lights.",
+          "difficulty": "Easy",
+          "timeToImplement": "This Week",
+          "savingKgPerYear": 110,
+          "category": "home",
+          "id": "4eb88196-1f34-4483-951c-e93425f19152",
+          "status": "accepted"
+        },
+        {
+          "title": "Install 5-Star BEE AC",
+          "description": "Upgrade old inefficient cooling systems to 5-star inverter air conditioners.",
+          "difficulty": "Easy",
+          "timeToImplement": "This Month",
+          "savingKgPerYear": 820,
+          "category": "home",
+          "id": "26b6db1f-15b7-4d58-bdb3-5a7c04a220b3",
+          "status": "pending"
+        },
+        {
           "title": "Shift Commutes to Metro",
           "description": "Use metro instead of your petrol vehicle for standard commute schedules.",
-          "difficulty": "Easy",
+          "difficulty": "Medium",
           "timeToImplement": "This Week",
           "savingKgPerYear": 480,
           "category": "transport",
-          "id": "dc71429c-5cc9-4fb4-87ab-c82c0f4bb776",
+          "id": "43e8a300-f23b-4edb-bdc2-ce62923ec8c9",
           "status": "pending"
         },
         {
           "title": "Carpool with Coworkers",
           "description": "Share rides 3 times a week, saving petrol consumption costs and emissions.",
-          "difficulty": "Easy",
+          "difficulty": "Medium",
           "timeToImplement": "Immediate",
           "savingKgPerYear": 320,
           "category": "transport",
-          "id": "9937cc60-5cd2-488e-b7e4-caad5b7dc4f6",
-          "status": "pending"
-        },
-        {
-          "title": "Adopt Electric 2-Wheeler",
-          "description": "Replace standard daily scooter commutes with an electric bike or scooter.",
-          "difficulty": "Easy",
-          "timeToImplement": "This Month",
-          "savingKgPerYear": 750,
-          "category": "transport",
-          "id": "926a33b8-bd32-4a81-946e-7f3c7f8ba0fd",
+          "id": "e04521c0-d0d7-4b7f-ac61-1a741ceffeff",
           "status": "pending"
         },
         {
@@ -1451,37 +1542,17 @@
           "timeToImplement": "Immediate",
           "savingKgPerYear": 180,
           "category": "food",
-          "id": "c448f913-e3a2-48ec-97b3-5f4caa8a6427",
+          "id": "36bdd2cd-b100-4f2e-9add-b01b33483923",
           "status": "pending"
         },
         {
           "title": "Reduce Food Scraps By 50%",
           "description": "Compost food waste locally and plan meals, avoiding landfill waste methane.",
-          "difficulty": "Medium",
+          "difficulty": "Hard",
           "timeToImplement": "This Week",
           "savingKgPerYear": 120,
           "category": "food",
-          "id": "d2024bdd-fdef-4b99-b90f-dfda8cd0a957",
-          "status": "pending"
-        },
-        {
-          "title": "Switch off Standby Devices",
-          "description": "Unplug chargers and appliances when idle. Save active standby vampire load.",
-          "difficulty": "Medium",
-          "timeToImplement": "Immediate",
-          "savingKgPerYear": 150,
-          "category": "home",
-          "id": "0671a082-03dd-462e-882d-f1d8e0231bc4",
-          "status": "pending"
-        },
-        {
-          "title": "Install 5-Star BEE AC",
-          "description": "Upgrade old inefficient cooling systems to 5-star inverter air conditioners.",
-          "difficulty": "Hard",
-          "timeToImplement": "This Month",
-          "savingKgPerYear": 820,
-          "category": "home",
-          "id": "6cc42413-8777-41e4-9b69-cf68d3b71b61",
+          "id": "4e8479f9-c3d4-4ac3-9e1d-67e9424e16d9",
           "status": "pending"
         },
         {
@@ -1491,7 +1562,7 @@
           "timeToImplement": "This Month",
           "savingKgPerYear": 340,
           "category": "lifestyle",
-          "id": "6bd0d562-62d8-4e3d-9258-69ad96b53e62",
+          "id": "8c01cf05-7841-42b4-a1cf-123ddaa15ca6",
           "status": "pending"
         }
       ]
@@ -1584,8 +1655,8 @@
       ]
     },
     "test_user_operator_9": {
-      "generatedAt": "2026-06-12T15:01:54.175Z",
-      "expiresAt": "2026-06-19T15:01:54.175Z",
+      "generatedAt": "2026-06-18T09:27:43.998Z",
+      "expiresAt": "2026-06-25T09:27:43.998Z",
       "modelVersion": "rules-based-fallback",
       "suggestions": [
         {
@@ -1595,7 +1666,7 @@
           "timeToImplement": "Immediate",
           "savingKgPerYear": 150,
           "category": "home",
-          "id": "378746cc-c55f-4d9f-b8ee-89c3ee6cebe4",
+          "id": "82d31727-c28d-4217-8e4d-67f7e5a6612e",
           "status": "pending"
         },
         {
@@ -1605,7 +1676,7 @@
           "timeToImplement": "This Month",
           "savingKgPerYear": 820,
           "category": "home",
-          "id": "eba6e9d2-870b-49af-aacc-6bac91cf931c",
+          "id": "ca7243dc-3b38-4cf7-90b1-adf69d250fac",
           "status": "pending"
         },
         {
@@ -1615,7 +1686,7 @@
           "timeToImplement": "This Week",
           "savingKgPerYear": 110,
           "category": "home",
-          "id": "14b6c23d-ec72-44b3-9317-fa667f38df7c",
+          "id": "f6354b98-5b8a-45b8-9983-d9343ab07e1c",
           "status": "pending"
         },
         {
@@ -1625,7 +1696,7 @@
           "timeToImplement": "This Week",
           "savingKgPerYear": 480,
           "category": "transport",
-          "id": "7362cbf5-c49c-4759-9750-71494bb81f68",
+          "id": "79add0ad-df68-4a46-9ca4-1b49d499fef9",
           "status": "pending"
         },
         {
@@ -1635,7 +1706,7 @@
           "timeToImplement": "Immediate",
           "savingKgPerYear": 320,
           "category": "transport",
-          "id": "0957a629-d867-4ac4-9e45-63ced6baeebe",
+          "id": "26094429-f176-4e02-bdb5-cb13ec885b52",
           "status": "pending"
         },
         {
@@ -1645,7 +1716,7 @@
           "timeToImplement": "Immediate",
           "savingKgPerYear": 180,
           "category": "food",
-          "id": "41747055-2107-411c-8548-d92ddc77a3fd",
+          "id": "109bf559-fcf4-446b-99ed-1d99f4f570d3",
           "status": "pending"
         },
         {
@@ -1655,7 +1726,7 @@
           "timeToImplement": "This Week",
           "savingKgPerYear": 120,
           "category": "food",
-          "id": "125c175d-2318-412b-aef7-30d078e51211",
+          "id": "787df78f-cebd-40ee-b692-e1aa1c9861d3",
           "status": "pending"
         },
         {
@@ -1665,7 +1736,7 @@
           "timeToImplement": "This Month",
           "savingKgPerYear": 340,
           "category": "lifestyle",
-          "id": "aeceef70-d2c1-4ffe-947e-d921b11dac72",
+          "id": "facc38b1-60da-4937-8702-7cfe5643f25c",
           "status": "pending"
         }
       ]
@@ -1758,8 +1829,8 @@
       ]
     },
     "user_4a46d773": {
-      "generatedAt": "2026-06-14T13:18:54.227Z",
-      "expiresAt": "2026-06-21T13:18:54.228Z",
+      "generatedAt": "2026-06-18T08:22:25.667Z",
+      "expiresAt": "2026-06-25T08:22:25.667Z",
       "modelVersion": "rules-based-fallback",
       "suggestions": [
         {
@@ -1849,10 +1920,10 @@
     "demo_operator_alpha": {
       "uid": "demo_operator_alpha",
       "displayName": "Alex Rivera",
-      "greenScore": 550,
+      "greenScore": 650,
       "footprintTotal": 1321532,
       "level": "tree",
-      "lastUpdated": "2026-06-12T10:32:51.360Z"
+      "lastUpdated": "2026-06-18T09:58:14.080Z"
     },
     "user_19d71f50": {
       "uid": "user_19d71f50",
@@ -1865,10 +1936,10 @@
     "test_user_operator_9": {
       "uid": "test_user_operator_9",
       "displayName": "Default User",
-      "greenScore": 0,
+      "greenScore": 218,
       "footprintTotal": 6366,
       "level": "seedling",
-      "lastUpdated": "2026-06-12T15:01:54.169Z"
+      "lastUpdated": "2026-06-18T09:27:43.993Z"
     },
     "user_f07d10a3": {
       "uid": "user_f07d10a3",

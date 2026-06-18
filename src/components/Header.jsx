@@ -1,6 +1,6 @@
-import React from "react";
 import { useStore } from "../store/useStore";
 import { Link } from "react-router-dom";
+import DecryptedText from "./DecryptedText";
 
 export default function Header() {
   const { user, offlineMode } = useStore();
@@ -32,9 +32,12 @@ export default function Header() {
               bolt
             </span>
             <span className="text-[10px] md:text-xs font-bold text-neon-amber">
-              {user.streakDays}
-              <span className="hidden md:inline">_DAY_STREAK</span>
-              <span className="md:hidden">D_STREAK</span>
+              <span className="hidden md:inline">
+                <DecryptedText text={`${user.streakDays}_DAY_STREAK`} animateOn="hover" />
+              </span>
+              <span className="md:hidden">
+                <DecryptedText text={`${user.streakDays}D_STREAK`} animateOn="hover" />
+              </span>
             </span>
           </Link>
         )}
@@ -45,12 +48,20 @@ export default function Header() {
         >
           <div className="text-right">
             <p className="text-xs font-bold text-neon-green group-hover:brightness-125 transition-all truncate max-w-[60px] md:max-w-[120px]">
-              {user.displayName.toUpperCase()}
+              <DecryptedText text={user.displayName.toUpperCase()} animateOn="hover" />
             </p>
             <p className="text-[9px] text-neon-amber group-hover:animate-pulse">
-              LVL_{Math.max(1, Math.round(user.greenScore / 70))}
               <span className="hidden md:inline">
-                _{user.level.toUpperCase()}
+                <DecryptedText
+                  text={`LVL_${Math.max(1, Math.round(user.greenScore / 70))}_${user.level.toUpperCase()}`}
+                  animateOn="hover"
+                />
+              </span>
+              <span className="md:hidden">
+                <DecryptedText
+                  text={`LVL_${Math.max(1, Math.round(user.greenScore / 70))}`}
+                  animateOn="hover"
+                />
               </span>
             </p>
           </div>

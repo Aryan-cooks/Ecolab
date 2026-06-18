@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useStore } from "../store/useStore";
 import {
   LineChart,
@@ -10,9 +10,17 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
+const getLogSize = (calculatedAt) => {
+  let hash = 0;
+  for (let i = 0; i < calculatedAt.length; i++) {
+    hash = calculatedAt.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  const pseudoRandom = Math.abs(hash % 100) / 100;
+  return (pseudoRandom * 2 + 0.5).toFixed(1);
+};
+
 export default function Tracker() {
-  const { progress, actions, user, fetchHistory, fetchCompletedActions } =
-    useStore();
+  const { progress, actions, user, fetchHistory, fetchCompletedActions } = useStore();
 
   useEffect(() => {
     fetchHistory();
@@ -25,14 +33,10 @@ export default function Tracker() {
       return;
     }
     const dataStr =
-      "data:text/json;charset=utf-8," +
-      encodeURIComponent(JSON.stringify(user.badges, null, 2));
+      "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(user.badges, null, 2));
     const downloadAnchor = document.createElement("a");
     downloadAnchor.setAttribute("href", dataStr);
-    downloadAnchor.setAttribute(
-      "download",
-      `badges_${user.uid.slice(0, 8)}_manifest.json`,
-    );
+    downloadAnchor.setAttribute("download", `badges_${user.uid.slice(0, 8)}_manifest.json`);
     document.body.appendChild(downloadAnchor);
     downloadAnchor.click();
     downloadAnchor.remove();
@@ -86,8 +90,7 @@ PERFORMANCE COEFFICIENTS:
 STATUS: ENCRYPTED // TELEMETRY DOWNLOAD COMPLETE
 ==================================================`;
 
-    const dataStr =
-      "data:text/plain;charset=utf-8," + encodeURIComponent(reportText);
+    const dataStr = "data:text/plain;charset=utf-8," + encodeURIComponent(reportText);
     const downloadAnchor = document.createElement("a");
     downloadAnchor.setAttribute("href", dataStr);
     downloadAnchor.setAttribute(
@@ -166,27 +169,21 @@ STATUS: ENCRYPTED // TELEMETRY DOWNLOAD COMPLETE
           <div>
             <div className="flex items-center gap-2 text-[10px] tracking-widest text-primary/60 mb-2">
               <span>ROOT</span>
-              <span className="material-symbols-outlined text-[10px]">
-                chevron_right
-              </span>
+              <span className="material-symbols-outlined text-[10px]">chevron_right</span>
               <span>ANALYTICS</span>
-              <span className="material-symbols-outlined text-[10px]">
-                chevron_right
-              </span>
+              <span className="material-symbols-outlined text-[10px]">chevron_right</span>
               <span className="text-primary">MISSION_PROGRESS</span>
             </div>
             <h1 className="text-3xl md:text-4xl font-extrabold tracking-tighter text-primary terminal-glow uppercase">
               EMISSION REDUCTION PROTOCOL
             </h1>
             <p className="text-primary/60 text-[10px] md:text-xs mt-2 max-w-3xl uppercase tracking-wider">
-              Strategic deployment of carbon mitigation vectors. Global
-              environmental impact telemetry streaming in real-time.
+              Strategic deployment of carbon mitigation vectors. Global environmental impact
+              telemetry streaming in real-time.
             </p>
           </div>
           <div className="text-right hidden md:block">
-            <div className="text-[10px] text-primary/60 mb-1">
-              DATA_INTEGRITY_CHECK
-            </div>
+            <div className="text-[10px] text-primary/60 mb-1">DATA_INTEGRITY_CHECK</div>
             <div className="flex gap-1 justify-end">
               <div className="h-1 w-8 bg-primary"></div>
               <div className="h-1 w-8 bg-primary"></div>
@@ -221,15 +218,8 @@ STATUS: ENCRYPTED // TELEMETRY DOWNLOAD COMPLETE
 
             <div className="h-[340px] w-full relative">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart
-                  data={chartData}
-                  margin={{ top: 10, right: 10, left: -25, bottom: 0 }}
-                >
-                  <CartesianGrid
-                    stroke="#003B00"
-                    strokeDasharray="3 3"
-                    vertical={false}
-                  />
+                <LineChart data={chartData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+                  <CartesianGrid stroke="#003B00" strokeDasharray="3 3" vertical={false} />
                   <XAxis
                     dataKey="date"
                     stroke="#00FF41"
@@ -361,46 +351,30 @@ STATUS: ENCRYPTED // TELEMETRY DOWNLOAD COMPLETE
               <div className="flex items-center justify-between text-[11px] border-b border-primary/20 pb-1">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-primary"></span>
-                  <span className="uppercase tracking-wider text-primary">
-                    LOGISTICS
-                  </span>
+                  <span className="uppercase tracking-wider text-primary">LOGISTICS</span>
                 </div>
-                <span className="font-bold text-primary">
-                  {(tPct * 100).toFixed(1)}%
-                </span>
+                <span className="font-bold text-primary">{(tPct * 100).toFixed(1)}%</span>
               </div>
               <div className="flex items-center justify-between text-[11px] border-b border-primary/20 pb-1">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-[#00cc33]"></span>
-                  <span className="uppercase tracking-wider text-primary">
-                    BIO_RESOURCES
-                  </span>
+                  <span className="uppercase tracking-wider text-primary">BIO_RESOURCES</span>
                 </div>
-                <span className="font-bold text-primary">
-                  {(fPct * 100).toFixed(1)}%
-                </span>
+                <span className="font-bold text-primary">{(fPct * 100).toFixed(1)}%</span>
               </div>
               <div className="flex items-center justify-between text-[11px] border-b border-primary/20 pb-1">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-[#009926]"></span>
-                  <span className="uppercase tracking-wider text-primary">
-                    HABITAT_CORE
-                  </span>
+                  <span className="uppercase tracking-wider text-primary">HABITAT_CORE</span>
                 </div>
-                <span className="font-bold text-primary">
-                  {(hPct * 100).toFixed(1)}%
-                </span>
+                <span className="font-bold text-primary">{(hPct * 100).toFixed(1)}%</span>
               </div>
               <div className="flex items-center justify-between text-[11px]">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 bg-[#006619]"></span>
-                  <span className="uppercase tracking-wider text-primary">
-                    LIFESTYLE_OP
-                  </span>
+                  <span className="uppercase tracking-wider text-primary">LIFESTYLE_OP</span>
                 </div>
-                <span className="font-bold text-primary">
-                  {(lPct * 100).toFixed(1)}%
-                </span>
+                <span className="font-bold text-primary">{(lPct * 100).toFixed(1)}%</span>
               </div>
             </div>
           </div>
@@ -410,9 +384,7 @@ STATUS: ENCRYPTED // TELEMETRY DOWNLOAD COMPLETE
             <div className="absolute -top-[1px] -left-[1px] w-2.5 h-2.5 border-t-2 border-l-2 border-primary"></div>
             <div className="absolute -bottom-[1px] -right-[1px] w-2.5 h-2.5 border-b-2 border-r-2 border-primary"></div>
             <div className="absolute top-0 right-0 p-2 opacity-20 group-hover:scale-110 transition-transform duration-500">
-              <span className="material-symbols-outlined text-6xl text-primary">
-                forest
-              </span>
+              <span className="material-symbols-outlined text-6xl text-primary">forest</span>
             </div>
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-4">
@@ -428,13 +400,11 @@ STATUS: ENCRYPTED // TELEMETRY DOWNLOAD COMPLETE
                 <span className="text-5xl md:text-6xl font-black text-primary leading-none terminal-glow">
                   {treesEq}
                 </span>
-                <span className="text-lg font-bold uppercase text-primary">
-                  UNITS
-                </span>
+                <span className="text-lg font-bold uppercase text-primary">UNITS</span>
               </div>
               <div className="text-[10px] md:text-[11px] leading-relaxed uppercase opacity-80 border-l border-primary/50 pl-3 text-primary/80">
-                Biomass sequestration capacity equivalent to {treesEq} mature
-                forestry units over 120 months.
+                Biomass sequestration capacity equivalent to {treesEq} mature forestry units over
+                120 months.
               </div>
             </div>
           </div>
@@ -443,9 +413,7 @@ STATUS: ENCRYPTED // TELEMETRY DOWNLOAD COMPLETE
             <div className="absolute -top-[1px] -left-[1px] w-2.5 h-2.5 border-t-2 border-l-2 border-primary"></div>
             <div className="absolute -bottom-[1px] -right-[1px] w-2.5 h-2.5 border-b-2 border-r-2 border-primary"></div>
             <div className="absolute top-0 right-0 p-2 opacity-20 group-hover:scale-110 transition-transform duration-500">
-              <span className="material-symbols-outlined text-6xl text-primary">
-                electric_bolt
-              </span>
+              <span className="material-symbols-outlined text-6xl text-primary">electric_bolt</span>
             </div>
             <div className="relative z-10">
               <div className="flex items-center gap-2 mb-4">
@@ -461,13 +429,10 @@ STATUS: ENCRYPTED // TELEMETRY DOWNLOAD COMPLETE
                 <span className="text-5xl md:text-6xl font-black text-primary leading-none terminal-glow">
                   {nodesEq}
                 </span>
-                <span className="text-lg font-bold uppercase text-primary">
-                  NODES
-                </span>
+                <span className="text-lg font-bold uppercase text-primary">NODES</span>
               </div>
               <div className="text-[10px] md:text-[11px] leading-relaxed uppercase opacity-80 border-l border-primary/50 pl-3 text-primary/80">
-                Mitigated load equivalent to {nodesEq} high-efficiency LED nodes
-                active 24/7/30.
+                Mitigated load equivalent to {nodesEq} high-efficiency LED nodes active 24/7/30.
               </div>
             </div>
           </div>
@@ -477,9 +442,7 @@ STATUS: ENCRYPTED // TELEMETRY DOWNLOAD COMPLETE
             <div className="absolute -bottom-[1px] -right-[1px] w-2.5 h-2.5 border-b-2 border-r-2 border-primary"></div>
             <div className="flex items-center gap-4 mb-4">
               <div className="w-12 h-12 bg-primary text-black flex items-center justify-center shrink-0">
-                <span className="material-symbols-outlined text-3xl font-bold">
-                  shield
-                </span>
+                <span className="material-symbols-outlined text-3xl font-bold">shield</span>
               </div>
               <div>
                 <div className="text-[10px] text-primary uppercase font-bold tracking-tighter">
@@ -492,14 +455,8 @@ STATUS: ENCRYPTED // TELEMETRY DOWNLOAD COMPLETE
             </div>
             <div className="text-[10px] md:text-[11px] uppercase tracking-tight mb-4 text-center text-primary/80">
               Collect{" "}
-              <span className="text-primary font-bold">
-                {Math.max(0, 1000 - greenScore)} XP
-              </span>{" "}
-              to unlock{" "}
-              <span className="text-white border-b border-white">
-                NEXT_TIER
-              </span>
-              .
+              <span className="text-primary font-bold">{Math.max(0, 1000 - greenScore)} XP</span> to
+              unlock <span className="text-white border-b border-white">NEXT_TIER</span>.
             </div>
             <div className="w-full bg-primary/20 h-4 border border-primary/50 relative mb-2">
               <div
@@ -522,9 +479,7 @@ STATUS: ENCRYPTED // TELEMETRY DOWNLOAD COMPLETE
             <div className="absolute -bottom-[1px] -right-[1px] w-2.5 h-2.5 border-b-2 border-r-2 border-primary"></div>
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 pb-4 border-b border-primary/30 gap-4">
               <h3 className="text-lg font-bold tracking-tight uppercase flex items-center gap-2 text-primary">
-                <span className="material-symbols-outlined text-primary">
-                  token
-                </span>
+                <span className="material-symbols-outlined text-primary">token</span>
                 MILESTONE EXTRACTION
               </h3>
               <button
@@ -584,9 +539,7 @@ STATUS: ENCRYPTED // TELEMETRY DOWNLOAD COMPLETE
             <div className="absolute -bottom-[1px] -right-[1px] w-2.5 h-2.5 border-b-2 border-r-2 border-primary"></div>
             <div className="flex items-center justify-between mb-8 pb-4 border-b border-primary/30">
               <h3 className="text-lg font-bold tracking-tight uppercase flex items-center gap-2 text-primary">
-                <span className="material-symbols-outlined text-primary">
-                  list_alt
-                </span>
+                <span className="material-symbols-outlined text-primary">list_alt</span>
                 DATA_LOG_MANIFEST
               </h3>
               <div className="flex gap-2 items-center">
@@ -609,19 +562,14 @@ STATUS: ENCRYPTED // TELEMETRY DOWNLOAD COMPLETE
                       <div
                         className={`flex gap-2 font-bold ${i === 0 ? "text-primary" : "text-primary/60"}`}
                       >
-                        <span>
-                          [{new Date(log.calculatedAt).toLocaleDateString()}]
-                        </span>
+                        <span>[{new Date(log.calculatedAt).toLocaleDateString()}]</span>
                         <span>REP_ID: SNAP_{log.calculatedAt.slice(-6)}</span>
                       </div>
                       <div className="text-white opacity-90">
-                        Telemetry snapshot: {log.results.totalTons.toFixed(2)}T
-                        CO2e recorded.
+                        Telemetry snapshot: {log.results.totalTons.toFixed(2)}T CO2e recorded.
                       </div>
                       <div className="text-[9px] text-primary/60 flex gap-4">
-                        <span>
-                          SIZE: {(Math.random() * 2 + 0.5).toFixed(1)}MB
-                        </span>
+                        <span>SIZE: {getLogSize(log.calculatedAt)}MB</span>
                         <span>MIME: APPLICATION/PDF</span>
                       </div>
                     </div>

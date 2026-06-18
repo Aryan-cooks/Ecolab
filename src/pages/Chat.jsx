@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useStore } from "../store/useStore";
 
 export default function Chat() {
@@ -49,7 +49,7 @@ export default function Chat() {
           timestamp: new Date().toISOString(),
         },
       ]);
-    } catch (err) {
+    } catch {
       setMessages((prev) => [
         ...prev,
         {
@@ -90,9 +90,7 @@ export default function Chat() {
     <main className="p-4 md:p-8 min-h-screen flex flex-col justify-between max-w-4xl mx-auto">
       {/* Header */}
       <div className="border-b border-neon-green/30 pb-4 mb-4">
-        <h2 className="text-xl font-bold text-neon-green terminal-glow">
-          [ NODE_SYNC_CHAT ]
-        </h2>
+        <h2 className="text-xl font-bold text-neon-green terminal-glow">[ NODE_SYNC_CHAT ]</h2>
         <p className="text-[10px] text-neon-amber mt-1">
           Converse with CarbonCoach AI Advisor // Session: 0x
           {user?.uid.slice(0, 6).toUpperCase()}
@@ -108,11 +106,7 @@ export default function Chat() {
               className={`flex flex-col ${msg.sender === "user" ? "items-end" : "items-start"}`}
             >
               <div className="flex items-center gap-2 mb-1 text-[8px] opacity-50 uppercase">
-                <span>
-                  {msg.sender === "user"
-                    ? "operator_input"
-                    : "carbon_coach_reply"}
-                </span>
+                <span>{msg.sender === "user" ? "operator_input" : "carbon_coach_reply"}</span>
                 <span>//</span>
                 <span>{new Date(msg.timestamp).toLocaleTimeString()}</span>
               </div>
@@ -135,9 +129,7 @@ export default function Chat() {
                 carbon_coach_reply // routing...
               </div>
               <div className="p-3 border border-neon-green bg-black/40 text-neon-green flex items-center gap-2">
-                <span className="material-symbols-outlined text-xs animate-spin">
-                  sync
-                </span>
+                <span className="material-symbols-outlined text-xs animate-spin">sync</span>
                 <span>GENERATING_RESPONSE_PULSE...</span>
               </div>
             </div>

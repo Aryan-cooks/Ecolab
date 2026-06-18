@@ -8,8 +8,7 @@ export function calculateFootprint(inputs) {
   const transitPercent = parseFloat(transportInput.transitPercent) || 0;
   const flightsPerYear = parseFloat(transportInput.flightsPerYear) || 0;
 
-  const carFactor =
-    factors.transport[vehicleType] || factors.transport.petrolCar;
+  const carFactor = factors.transport[vehicleType] || factors.transport.petrolCar;
   const busFactor = factors.transport.bus;
   const metroFactor = factors.transport.metro;
   const flightFactor = factors.transport.flight_domestic;
@@ -20,11 +19,7 @@ export function calculateFootprint(inputs) {
   const carEmissions = carDistance * 52 * carFactor;
   // If transit, assume 70% bus and 30% metro, or if vehicleType itself is metro/bus, use that.
   const transitFactorUsed =
-    vehicleType === "metro"
-      ? metroFactor
-      : vehicleType === "bus"
-        ? busFactor
-        : busFactor;
+    vehicleType === "metro" ? metroFactor : vehicleType === "bus" ? busFactor : busFactor;
   const transitEmissions = transitDistance * 52 * transitFactorUsed;
   const flightEmissions = flightsPerYear * 2000 * flightFactor; // Assume 2000km return flight on average
 
@@ -37,8 +32,7 @@ export function calculateFootprint(inputs) {
   const localFoodPercent = parseFloat(foodInput.localFoodPercent) || 0;
 
   const dietFactor = factors.food[dietType] || factors.food.vegetarian;
-  const wasteMultiplier =
-    wasteLevel === "low" ? 0.9 : wasteLevel === "high" ? 1.2 : 1.0;
+  const wasteMultiplier = wasteLevel === "low" ? 0.9 : wasteLevel === "high" ? 1.2 : 1.0;
   const localFoodMultiplier = 1 - 0.1 * (localFoodPercent / 100);
 
   const foodTotal = dietFactor * 365 * wasteMultiplier * localFoodMultiplier;
@@ -48,17 +42,14 @@ export function calculateFootprint(inputs) {
   const monthlyKwh = parseFloat(homeInput.monthlyKwh) || 0;
   const lpgCylindersPerMonth = parseFloat(homeInput.lpgCylindersPerMonth) || 0;
 
-  const electricityEmissions =
-    monthlyKwh * 12 * factors.energy.electricityIndia;
-  const lpgEmissions =
-    lpgCylindersPerMonth * 12 * factors.energy.lpgPerCylinder;
+  const electricityEmissions = monthlyKwh * 12 * factors.energy.electricityIndia;
+  const lpgEmissions = lpgCylindersPerMonth * 12 * factors.energy.lpgPerCylinder;
 
   const homeTotal = electricityEmissions + lpgEmissions;
 
   // 4. Lifestyle
   const lifestyleInput = inputs.lifestyle || {};
-  const monthlyClothingSpend =
-    parseFloat(lifestyleInput.monthlyClothingSpend) || 0;
+  const monthlyClothingSpend = parseFloat(lifestyleInput.monthlyClothingSpend) || 0;
   const screenHoursPerDay = parseFloat(lifestyleInput.screenHoursPerDay) || 0;
   const recyclingHabits = lifestyleInput.recyclingHabits || "partial";
 
@@ -70,8 +61,7 @@ export function calculateFootprint(inputs) {
   const clothingEmissions = monthlyClothingSpend * 12 * clothingFactor;
   const screenEmissions = screenHoursPerDay * 365 * screenFactor;
 
-  const lifestyleTotal =
-    (clothingEmissions + screenEmissions) * recyclingMultiplier;
+  const lifestyleTotal = (clothingEmissions + screenEmissions) * recyclingMultiplier;
 
   // Total in kg
   const totalKg = transportTotal + foodTotal + homeTotal + lifestyleTotal;
@@ -81,10 +71,7 @@ export function calculateFootprint(inputs) {
   // formula: score = max(0, 1000 - (total - 500) / 7.5)
   // Let's keep it bounded between 0 and 1000
   const totalKgScoreRef = totalKg;
-  let greenScore = Math.max(
-    0,
-    Math.min(1000, 1000 - (totalKgScoreRef - 500) / 7.5),
-  );
+  let greenScore = Math.max(0, Math.min(1000, 1000 - (totalKgScoreRef - 500) / 7.5));
   greenScore = Math.round(greenScore);
 
   // Level System
@@ -106,9 +93,6 @@ export function calculateFootprint(inputs) {
     greenScore,
     level,
     nationalAverageIndia: 2000,
-    percentileRank: Math.max(
-      0,
-      Math.min(100, Math.round(100 - (totalKg / 4000) * 100)),
-    ), // mock percentile compared to an average Indian (closer to 2000kg)
+    percentileRank: Math.max(0, Math.min(100, Math.round(100 - (totalKg / 4000) * 100))), // mock percentile compared to an average Indian (closer to 2000kg)
   };
 }

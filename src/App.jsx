@@ -1,17 +1,13 @@
-import React, { useEffect } from "react";
-import {
-  HashRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-  useLocation,
-} from "react-router-dom";
+import { useEffect } from "react";
+import { HashRouter as Router, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { useStore } from "./store/useStore";
 
 // Layout
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import GlobalTips from "./components/GlobalTips";
+import LetterGlitch from "./components/LetterGlitch";
+import TargetCursor from "./components/TargetCursor";
 
 // Pages
 import LandingPage from "./pages/LandingPage";
@@ -31,12 +27,8 @@ function ProtectedRoute({ children }) {
   if (isLoading) {
     return (
       <div className="h-screen w-screen flex flex-col items-center justify-center bg-black text-neon-green">
-        <span className="material-symbols-outlined text-4xl animate-spin mb-4">
-          terminal
-        </span>
-        <div className="text-xs font-bold tracking-widest uppercase">
-          BOOTING_ECO_LAB_V2.4...
-        </div>
+        <span className="material-symbols-outlined text-4xl animate-spin mb-4">terminal</span>
+        <div className="text-xs font-bold tracking-widest uppercase">BOOTING_ECO_LAB_V2.4...</div>
       </div>
     );
   }
@@ -66,6 +58,18 @@ function MainLayout() {
   return (
     <div className="min-h-screen bg-black text-neon-green grid-bg relative overflow-x-hidden">
       <div className="scanline"></div>
+
+      {/* Global Background LetterGlitch animation */}
+      <div className="fixed inset-0 z-0 opacity-10 pointer-events-none">
+        <LetterGlitch
+          glitchSpeed={80}
+          centerVignette={true}
+          outerVignette={true}
+          smooth={true}
+          glitchColors={["#00FF41", "#003B00", "#1a4d0f"]}
+          backgroundColor="transparent"
+        />
+      </div>
 
       {showChrome && <Sidebar />}
       {showChrome && <Header />}
@@ -155,6 +159,12 @@ export default function App() {
 
   return (
     <Router>
+      <TargetCursor
+        targetSelector="button, a, [role='button'], input[type='submit'], input[type='button'], .cursor-target, .cursor-pointer"
+        spinDuration={2}
+        hideDefaultCursor={true}
+        parallaxOn={true}
+      />
       <MainLayout />
     </Router>
   );

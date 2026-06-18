@@ -28,7 +28,7 @@ export const useStore = create((set, get) => ({
       // Test server connection
       await api.get("/health");
       set({ offlineMode: false });
-    } catch (err) {
+    } catch {
       console.log("Backend offline, running in client-only fallback mode.");
       set({ offlineMode: true });
     }
@@ -95,10 +95,7 @@ export const useStore = create((set, get) => ({
     set({ isLoading: true, error: null });
 
     // Auto-demo bypass check
-    if (
-      email === "operator.alpha@eco-impact.net" &&
-      password === "security_code_7"
-    ) {
+    if (email === "operator.alpha@eco-impact.net" && password === "security_code_7") {
       const defaultUser = {
         uid: "demo_operator_alpha",
         displayName: "Alex Rivera",
@@ -118,9 +115,7 @@ export const useStore = create((set, get) => ({
           id: "challenge_w1",
           title: "Swap 2 beef portions for pulses.",
           completed: false,
-          targetDate: new Date(
-            Date.now() + 7 * 24 * 60 * 60 * 1000,
-          ).toISOString(),
+          targetDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
         },
       };
       set({ user: defaultUser });
@@ -153,8 +148,7 @@ export const useStore = create((set, get) => ({
       }
     } else {
       set({
-        error:
-          "Cannot log in during offline mode. Please connect to the server.",
+        error: "Cannot log in during offline mode. Please connect to the server.",
         isLoading: false,
       });
       return false;
@@ -307,19 +301,16 @@ export const useStore = create((set, get) => ({
           userProfile: user,
         });
         set({ suggestions: res.data.suggestions });
-        localStorage.setItem(
-          `eco_suggestions_${user.uid}`,
-          JSON.stringify(res.data.suggestions),
-        );
+        localStorage.setItem(`eco_suggestions_${user.uid}`, JSON.stringify(res.data.suggestions));
       } catch (err) {
         console.error(
           "API suggestions fetch failed, falling back to local rules-based recommendations.",
           err,
         );
-        loadLocalSuggestions(fp);
+        loadLocalSuggestions();
       }
     } else {
-      loadLocalSuggestions(fp);
+      loadLocalSuggestions();
     }
   },
 
@@ -331,8 +322,7 @@ export const useStore = create((set, get) => ({
     const newSuggestion = {
       id: "manual_" + Math.random().toString(36).substr(2, 9),
       title: suggestionData.title,
-      description:
-        suggestionData.description || "manually logged custom protocol.",
+      description: suggestionData.description || "manually logged custom protocol.",
       category: suggestionData.category,
       savingKgPerYear: parseInt(suggestionData.savingKgPerYear) || 0,
       difficulty: suggestionData.difficulty || "Easy",
@@ -344,10 +334,7 @@ export const useStore = create((set, get) => ({
 
     const updatedSuggestions = [newSuggestion, ...get().suggestions];
     set({ suggestions: updatedSuggestions });
-    localStorage.setItem(
-      `eco_suggestions_${user.uid}`,
-      JSON.stringify(updatedSuggestions),
-    );
+    localStorage.setItem(`eco_suggestions_${user.uid}`, JSON.stringify(updatedSuggestions));
 
     if (!get().offlineMode) {
       try {
@@ -373,10 +360,7 @@ export const useStore = create((set, get) => ({
       s.id === actionId ? { ...s, status: "accepted" } : s,
     );
     set({ suggestions: updatedSuggestions });
-    localStorage.setItem(
-      `eco_suggestions_${user.uid}`,
-      JSON.stringify(updatedSuggestions),
-    );
+    localStorage.setItem(`eco_suggestions_${user.uid}`, JSON.stringify(updatedSuggestions));
 
     // locally update user parameters
     const updatedScore = Math.min(1000, user.greenScore + 50);
@@ -398,14 +382,11 @@ export const useStore = create((set, get) => ({
 
     const badges = [...user.badges];
     if (!badges.includes("first_step")) badges.push("first_step");
-    if (updatedScore > 600 && !badges.includes("eco_enthusiast"))
-      badges.push("eco_enthusiast");
+    if (updatedScore > 600 && !badges.includes("eco_enthusiast")) badges.push("eco_enthusiast");
     if (updatedScore > 800 && !badges.includes("carbon_neutralizer"))
       badges.push("carbon_neutralizer");
-    if (streak >= 3 && !badges.includes("streak_master"))
-      badges.push("streak_master");
-    if (completedCount >= 3 && !badges.includes("action_taker"))
-      badges.push("action_taker");
+    if (streak >= 3 && !badges.includes("streak_master")) badges.push("streak_master");
+    if (completedCount >= 3 && !badges.includes("action_taker")) badges.push("action_taker");
 
     let level = "seedling";
     if (updatedScore >= 750) level = "guardian";
@@ -446,10 +427,7 @@ export const useStore = create((set, get) => ({
     );
     set({ suggestions: updatedSuggestions });
     if (user) {
-      localStorage.setItem(
-        `eco_suggestions_${user.uid}`,
-        JSON.stringify(updatedSuggestions),
-      );
+      localStorage.setItem(`eco_suggestions_${user.uid}`, JSON.stringify(updatedSuggestions));
     }
   },
 
@@ -496,9 +474,7 @@ export const useStore = create((set, get) => ({
         total: 4200,
         breakdown: {},
       };
-    const categories = Object.entries(fp.breakdown || {}).sort(
-      (a, b) => b[1] - a[1],
-    );
+    const categories = Object.entries(fp.breakdown || {}).sort((a, b) => b[1] - a[1]);
     const topCat = categories[0]?.[0] || "transport";
     const topValue = categories[0]?.[1] || 0;
 
@@ -536,8 +512,7 @@ export const useStore = create((set, get) => ({
   // Complete weekly challenge
   completeWeeklyChallenge: async () => {
     const { user } = get();
-    if (!user || !user.weeklyChallenge || user.weeklyChallenge.completed)
-      return;
+    if (!user || !user.weeklyChallenge || user.weeklyChallenge.completed) return;
 
     set({ isLoading: true });
     const timestamp = new Date().toISOString();
@@ -552,8 +527,7 @@ export const useStore = create((set, get) => ({
     const badges = [...user.badges];
 
     // Unlock elite badges if eligible
-    if (updatedScore > 600 && !badges.includes("eco_enthusiast"))
-      badges.push("eco_enthusiast");
+    if (updatedScore > 600 && !badges.includes("eco_enthusiast")) badges.push("eco_enthusiast");
     if (updatedScore > 800 && !badges.includes("carbon_neutralizer"))
       badges.push("carbon_neutralizer");
 
@@ -581,10 +555,7 @@ export const useStore = create((set, get) => ({
           profile: updatedUser,
         });
       } catch (err) {
-        console.error(
-          "API complete weekly challenge failed, cached locally.",
-          err,
-        );
+        console.error("API complete weekly challenge failed, cached locally.", err);
       }
     }
 
@@ -613,7 +584,7 @@ function loadLocalHistory(uid) {
   useStore.setState({ progress: logs });
 }
 
-function loadLocalSuggestions(fp) {
+function loadLocalSuggestions() {
   const savedUser = localStorage.getItem("eco_user");
   if (savedUser) {
     const user = JSON.parse(savedUser);
@@ -625,22 +596,11 @@ function loadLocalSuggestions(fp) {
   }
 
   // Simple generator matching backend fallback Suggestions
-  const breakdown = fp.breakdown || {
-    transport: 1000,
-    food: 1000,
-    home: 1000,
-    lifestyle: 500,
-  };
-  const primaryCategory =
-    Object.entries(breakdown).sort((a, b) => b[1] - a[1])[0]?.[0] ||
-    "transport";
-
   const defaultSuggestions = [
     {
       id: "mock_1",
       title: "Shift Commutes to Metro",
-      description:
-        "Use metro instead of petrol vehicle for your daily schedule.",
+      description: "Use metro instead of petrol vehicle for your daily schedule.",
       category: "transport",
       savingKgPerYear: 480,
       difficulty: "Easy",
@@ -650,8 +610,7 @@ function loadLocalSuggestions(fp) {
     {
       id: "mock_2",
       title: "1 Meatless Day Per Week",
-      description:
-        "Cut out high-methane meats for plant-based meals on Mondays.",
+      description: "Cut out high-methane meats for plant-based meals on Mondays.",
       category: "food",
       savingKgPerYear: 180,
       difficulty: "Easy",
@@ -661,8 +620,7 @@ function loadLocalSuggestions(fp) {
     {
       id: "mock_3",
       title: "Switch off Standby Devices",
-      description:
-        "Unplug chargers and appliances when idle to stop standby load draws.",
+      description: "Unplug chargers and appliances when idle to stop standby load draws.",
       category: "home",
       savingKgPerYear: 150,
       difficulty: "Easy",
@@ -682,8 +640,7 @@ function loadLocalSuggestions(fp) {
     {
       id: "mock_5",
       title: "Adopt Electric 2-Wheeler",
-      description:
-        "Swap out daily gasoline scooter trips for electric alternatives.",
+      description: "Swap out daily gasoline scooter trips for electric alternatives.",
       category: "transport",
       savingKgPerYear: 750,
       difficulty: "Medium",
@@ -693,8 +650,7 @@ function loadLocalSuggestions(fp) {
     {
       id: "mock_6",
       title: "Source 80% Local Groceries",
-      description:
-        "Buy from local farmers and mandis to bypass heavy transport emissions.",
+      description: "Buy from local farmers and mandis to bypass heavy transport emissions.",
       category: "food",
       savingKgPerYear: 280,
       difficulty: "Medium",
@@ -704,8 +660,7 @@ function loadLocalSuggestions(fp) {
     {
       id: "mock_7",
       title: "Install 5-Star BEE AC",
-      description:
-        "Upgrade old home air conditioning to new high-efficiency systems.",
+      description: "Upgrade old home air conditioning to new high-efficiency systems.",
       category: "home",
       savingKgPerYear: 820,
       difficulty: "Hard",
@@ -715,8 +670,7 @@ function loadLocalSuggestions(fp) {
     {
       id: "mock_8",
       title: "Transition to Plant-Based Diet",
-      description:
-        "Commit fully to plant-based diet to avoid animal farming impact.",
+      description: "Commit fully to plant-based diet to avoid animal farming impact.",
       category: "food",
       savingKgPerYear: 650,
       difficulty: "Hard",
@@ -728,10 +682,7 @@ function loadLocalSuggestions(fp) {
   useStore.setState({ suggestions: defaultSuggestions });
   if (savedUser) {
     const user = JSON.parse(savedUser);
-    localStorage.setItem(
-      `eco_suggestions_${user.uid}`,
-      JSON.stringify(defaultSuggestions),
-    );
+    localStorage.setItem(`eco_suggestions_${user.uid}`, JSON.stringify(defaultSuggestions));
   }
 }
 
@@ -806,9 +757,7 @@ function loadLocalLeaderboard() {
   if (savedUser) {
     const user = JSON.parse(savedUser);
     const savedFootprint = localStorage.getItem("eco_footprint");
-    const footprint = savedFootprint
-      ? JSON.parse(savedFootprint)
-      : { total: 4200 };
+    const footprint = savedFootprint ? JSON.parse(savedFootprint) : { total: 4200 };
 
     const idx = defaultLeaderboard.findIndex((l) => l.uid === user.uid);
     const userRecord = {
@@ -839,14 +788,11 @@ function mockChatReply(userText, context) {
 
   // Regular expressions using word boundaries to avoid false positives (e.g. 'car' in 'carbon', 'hi' in 'shift')
   const helloRegex = /\b(hello|hi|hey)\b/;
-  const transportRegex =
-    /\b(metro|transit|car|cars|transport|travel|commute|commuting)\b/;
+  const transportRegex = /\b(metro|transit|car|cars|transport|travel|commute|commuting)\b/;
   const foodRegex =
     /\b(food|diet|dietary|meat|vegan|veg|vegetarian|vegetable|vegetables|veggie|veggies)\b/;
-  const energyRegex =
-    /\b(energy|electricity|ac|solar|lpg|power|grid|electricityindia)\b/;
-  const lifestyleRegex =
-    /\b(clothing|buy|buying|lifestyle|shopping|clothes|fashion)\b/;
+  const energyRegex = /\b(energy|electricity|ac|solar|lpg|power|grid|electricityindia)\b/;
+  const lifestyleRegex = /\b(clothing|buy|buying|lifestyle|shopping|clothes|fashion)\b/;
   const scoreRegex = /\b(score|green|rank|level|tier)\b/;
 
   if (helloRegex.test(query)) {

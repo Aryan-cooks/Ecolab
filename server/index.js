@@ -26,10 +26,7 @@ function readDb() {
     const data = fs.readFileSync(DB_PATH, "utf8");
     return JSON.parse(data);
   } catch (err) {
-    console.error(
-      "Error reading local db, resetting to default structure",
-      err,
-    );
+    console.error("Error reading local db, resetting to default structure", err);
     return {
       users: {},
       footprints: {},
@@ -76,9 +73,7 @@ setInterval(() => {
   const totalDifference = currentCpuInfo.total - previousCpuInfo.total;
 
   currentCpuLoad =
-    totalDifference === 0
-      ? 0
-      : 100 - Math.floor((100 * idleDifference) / totalDifference);
+    totalDifference === 0 ? 0 : 100 - Math.floor((100 * idleDifference) / totalDifference);
   previousCpuInfo = currentCpuInfo;
 }, 1000);
 
@@ -100,9 +95,7 @@ app.post("/api/auth/register", (req, res) => {
   // Check if email exists
   const existingUser = Object.values(db.users).find((u) => u.email === email);
   if (existingUser) {
-    return res
-      .status(400)
-      .json({ error: "User with this email already exists" });
+    return res.status(400).json({ error: "User with this email already exists" });
   }
 
   const uid = "user_" + uuidv4().substring(0, 8);
@@ -136,7 +129,8 @@ app.post("/api/auth/register", (req, res) => {
   writeDb(db);
 
   // Exclude password from response
-  const { password: _, ...userWithoutPassword } = newUser;
+  const userWithoutPassword = { ...newUser };
+  delete userWithoutPassword.password;
   res.json({ user: userWithoutPassword });
 });
 
@@ -148,9 +142,7 @@ app.post("/api/auth/login", (req, res) => {
   }
 
   const db = readDb();
-  const user = Object.values(db.users).find(
-    (u) => u.email === email && u.password === password,
-  );
+  const user = Object.values(db.users).find((u) => u.email === email && u.password === password);
 
   if (!user) {
     return res.status(401).json({ error: "Invalid credentials" });
@@ -161,7 +153,8 @@ app.post("/api/auth/login", (req, res) => {
   db.users[user.uid] = user;
   writeDb(db);
 
-  const { password: _, ...userWithoutPassword } = user;
+  const userWithoutPassword = { ...user };
+  delete userWithoutPassword.password;
   res.json({ user: userWithoutPassword });
 });
 
@@ -172,17 +165,11 @@ app.post("/api/footprint/calculate", (req, res) => {
     return res.status(400).json({ error: "No input data provided" });
   }
   // Load factors
-  const factorsPath = path.join(
-    __dirname,
-    "..",
-    "src",
-    "data",
-    "emissionFactors.json",
-  );
-  let factors = {};
+  const factorsPath = path.join(__dirname, "..", "src", "data", "emissionFactors.json");
+  let factors;
   try {
     factors = JSON.parse(fs.readFileSync(factorsPath, "utf8"));
-  } catch (err) {
+  } catch {
     // Hardcoded fallback factors in case path issues
     factors = {
       transport: {
@@ -208,8 +195,7 @@ app.post("/api/footprint/calculate", (req, res) => {
   const transitPercent = parseFloat(transportInput.transitPercent) || 0;
   const flightsPerYear = parseFloat(transportInput.flightsPerYear) || 0;
 
-  const carFactor =
-    factors.transport[vehicleType] || factors.transport.petrolCar;
+  const carFactor = factors.transport[vehicleType] || factors.transport.petrolCar;
   const busFactor = factors.transport.bus;
   const metroFactor = factors.transport.metro;
   const flightFactor = factors.transport.flight_domestic;
@@ -231,8 +217,7 @@ app.post("/api/footprint/calculate", (req, res) => {
   const localFoodPercent = parseFloat(foodInput.localFoodPercent) || 0;
 
   const dietFactor = factors.food[dietType] || factors.food.vegetarian;
-  const wasteMultiplier =
-    wasteLevel === "low" ? 0.9 : wasteLevel === "high" ? 1.2 : 1.0;
+  const wasteMultiplier = wasteLevel === "low" ? 0.9 : wasteLevel === "high" ? 1.2 : 1.0;
   const localFoodMultiplier = 1 - 0.1 * (localFoodPercent / 100);
 
   const foodTotal = dietFactor * 365 * wasteMultiplier * localFoodMultiplier;
@@ -242,17 +227,14 @@ app.post("/api/footprint/calculate", (req, res) => {
   const monthlyKwh = parseFloat(homeInput.monthlyKwh) || 0;
   const lpgCylindersPerMonth = parseFloat(homeInput.lpgCylindersPerMonth) || 0;
 
-  const electricityEmissions =
-    monthlyKwh * 12 * factors.energy.electricityIndia;
-  const lpgEmissions =
-    lpgCylindersPerMonth * 12 * factors.energy.lpgPerCylinder;
+  const electricityEmissions = monthlyKwh * 12 * factors.energy.electricityIndia;
+  const lpgEmissions = lpgCylindersPerMonth * 12 * factors.energy.lpgPerCylinder;
 
   const homeTotal = electricityEmissions + lpgEmissions;
 
   // 4. Lifestyle
   const lifestyleInput = inputs.lifestyle || {};
-  const monthlyClothingSpend =
-    parseFloat(lifestyleInput.monthlyClothingSpend) || 0;
+  const monthlyClothingSpend = parseFloat(lifestyleInput.monthlyClothingSpend) || 0;
   const screenHoursPerDay = parseFloat(lifestyleInput.screenHoursPerDay) || 0;
   const recyclingHabits = lifestyleInput.recyclingHabits || "partial";
 
@@ -264,8 +246,7 @@ app.post("/api/footprint/calculate", (req, res) => {
   const clothingEmissions = monthlyClothingSpend * 12 * clothingFactor;
   const screenEmissions = screenHoursPerDay * 365 * screenFactor;
 
-  const lifestyleTotal =
-    (clothingEmissions + screenEmissions) * recyclingMultiplier;
+  const lifestyleTotal = (clothingEmissions + screenEmissions) * recyclingMultiplier;
 
   const totalKg = transportTotal + foodTotal + homeTotal + lifestyleTotal;
   const totalTons = totalKg / 1000;
@@ -291,10 +272,7 @@ app.post("/api/footprint/calculate", (req, res) => {
     greenScore,
     level,
     nationalAverageIndia: 2000,
-    percentileRank: Math.max(
-      0,
-      Math.min(100, Math.round(100 - (totalKg / 4000) * 100)),
-    ),
+    percentileRank: Math.max(0, Math.min(100, Math.round(100 - (totalKg / 4000) * 100))),
   };
 
   res.json({ results: responsePayload });
@@ -313,8 +291,7 @@ app.post("/api/footprint/save", (req, res) => {
   // Initializing collections if missing
   if (!db.footprints[uid]) db.footprints[uid] = {};
   if (!db.footprints[uid].logs) db.footprints[uid].logs = {};
-  if (!db.users[uid])
-    db.users[uid] = { uid, createdAt: timestamp, displayName: "Default User" };
+  if (!db.users[uid]) db.users[uid] = { uid, createdAt: timestamp, displayName: "Default User" };
 
   // Write log entry
   db.footprints[uid].logs[timestamp] = {
@@ -373,8 +350,7 @@ app.post("/api/ai/suggestions", async (req, res) => {
   const db = readDb();
   const apiKey = process.env.ANTHROPIC_API_KEY;
 
-  const userDisplayName =
-    userProfile?.displayName || db.users[uid]?.displayName || "Eco Warrior";
+  const userDisplayName = userProfile?.displayName || db.users[uid]?.displayName || "Eco Warrior";
   const locationText = userProfile?.location
     ? `${userProfile.location.city}, ${userProfile.location.state}`
     : "India";
@@ -401,7 +377,7 @@ Current Carbon Footprint:
 Total Footprint: ${footprintData.total || 0} kg CO2e/year
 India average: 2000 kg CO2e/year`;
 
-  let suggestions = [];
+  let suggestions;
 
   if (apiKey) {
     try {
@@ -435,10 +411,7 @@ India average: 2000 kg CO2e/year`;
         suggestions = JSON.parse(content);
       }
     } catch (err) {
-      console.error(
-        "Anthropic API suggestions request failed or timed out",
-        err.message,
-      );
+      console.error("Anthropic API suggestions request failed or timed out", err.message);
       suggestions = generateFallbackSuggestions(footprintData);
     }
   } else {
@@ -450,10 +423,7 @@ India average: 2000 kg CO2e/year`;
   if (uid) {
     const existing = db.suggestions[uid]?.suggestions || [];
     const manualAndModified = existing.filter(
-      (s) =>
-        s.source === "manual" ||
-        s.status === "accepted" ||
-        s.status === "dismissed",
+      (s) => s.source === "manual" || s.status === "accepted" || s.status === "dismissed",
     );
 
     const filteredNew = suggestions
@@ -464,17 +434,13 @@ India average: 2000 kg CO2e/year`;
       }))
       .filter(
         (s) =>
-          !manualAndModified.some(
-            (existing) => existing.title === s.title || existing.id === s.id,
-          ),
+          !manualAndModified.some((existing) => existing.title === s.title || existing.id === s.id),
       );
 
     db.suggestions[uid] = {
       generatedAt: new Date().toISOString(),
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
-      modelVersion: apiKey
-        ? "claude-3-5-sonnet-20241022"
-        : "rules-based-fallback",
+      modelVersion: apiKey ? "claude-3-5-sonnet-20241022" : "rules-based-fallback",
       suggestions: [...manualAndModified, ...filteredNew],
     };
     writeDb(db);
@@ -500,32 +466,28 @@ function generateFallbackSuggestions(footprintData) {
     transport: [
       {
         title: "Shift Commutes to Metro",
-        description:
-          "Use metro instead of your petrol vehicle for standard commute schedules.",
+        description: "Use metro instead of your petrol vehicle for standard commute schedules.",
         difficulty: "Easy",
         timeToImplement: "This Week",
         savingKgPerYear: 480,
       },
       {
         title: "Carpool with Coworkers",
-        description:
-          "Share rides 3 times a week, saving petrol consumption costs and emissions.",
+        description: "Share rides 3 times a week, saving petrol consumption costs and emissions.",
         difficulty: "Easy",
         timeToImplement: "Immediate",
         savingKgPerYear: 320,
       },
       {
         title: "Adopt Electric 2-Wheeler",
-        description:
-          "Replace standard daily scooter commutes with an electric bike or scooter.",
+        description: "Replace standard daily scooter commutes with an electric bike or scooter.",
         difficulty: "Medium",
         timeToImplement: "This Month",
         savingKgPerYear: 750,
       },
       {
         title: "Cancel 1 Domestic Flight",
-        description:
-          "Use train (sleeper/AC) for intermediate intercity travel instead of flying.",
+        description: "Use train (sleeper/AC) for intermediate intercity travel instead of flying.",
         difficulty: "Hard",
         timeToImplement: "This Month",
         savingKgPerYear: 900,
@@ -534,32 +496,28 @@ function generateFallbackSuggestions(footprintData) {
     food: [
       {
         title: "1 Meatless Day Per Week",
-        description:
-          "Cut out high-methane meats for vegetarian meals on Mondays.",
+        description: "Cut out high-methane meats for vegetarian meals on Mondays.",
         difficulty: "Easy",
         timeToImplement: "Immediate",
         savingKgPerYear: 180,
       },
       {
         title: "Reduce Food Scraps By 50%",
-        description:
-          "Compost food waste locally and plan meals, avoiding landfill waste methane.",
+        description: "Compost food waste locally and plan meals, avoiding landfill waste methane.",
         difficulty: "Easy",
         timeToImplement: "This Week",
         savingKgPerYear: 120,
       },
       {
         title: "Transition to Plant-Based Diet",
-        description:
-          "Commit fully to vegan/plant-based proteins, avoiding animal farming impact.",
+        description: "Commit fully to vegan/plant-based proteins, avoiding animal farming impact.",
         difficulty: "Hard",
         timeToImplement: "This Month",
         savingKgPerYear: 650,
       },
       {
         title: "Source 80% Local Groceries",
-        description:
-          "Buy vegetables and grains from local mandis to cut down transport miles.",
+        description: "Buy vegetables and grains from local mandis to cut down transport miles.",
         difficulty: "Medium",
         timeToImplement: "This Week",
         savingKgPerYear: 280,
@@ -568,32 +526,28 @@ function generateFallbackSuggestions(footprintData) {
     home: [
       {
         title: "Switch off Standby Devices",
-        description:
-          "Unplug chargers and appliances when idle. Save active standby vampire load.",
+        description: "Unplug chargers and appliances when idle. Save active standby vampire load.",
         difficulty: "Easy",
         timeToImplement: "Immediate",
         savingKgPerYear: 150,
       },
       {
         title: "Install 5-Star BEE AC",
-        description:
-          "Upgrade old inefficient cooling systems to 5-star inverter air conditioners.",
+        description: "Upgrade old inefficient cooling systems to 5-star inverter air conditioners.",
         difficulty: "Hard",
         timeToImplement: "This Month",
         savingKgPerYear: 820,
       },
       {
         title: "Configure LED Retrofitting",
-        description:
-          "Replace all old standard filament bulbs with 9W energy-saving LED lights.",
+        description: "Replace all old standard filament bulbs with 9W energy-saving LED lights.",
         difficulty: "Easy",
         timeToImplement: "This Week",
         savingKgPerYear: 110,
       },
       {
         title: "Adopt Solar Rooftop Energy",
-        description:
-          "Deploy localized solar cells on rooftop to offset baseline coal grid draws.",
+        description: "Deploy localized solar cells on rooftop to offset baseline coal grid draws.",
         difficulty: "Hard",
         timeToImplement: "This Month",
         savingKgPerYear: 1400,
@@ -618,16 +572,14 @@ function generateFallbackSuggestions(footprintData) {
       },
       {
         title: "Minimize Digital Streaming",
-        description:
-          "Reduce screen hours to 2 hrs/day, saving server-side data center energy.",
+        description: "Reduce screen hours to 2 hrs/day, saving server-side data center energy.",
         difficulty: "Easy",
         timeToImplement: "Immediate",
         savingKgPerYear: 80,
       },
       {
         title: "Commit to Zero Plastic Lifestyle",
-        description:
-          "Eliminate single-use plastic bottles, containers, bags entirely.",
+        description: "Eliminate single-use plastic bottles, containers, bags entirely.",
         difficulty: "Medium",
         timeToImplement: "This Week",
         savingKgPerYear: 210,
@@ -655,9 +607,7 @@ function generateFallbackSuggestions(footprintData) {
   addFromCat(primaryCategory, 3);
 
   // 2. Add from other categories
-  const otherCats = Object.keys(allLibrary).filter(
-    (c) => c !== primaryCategory,
-  );
+  const otherCats = Object.keys(allLibrary).filter((c) => c !== primaryCategory);
   for (const cat of otherCats) {
     addFromCat(cat, 2);
   }
@@ -678,7 +628,7 @@ function generateFallbackSuggestions(footprintData) {
 
 // 6. AI Chat (Gemini Flash integration with dynamic fallback)
 app.post("/api/ai/chat", async (req, res) => {
-  const { uid, messages, userContext } = req.body;
+  const { messages, userContext } = req.body;
   if (!messages || !Array.isArray(messages)) {
     return res.status(400).json({ error: "Missing messages array" });
   }
@@ -731,23 +681,20 @@ Core Directives:
       );
 
       const reply =
-        response.data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-        "System anomaly. Reconnect...";
+        response.data?.candidates?.[0]?.content?.parts?.[0]?.text || "System anomaly. Reconnect...";
       return res.json({ reply });
     } catch (err) {
       console.error("Gemini API chat request failed", err.message);
       if (err.response) {
         console.error("Response data:", err.response.data);
       }
-      const lastUserText =
-        geminiMessages[geminiMessages.length - 1].parts[0].text;
+      const lastUserText = geminiMessages[geminiMessages.length - 1].parts[0].text;
       const fallbackReply = generateFallbackChatResponse(lastUserText, context);
       return res.json({ reply: fallbackReply });
     }
   } else {
     // Generate simulated CarbonCoach response
-    const lastUserText =
-      geminiMessages[geminiMessages.length - 1].parts[0].text;
+    const lastUserText = geminiMessages[geminiMessages.length - 1].parts[0].text;
     const fallbackReply = generateFallbackChatResponse(lastUserText, context);
     return res.json({ reply: fallbackReply });
   }
@@ -761,14 +708,11 @@ function generateFallbackChatResponse(userText, context) {
 
   // Regular expressions using word boundaries to avoid false positives (e.g. 'car' in 'carbon', 'hi' in 'shift')
   const helloRegex = /\b(hello|hi|hey)\b/;
-  const transportRegex =
-    /\b(metro|transit|car|cars|transport|travel|commute|commuting)\b/;
+  const transportRegex = /\b(metro|transit|car|cars|transport|travel|commute|commuting)\b/;
   const foodRegex =
     /\b(food|diet|dietary|meat|vegan|veg|vegetarian|vegetable|vegetables|veggie|veggies)\b/;
-  const energyRegex =
-    /\b(energy|electricity|ac|solar|lpg|power|grid|electricityindia)\b/;
-  const lifestyleRegex =
-    /\b(clothing|buy|buying|lifestyle|shopping|clothes|fashion)\b/;
+  const energyRegex = /\b(energy|electricity|ac|solar|lpg|power|grid|electricityindia)\b/;
+  const lifestyleRegex = /\b(clothing|buy|buying|lifestyle|shopping|clothes|fashion)\b/;
   const scoreRegex = /\b(score|green|rank|level|tier)\b/;
 
   if (helloRegex.test(query)) {
@@ -809,8 +753,7 @@ app.get("/api/ai/tips", async (req, res) => {
   ];
 
   if (!apiKey) {
-    const randomTip =
-      fallbackTips[Math.floor(Math.random() * fallbackTips.length)];
+    const randomTip = fallbackTips[Math.floor(Math.random() * fallbackTips.length)];
     return res.json({ tip: randomTip });
   }
 
@@ -838,8 +781,7 @@ Output ONLY a raw JSON array of 5 strings. Do not include markdown blocks or any
       { headers: { "Content-Type": "application/json" } },
     );
 
-    const generatedText =
-      response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    const generatedText = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
     if (generatedText) {
       try {
         const cleanText = generatedText
@@ -859,8 +801,7 @@ Output ONLY a raw JSON array of 5 strings. Do not include markdown blocks or any
     throw new Error("Unexpected Gemini API response structure");
   } catch (err) {
     console.error("Gemini API tip generation failed", err.message);
-    const randomTip =
-      fallbackTips[Math.floor(Math.random() * fallbackTips.length)];
+    const randomTip = fallbackTips[Math.floor(Math.random() * fallbackTips.length)];
     return res.json({ tip: randomTip });
   }
 });
@@ -869,9 +810,7 @@ Output ONLY a raw JSON array of 5 strings. Do not include markdown blocks or any
 app.post("/api/actions/log", (req, res) => {
   const { uid, actionId, actionData } = req.body;
   if (!uid || !actionId || !actionData) {
-    return res
-      .status(400)
-      .json({ error: "Missing uid, actionId, or actionData" });
+    return res.status(400).json({ error: "Missing uid, actionId, or actionData" });
   }
 
   const db = readDb();
@@ -906,10 +845,7 @@ app.post("/api/actions/log", (req, res) => {
   // Update user's Green Score (award points)
   if (db.users[uid]) {
     // Complete action gives +50 points
-    db.users[uid].greenScore = Math.min(
-      1000,
-      (db.users[uid].greenScore || 500) + 50,
-    );
+    db.users[uid].greenScore = Math.min(1000, (db.users[uid].greenScore || 500) + 50);
 
     // Increments streak
     const lastStreakStr = db.users[uid].lastStreakDate;
@@ -933,15 +869,11 @@ app.post("/api/actions/log", (req, res) => {
     if (!badges.includes("first_step")) badges.push("first_step");
     if (db.users[uid].greenScore > 600 && !badges.includes("eco_enthusiast"))
       badges.push("eco_enthusiast");
-    if (
-      db.users[uid].greenScore > 800 &&
-      !badges.includes("carbon_neutralizer")
-    )
+    if (db.users[uid].greenScore > 800 && !badges.includes("carbon_neutralizer"))
       badges.push("carbon_neutralizer");
     if (db.users[uid].streakDays >= 3 && !badges.includes("streak_master"))
       badges.push("streak_master");
-    if (completedCount >= 3 && !badges.includes("action_taker"))
-      badges.push("action_taker");
+    if (completedCount >= 3 && !badges.includes("action_taker")) badges.push("action_taker");
 
     db.users[uid].badges = badges;
 
@@ -1026,8 +958,7 @@ app.post("/api/users/profile", (req, res) => {
   db.users[uid] = {
     ...(db.users[uid] || {}),
     uid,
-    displayName:
-      profile.displayName || db.users[uid]?.displayName || "Eco Warrior",
+    displayName: profile.displayName || db.users[uid]?.displayName || "Eco Warrior",
     email: profile.email || db.users[uid]?.email || "",
     location: profile.location || {
       city: "Durgapur",
@@ -1040,16 +971,11 @@ app.post("/api/users/profile", (req, res) => {
     dietType: profile.dietType || "vegetarian",
     primaryGoal: profile.primaryGoal || "Become carbon neutral",
     greenScore:
-      profile.greenScore !== undefined
-        ? profile.greenScore
-        : db.users[uid]?.greenScore || 500,
+      profile.greenScore !== undefined ? profile.greenScore : db.users[uid]?.greenScore || 500,
     level: profile.level || db.users[uid]?.level || "sapling",
     streakDays:
-      profile.streakDays !== undefined
-        ? profile.streakDays
-        : db.users[uid]?.streakDays || 1,
-    lastStreakDate:
-      profile.lastStreakDate || db.users[uid]?.lastStreakDate || timestamp,
+      profile.streakDays !== undefined ? profile.streakDays : db.users[uid]?.streakDays || 1,
+    lastStreakDate: profile.lastStreakDate || db.users[uid]?.lastStreakDate || timestamp,
     badges: profile.badges || db.users[uid]?.badges || ["first_step"],
     createdAt: db.users[uid]?.createdAt || timestamp,
     lastActiveAt: timestamp,
@@ -1058,9 +984,7 @@ app.post("/api/users/profile", (req, res) => {
         id: "challenge_w1",
         title: "Log Commutes and Swap 2 beef portions for pulses.",
         completed: false,
-        targetDate: new Date(
-          Date.now() + 7 * 24 * 60 * 60 * 1000,
-        ).toISOString(),
+        targetDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
       },
   };
 

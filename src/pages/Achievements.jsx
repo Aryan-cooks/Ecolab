@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable react-hooks/purity */
+import { useEffect, useState, useMemo } from "react";
 import { useStore } from "../store/useStore";
 
 export default function Achievements() {
-  const { user, actions, leaderboard, fetchLeaderboard } = useStore();
+  const { user, actions, fetchLeaderboard } = useStore();
   const [selectedItem, setSelectedItem] = useState(null);
 
   useEffect(() => {
@@ -19,6 +20,20 @@ export default function Achievements() {
   const level = user?.level || "eco-warrior";
   const streak = user?.streakDays || 5;
   const rank = Math.round(greenScore / 10); // Pseudo rank percentile
+
+  const currentTimeString = useMemo(() => {
+    return new Date().toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  }, []);
+
+  const timeOneHourAgoString = useMemo(() => {
+    return new Date(Date.now() - 3600000).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  }, []);
 
   return (
     <main className="flex-1 flex flex-col min-w-0 bg-black relative overflow-y-auto min-h-screen">
@@ -129,9 +144,7 @@ export default function Achievements() {
               return (
                 <div
                   key={badge.id}
-                  onClick={() =>
-                    setSelectedItem({ type: "badge", data: badge })
-                  }
+                  onClick={() => setSelectedItem({ type: "badge", data: badge })}
                   className={`border p-4 bg-surface flex flex-col items-center text-center justify-between relative group transition-all duration-300 cursor-pointer hover:scale-105 ${
                     isUnlocked
                       ? "border-neon-green/80 shadow-[0_0_10px_rgba(0,255,65,0.1)] hover:bg-neon-green/10"
@@ -148,9 +161,7 @@ export default function Achievements() {
                         : "border-neon-green/20 text-neon-green/30"
                     }`}
                   >
-                    <span className="material-symbols-outlined text-2xl">
-                      {badge.icon}
-                    </span>
+                    <span className="material-symbols-outlined text-2xl">{badge.icon}</span>
                   </div>
 
                   <div>
@@ -198,9 +209,7 @@ export default function Achievements() {
               completed.map((item, i) => (
                 <div
                   key={item.actionId || i}
-                  onClick={() =>
-                    setSelectedItem({ type: "milestone", data: item })
-                  }
+                  onClick={() => setSelectedItem({ type: "milestone", data: item })}
                   className="border border-neon-green/30 bg-surface p-5 hover:border-neon-green hover:bg-neon-green/5 hover:-translate-y-1 transition-all group cursor-pointer relative shadow-sm hover:shadow-[0_4px_15px_rgba(0,255,65,0.15)]"
                 >
                   <div className="absolute -top-[1px] -left-[1px] w-2 h-2 border-t-2 border-l-2 border-neon-green"></div>
@@ -218,16 +227,14 @@ export default function Achievements() {
                       </span>
                     </div>
                     <span className="font-mono text-[8px] text-neon-green/60 border border-neon-green/30 px-1 py-0.5">
-                      {item.category.slice(0, 3).toUpperCase()}_
-                      {String(i + 1).padStart(2, "0")}
+                      {item.category.slice(0, 3).toUpperCase()}_{String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
                   <h3 className="font-mono text-[13px] font-bold text-neon-green mb-2 tracking-tight uppercase truncate">
                     {item.title}
                   </h3>
                   <p className="font-mono text-[10px] text-neon-green/60 leading-relaxed mb-6 uppercase h-10 overflow-hidden line-clamp-2">
-                    {item.notes ||
-                      "Executed protocol successfully. Impact integrated to grid."}
+                    {item.notes || "Executed protocol successfully. Impact integrated to grid."}
                   </p>
                   <div className="flex justify-between items-end border-t border-neon-green/20 pt-4">
                     <div className="space-y-1">
@@ -235,9 +242,7 @@ export default function Achievements() {
                         VALIDATED
                       </span>
                       <span className="font-mono text-[10px] text-neon-green">
-                        {new Date(item.completedAt)
-                          .toLocaleDateString()
-                          .replace(/\//g, "_")}
+                        {new Date(item.completedAt).toLocaleDateString().replace(/\//g, "_")}
                       </span>
                     </div>
                     <div className="text-right space-y-1">
@@ -272,12 +277,9 @@ export default function Achievements() {
               {/* Target 1 */}
               <div className="space-y-2">
                 <div className="flex justify-between font-mono text-[11px]">
-                  <span className="text-neon-green uppercase">
-                    PROTOCOL: ANNUAL_OFFSET_TARGET
-                  </span>
+                  <span className="text-neon-green uppercase">PROTOCOL: ANNUAL_OFFSET_TARGET</span>
                   <span className="text-neon-amber font-bold">
-                    {completed.reduce((sum, a) => sum + a.savingKgPerYear, 0)} /
-                    500 KG
+                    {completed.reduce((sum, a) => sum + a.savingKgPerYear, 0)} / 500 KG
                   </span>
                 </div>
                 <div className="w-full h-3 bg-black border border-neon-green/30">
@@ -297,12 +299,8 @@ export default function Achievements() {
               {/* Target 2 */}
               <div className="space-y-2">
                 <div className="flex justify-between font-mono text-[11px]">
-                  <span className="text-neon-green uppercase">
-                    PROTOCOL: GREEN_SCORE_ELITE
-                  </span>
-                  <span className="text-neon-amber font-bold">
-                    {greenScore} / 1000
-                  </span>
+                  <span className="text-neon-green uppercase">PROTOCOL: GREEN_SCORE_ELITE</span>
+                  <span className="text-neon-amber font-bold">{greenScore} / 1000</span>
                 </div>
                 <div className="w-full h-3 bg-black border border-neon-green/30">
                   <div
@@ -319,12 +317,8 @@ export default function Achievements() {
               {/* Target 3 */}
               <div className="space-y-2">
                 <div className="flex justify-between font-mono text-[11px]">
-                  <span className="text-neon-green uppercase">
-                    PROTOCOL: NODE_STREAK_STABILITY
-                  </span>
-                  <span className="text-neon-amber font-bold">
-                    {streak} / 30 DAYS
-                  </span>
+                  <span className="text-neon-green uppercase">PROTOCOL: NODE_STREAK_STABILITY</span>
+                  <span className="text-neon-amber font-bold">{streak} / 30 DAYS</span>
                 </div>
                 <div className="w-full h-3 bg-black border border-neon-green/30">
                   <div
@@ -347,8 +341,7 @@ export default function Achievements() {
                 PROTOCOL_LOG_MANIFEST
               </h2>
               <span className="flex items-center gap-2 text-[9px] text-neon-red font-bold animate-pulse">
-                <span className="w-2 h-2 bg-neon-red rounded-full"></span>{" "}
-                LIVE_FEED
+                <span className="w-2 h-2 bg-neon-red rounded-full"></span> LIVE_FEED
               </span>
             </div>
             <div className="border border-neon-green/30 bg-surface p-4 h-[320px] overflow-y-auto relative">
@@ -371,8 +364,7 @@ export default function Achievements() {
                           ]
                         </span>
                         <span className="text-neon-green">
-                          EXECUTED:{" "}
-                          <span className="font-bold">{action.title}</span>{" "}
+                          EXECUTED: <span className="font-bold">{action.title}</span>{" "}
                           <span className="text-neon-amber ml-2">
                             (-{action.savingKgPerYear}KG)
                           </span>
@@ -382,36 +374,17 @@ export default function Achievements() {
                   : null}
 
                 <div className="flex gap-4 border-l-2 border-neon-green/30 pl-2">
-                  <span className="text-neon-green/60 shrink-0">
-                    [
-                    {new Date().toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                    ]
-                  </span>
+                  <span className="text-neon-green/60 shrink-0">[{currentTimeString}]</span>
                   <span className="text-neon-green">
-                    LOG: SYSTEM_SCAN_START ...{" "}
-                    <span className="font-bold">PASS</span>
+                    LOG: SYSTEM_SCAN_START ... <span className="font-bold">PASS</span>
                   </span>
                 </div>
                 <div className="flex gap-4 border-l-2 border-neon-green/30 pl-2 opacity-50">
-                  <span className="text-neon-green/60 shrink-0">
-                    [
-                    {new Date(Date.now() - 3600000).toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}
-                    ]
-                  </span>
-                  <span className="text-neon-green">
-                    AUTO_SAVE: MISSION_DATA_BACKED_UP
-                  </span>
+                  <span className="text-neon-green/60 shrink-0">[{timeOneHourAgoString}]</span>
+                  <span className="text-neon-green">AUTO_SAVE: MISSION_DATA_BACKED_UP</span>
                 </div>
                 <div className="flex gap-4 border-l-2 border-neon-green/30 pl-2">
-                  <span className="text-neon-green/60 shrink-0">
-                    [00:00:00]
-                  </span>
+                  <span className="text-neon-green/60 shrink-0">[00:00:00]</span>
                   <span className="animate-pulse text-neon-green font-bold">
                     &gt; STANDBY_MODE_ACTIVE_0x112
                   </span>
@@ -431,17 +404,15 @@ export default function Achievements() {
                 GLOBAL_SYNCHRONIZATION_INDEX
               </h3>
               <p className="font-mono text-[10px] text-neon-green/60 uppercase tracking-wider">
-                Your node is currently operating with higher efficiency than{" "}
-                {Math.max(1, rank)}% of regional operators.
+                Your node is currently operating with higher efficiency than {Math.max(1, rank)}% of
+                regional operators.
               </p>
             </div>
             <div className="flex items-baseline gap-2">
               <span className="font-mono text-5xl md:text-6xl font-black text-neon-green leading-none terminal-glow">
                 {rank.toFixed(1)}
               </span>
-              <span className="font-mono text-xl text-neon-green/40 font-bold">
-                PTL
-              </span>
+              <span className="font-mono text-xl text-neon-green/40 font-bold">PTL</span>
             </div>
           </div>
           {/* Data Strip Visualizer */}
@@ -541,9 +512,7 @@ export default function Achievements() {
                       VALIDATED
                     </span>
                     <span className="font-mono text-xs text-neon-green font-bold">
-                      {new Date(
-                        selectedItem.data.completedAt,
-                      ).toLocaleDateString()}
+                      {new Date(selectedItem.data.completedAt).toLocaleDateString()}
                     </span>
                   </div>
                   <div className="border border-neon-amber/30 bg-neon-amber/5 p-3 text-center">

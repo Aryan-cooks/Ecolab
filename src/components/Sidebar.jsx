@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useStore } from "../store/useStore";
 import axios from "axios";
+import DecryptedText from "./DecryptedText";
 
 export default function Sidebar() {
   const { logout, user } = useStore();
@@ -14,7 +15,7 @@ export default function Sidebar() {
       try {
         const res = await axios.get("http://localhost:5000/api/system/stats");
         setSysStats(res.data);
-      } catch (err) {
+      } catch {
         // silently fallback or ignore on error
       }
     };
@@ -58,16 +59,13 @@ export default function Sidebar() {
     <>
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex h-screen w-64 fixed left-0 top-0 flex-col py-6 px-4 bg-black border-r-2 border-neon-green z-50">
-        <div
-          className="mb-8 px-2 cursor-pointer group"
-          onClick={() => setIsManifestoOpen(true)}
-        >
+        <div className="mb-8 px-2 cursor-pointer group" onClick={() => setIsManifestoOpen(true)}>
           <div className="flex items-center gap-2 mb-1">
             <span className="material-symbols-outlined text-neon-green group-hover:animate-pulse">
               terminal
             </span>
             <h1 className="font-bold text-xl text-neon-green terminal-glow group-hover:brightness-125 transition-all">
-              ECO-LAB V2.4
+              <DecryptedText text="ECO-LAB V2.4" animateOn="hover" />
             </h1>
           </div>
           <p className="text-[10px] text-neon-green opacity-60 group-hover:opacity-100 transition-opacity">
@@ -110,63 +108,49 @@ export default function Sidebar() {
 
                 <div className="space-y-4 text-xs md:text-sm leading-relaxed">
                   <div>
-                    <h3 className="text-neon-amber font-bold mb-1">
-                      &gt; 01_MOTIVE
-                    </h3>
+                    <h3 className="text-neon-amber font-bold mb-1">&gt; 01_MOTIVE</h3>
                     <p className="opacity-80">
-                      Our planetary system is facing critical thermal overload.
-                      The ECO-LAB V2.4 terminal is deployed to give nodes
-                      (users) direct, actionable telemetry on their personal
-                      carbon emission vectors.
+                      Our planetary system is facing critical thermal overload. The ECO-LAB V2.4
+                      terminal is deployed to give nodes (users) direct, actionable telemetry on
+                      their personal carbon emission vectors.
                     </p>
                   </div>
 
                   <div>
-                    <h3 className="text-neon-amber font-bold mb-1">
-                      &gt; 02_WHY_IT_WORKS
-                    </h3>
+                    <h3 className="text-neon-amber font-bold mb-1">&gt; 02_WHY_IT_WORKS</h3>
                     <p className="opacity-80">
-                      Sustainability is often paralyzed by ambiguity. This
-                      interface works by breaking down monolithic carbon impact
-                      into precise, manageable sub-sectors (Transport,
-                      Nutrition, Residential, Externals). Visibility leads to
+                      Sustainability is often paralyzed by ambiguity. This interface works by
+                      breaking down monolithic carbon impact into precise, manageable sub-sectors
+                      (Transport, Nutrition, Residential, Externals). Visibility leads to
                       accountability. Accountability leads to optimization.
                     </p>
                   </div>
 
                   <div>
-                    <h3 className="text-neon-amber font-bold mb-1">
-                      &gt; 03_SYSTEM_USES
-                    </h3>
+                    <h3 className="text-neon-amber font-bold mb-1">&gt; 03_SYSTEM_USES</h3>
                     <ul className="list-disc list-inside opacity-80 space-y-1 ml-2">
                       <li>
-                        <span className="text-white">TELEMETRY:</span> Calculate
-                        and track exact baseline emissions.
+                        <span className="text-white">TELEMETRY:</span> Calculate and track exact
+                        baseline emissions.
                       </li>
                       <li>
-                        <span className="text-white">PROTOCOLS:</span> Execute
-                        AI-generated reduction strategies tailored to your
-                        vectors.
+                        <span className="text-white">PROTOCOLS:</span> Execute AI-generated
+                        reduction strategies tailored to your vectors.
                       </li>
                       <li>
-                        <span className="text-white">SYNCHRONIZATION:</span>{" "}
-                        Compare operational efficiency against peer nodes and
-                        global averages.
+                        <span className="text-white">SYNCHRONIZATION:</span> Compare operational
+                        efficiency against peer nodes and global averages.
                       </li>
                     </ul>
                   </div>
 
                   <div>
-                    <h3 className="text-neon-amber font-bold mb-1">
-                      &gt; 04_DESIGN_ARCHITECTURE
-                    </h3>
+                    <h3 className="text-neon-amber font-bold mb-1">&gt; 04_DESIGN_ARCHITECTURE</h3>
                     <p className="opacity-80">
-                      Designed as a tactical response terminal, ECO-LAB shifts
-                      the paradigm from passive ecological anxiety to active,
-                      gamified operational security. The interface is
-                      deliberately raw—treating climate action not as an
-                      abstract concept, but as a critical mission requiring
-                      systemic intervention.
+                      Designed as a tactical response terminal, ECO-LAB shifts the paradigm from
+                      passive ecological anxiety to active, gamified operational security. The
+                      interface is deliberately raw—treating climate action not as an abstract
+                      concept, but as a critical mission requiring systemic intervention.
                     </p>
                   </div>
                 </div>
@@ -192,10 +176,10 @@ export default function Sidebar() {
                 }`
               }
             >
-              <span className="material-symbols-outlined text-xl">
-                {link.icon}
+              <span className="material-symbols-outlined text-xl">{link.icon}</span>
+              <span>
+                <DecryptedText text={link.name} animateOn="hover" />
               </span>
-              <span>{link.name}</span>
             </NavLink>
           ))}
         </nav>
@@ -206,12 +190,10 @@ export default function Sidebar() {
               <span>UPTIME:</span> <span>{formatUptime(sysStats.uptime)}</span>
             </p>
             <p className="flex justify-between">
-              <span>CPU LOAD:</span>{" "}
-              <span className="text-neon-amber">{sysStats.cpu}%</span>
+              <span>CPU LOAD:</span> <span className="text-neon-amber">{sysStats.cpu}%</span>
             </p>
             <p className="flex justify-between">
-              <span>NODE ID:</span>{" "}
-              <span>{user.uid.slice(0, 8).toUpperCase()}</span>
+              <span>NODE ID:</span> <span>{user.uid.slice(0, 8).toUpperCase()}</span>
             </p>
           </div>
 
@@ -220,7 +202,7 @@ export default function Sidebar() {
             className="w-full border-2 border-neon-red text-neon-red py-2 px-4 font-bold flex items-center justify-center gap-2 hover:bg-neon-red hover:text-black transition-all text-xs"
           >
             <span className="material-symbols-outlined text-xl">logout</span>
-            DISCONNECT_NODE
+            <DecryptedText text="DISCONNECT_NODE" animateOn="hover" />
           </button>
         </div>
       </aside>
@@ -237,15 +219,13 @@ export default function Sidebar() {
               }`
             }
           >
-            <span className="material-symbols-outlined text-xl">
-              {link.icon}
-            </span>
+            <span className="material-symbols-outlined text-xl">{link.icon}</span>
             <span className="text-[7px] mt-0.5 tracking-tight font-black text-center leading-[1.1]">
               {link.name.split("_").map((word, idx) => (
-                <React.Fragment key={idx}>
+                <Fragment key={idx}>
                   {word}
                   {idx === 0 && <br />}
-                </React.Fragment>
+                </Fragment>
               ))}
             </span>
           </NavLink>

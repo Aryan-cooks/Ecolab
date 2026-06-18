@@ -95,13 +95,7 @@
 }
 
 .telemetry-scroll {
-  mask-image: linear-gradient(
-    to bottom,
-    transparent,
-    black 15%,
-    black 85%,
-    transparent
-  );
+  mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
 }
 
 /* Cyberpunk terminal style buttons and inputs */

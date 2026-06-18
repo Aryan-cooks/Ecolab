@@ -1,7 +1,7 @@
 // Mock Firebase services out-of-the-box
 export const auth = {
   currentUser: null,
-  onAuthStateChanged: (callback) => {
+  onAuthStateChanged: () => {
     // Return unsubscribe function
     return () => {};
   },

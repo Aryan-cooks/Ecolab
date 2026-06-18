@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 
 export default function GlobalTips() {
@@ -6,7 +6,15 @@ export default function GlobalTips() {
   const [isVisible, setIsVisible] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
 
-  const fetchTip = async () => {
+  const triggerExit = useCallback(() => {
+    setIsExiting(true);
+    setTimeout(() => {
+      setIsVisible(false);
+      setCurrentTip(null);
+    }, 500); // 500ms duration for exit animation to complete
+  }, []);
+
+  const fetchTip = useCallback(async () => {
     try {
       const res = await axios.get("http://localhost:5000/api/ai/tips");
       if (res.data && res.data.tip) {
@@ -22,15 +30,7 @@ export default function GlobalTips() {
     } catch (err) {
       console.error("Failed to fetch tip", err);
     }
-  };
-
-  const triggerExit = () => {
-    setIsExiting(true);
-    setTimeout(() => {
-      setIsVisible(false);
-      setCurrentTip(null);
-    }, 500); // 500ms duration for exit animation to complete
-  };
+  }, [triggerExit]);
 
   useEffect(() => {
     // Show a tip every 45 seconds
@@ -47,7 +47,7 @@ export default function GlobalTips() {
       clearInterval(interval);
       clearTimeout(initialTimeout);
     };
-  }, []);
+  }, [fetchTip]);
 
   if (!isVisible || !currentTip) return null;
 
@@ -72,9 +72,7 @@ export default function GlobalTips() {
           <h4 className="text-[10px] md:text-xs font-bold text-neon-amber uppercase tracking-widest mb-1">
             [ SYSTEM_TIP ]
           </h4>
-          <p className="text-xs text-neon-green leading-relaxed">
-            {currentTip}
-          </p>
+          <p className="text-xs text-neon-green leading-relaxed">{currentTip}</p>
         </div>
         <button
           onClick={triggerExit}

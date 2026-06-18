@@ -1,14 +1,9 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useStore } from "../store/useStore";
 
 export default function Suggestions() {
-  const {
-    suggestions,
-    actions,
-    completeAction,
-    dismissSuggestion,
-    addCustomSuggestion,
-  } = useStore();
+  const { suggestions, actions, completeAction, dismissSuggestion, addCustomSuggestion } =
+    useStore();
   const [activeTab, setActiveTab] = useState("pending");
 
   // Manual action logger form states
@@ -19,13 +14,9 @@ export default function Suggestions() {
   const [logDifficulty, setLogDifficulty] = useState("Easy");
   const [logNotes, setLogNotes] = useState("");
 
-  const pending = suggestions
-    ? suggestions.filter((s) => s.status === "pending")
-    : [];
+  const pending = suggestions ? suggestions.filter((s) => s.status === "pending") : [];
   const completed = actions || [];
-  const dismissed = suggestions
-    ? suggestions.filter((s) => s.status === "dismissed")
-    : [];
+  const dismissed = suggestions ? suggestions.filter((s) => s.status === "dismissed") : [];
 
   const handleExecute = async (item) => {
     await completeAction(item.id, {
@@ -86,18 +77,14 @@ export default function Suggestions() {
         {showLogForm && (
           <div className="border-2 border-neon-amber p-6 bg-surface animate-fade-in">
             <h3 className="text-xs font-bold text-neon-amber mb-4 uppercase flex items-center gap-2">
-              <span className="material-symbols-outlined text-sm">
-                post_add
-              </span>
+              <span className="material-symbols-outlined text-sm">post_add</span>
               MANUAL_OFFSET_EMULATION_FORM
             </h3>
 
             <form onSubmit={handleManualLog} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-1">
-                  <label className="text-[9px] uppercase text-neon-green/60">
-                    Action Title
-                  </label>
+                  <label className="text-[9px] uppercase text-neon-green/60">Action Title</label>
                   <input
                     type="text"
                     required
@@ -130,9 +117,7 @@ export default function Suggestions() {
                     type="number"
                     min="0"
                     value={logSavings}
-                    onChange={(e) =>
-                      setLogSavings(Math.max(0, parseInt(e.target.value) || 0))
-                    }
+                    onChange={(e) => setLogSavings(Math.max(0, parseInt(e.target.value) || 0))}
                     className="w-full text-sm py-2 px-3 focus:outline-none"
                   />
                 </div>
@@ -241,13 +226,10 @@ export default function Suggestions() {
                                 : "border-neon-green text-neon-green"
                           }`}
                         >
-                          {item.difficulty.toUpperCase()} //{" "}
-                          {item.timeToImplement.toUpperCase()}
+                          {item.difficulty.toUpperCase()} // {item.timeToImplement.toUpperCase()}
                         </span>
                       </div>
-                      <h4 className="text-xs font-bold mb-2 uppercase">
-                        {item.title}
-                      </h4>
+                      <h4 className="text-xs font-bold mb-2 uppercase">{item.title}</h4>
                       <p className="text-[10px] opacity-75 mb-6 min-h-[40px] leading-relaxed lowercase">
                         {item.description}
                       </p>
@@ -286,8 +268,7 @@ export default function Suggestions() {
                 ))
               ) : (
                 <div className="col-span-2 border border-dashed border-neon-green/30 p-8 text-center text-neon-green/60">
-                  NO PENDING AI RECOMMENDATIONS. RE-CALCULATE PROFILE METRICS
-                  FOR NEW PROTOCOLS.
+                  NO PENDING AI RECOMMENDATIONS. RE-CALCULATE PROFILE METRICS FOR NEW PROTOCOLS.
                 </div>
               )}
             </div>
@@ -313,9 +294,7 @@ export default function Suggestions() {
                                 ? "bolt"
                                 : "shopping_bag"}
                         </span>
-                        <h4 className="text-xs font-bold uppercase">
-                          {item.title}
-                        </h4>
+                        <h4 className="text-xs font-bold uppercase">{item.title}</h4>
                         <span className="text-[7px] border border-neon-green text-neon-green px-1 font-bold">
                           {item.source.toUpperCase()}
                         </span>
@@ -338,8 +317,7 @@ export default function Suggestions() {
                 ))
               ) : (
                 <div className="border border-dashed border-neon-green/30 p-8 text-center text-neon-green/60">
-                  NO ACTIVE PLANS COMPLETED. SELECT AND EXECUTE PROTOCOLS FROM
-                  REC TABS.
+                  NO ACTIVE PLANS COMPLETED. SELECT AND EXECUTE PROTOCOLS FROM REC TABS.
                 </div>
               )}
             </div>
@@ -369,9 +347,7 @@ export default function Suggestions() {
                           {item.difficulty.toUpperCase()}
                         </span>
                       </div>
-                      <h4 className="text-xs font-bold mb-2 uppercase">
-                        {item.title}
-                      </h4>
+                      <h4 className="text-xs font-bold mb-2 uppercase">{item.title}</h4>
                       <p className="text-[10px] opacity-75 mb-6 min-h-[40px] leading-relaxed lowercase">
                         {item.description}
                       </p>

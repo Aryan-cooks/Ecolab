@@ -58,16 +58,11 @@ async function runTests() {
         `       Calculated footprint: ${calculationResults.totalTons} T, Green Score: ${calculationResults.greenScore}`,
       );
     } else {
-      console.log(
-        "[FAIL] POST /api/footprint/calculate - missing response parameters",
-      );
+      console.log("[FAIL] POST /api/footprint/calculate - missing response parameters");
       failures++;
     }
   } catch (err) {
-    console.log(
-      "[FAIL] POST /api/footprint/calculate - request failed",
-      err.message,
-    );
+    console.log("[FAIL] POST /api/footprint/calculate - request failed", err.message);
     failures++;
   }
 
@@ -81,37 +76,25 @@ async function runTests() {
     if (res.data.saved && res.data.logId) {
       console.log("[PASS] POST /api/footprint/save");
     } else {
-      console.log(
-        "[FAIL] POST /api/footprint/save - invalid response structure",
-      );
+      console.log("[FAIL] POST /api/footprint/save - invalid response structure");
       failures++;
     }
   } catch (err) {
-    console.log(
-      "[FAIL] POST /api/footprint/save - request failed",
-      err.message,
-    );
+    console.log("[FAIL] POST /api/footprint/save - request failed", err.message);
     failures++;
   }
 
   // 4. Fetch history
   try {
-    const res = await axios.get(
-      `${BASE_URL}/footprint/test_user_operator_9/history`,
-    );
+    const res = await axios.get(`${BASE_URL}/footprint/test_user_operator_9/history`);
     if (Array.isArray(res.data) && res.data.length > 0) {
       console.log("[PASS] GET /api/footprint/:uid/history");
     } else {
-      console.log(
-        "[FAIL] GET /api/footprint/:uid/history - empty history logs",
-      );
+      console.log("[FAIL] GET /api/footprint/:uid/history - empty history logs");
       failures++;
     }
   } catch (err) {
-    console.log(
-      "[FAIL] GET /api/footprint/:uid/history - request failed",
-      err.message,
-    );
+    console.log("[FAIL] GET /api/footprint/:uid/history - request failed", err.message);
     failures++;
   }
 
@@ -125,20 +108,14 @@ async function runTests() {
         location: { city: "Durgapur", state: "West Bengal" },
       },
     });
-    if (
-      Array.isArray(res.data.suggestions) &&
-      res.data.suggestions.length === 8
-    ) {
+    if (Array.isArray(res.data.suggestions) && res.data.suggestions.length === 8) {
       console.log("[PASS] POST /api/ai/suggestions - returned 8 suggestions");
     } else {
       console.log("[FAIL] POST /api/ai/suggestions - structure invalid");
       failures++;
     }
   } catch (err) {
-    console.log(
-      "[FAIL] POST /api/ai/suggestions - request failed",
-      err.message,
-    );
+    console.log("[FAIL] POST /api/ai/suggestions - request failed", err.message);
     failures++;
   }
 
