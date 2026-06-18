@@ -45,6 +45,16 @@ function writeDb(data) {
   }
 }
 
+// Root health check (friendly message for direct visits)
+app.get("/", (req, res) => {
+  res.json({
+    service: "ECO-LAB V2.4 API",
+    status: "ONLINE",
+    message: "Node awareness confirmed. Access endpoints via /api",
+    timestamp: new Date().toISOString()
+  });
+});
+
 // 1. Health check
 app.get("/api/health", (req, res) => {
   res.json({ status: "OK", timestamp: new Date().toISOString() });
