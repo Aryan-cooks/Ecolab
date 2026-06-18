@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useStore } from "../store/useStore";
 import axios from "axios";
 import DecryptedText from "./DecryptedText";
+import TextType from "./TextType";
 
 export default function Sidebar() {
   const { logout, user } = useStore();
@@ -78,90 +79,7 @@ export default function Sidebar() {
         </div>
 
         {/* Manifesto Modal */}
-        {isManifestoOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
-            <div className="bg-surface border-2 border-neon-green w-full max-w-2xl relative overflow-hidden flex flex-col max-h-[90vh]">
-              {/* Modal Header */}
-              <div className="bg-neon-green text-black px-4 py-2 flex justify-between items-center font-bold text-xs uppercase tracking-widest">
-                <span>[ TERMINAL_MANIFESTO_PROTOCOL ]</span>
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsManifestoOpen(false);
-                  }}
-                  className="hover:bg-black hover:text-neon-green px-2 py-0.5 transition-colors"
-                >
-                  [X] ABORT
-                </button>
-              </div>
-
-              {/* Modal Content */}
-              <div className="p-6 md:p-8 space-y-6 overflow-y-auto telemetry-scroll text-neon-green">
-                <div className="space-y-2 border-b border-neon-green/30 pb-4">
-                  <h2 className="text-xl md:text-2xl font-black terminal-glow uppercase">
-                    The Eco-Lab Directive
-                  </h2>
-                  <p className="text-[10px] md:text-xs text-neon-amber animate-pulse">
-                    DECRYPTING MISSION STATEMENT...
-                  </p>
-                </div>
-
-                <div className="space-y-4 text-xs md:text-sm leading-relaxed">
-                  <div>
-                    <h3 className="text-neon-amber font-bold mb-1">&gt; 01_MOTIVE</h3>
-                    <p className="opacity-80">
-                      Our planetary system is facing critical thermal overload. The ECO-LAB V2.4
-                      terminal is deployed to give nodes (users) direct, actionable telemetry on
-                      their personal carbon emission vectors.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="text-neon-amber font-bold mb-1">&gt; 02_WHY_IT_WORKS</h3>
-                    <p className="opacity-80">
-                      Sustainability is often paralyzed by ambiguity. This interface works by
-                      breaking down monolithic carbon impact into precise, manageable sub-sectors
-                      (Transport, Nutrition, Residential, Externals). Visibility leads to
-                      accountability. Accountability leads to optimization.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="text-neon-amber font-bold mb-1">&gt; 03_SYSTEM_USES</h3>
-                    <ul className="list-disc list-inside opacity-80 space-y-1 ml-2">
-                      <li>
-                        <span className="text-white">TELEMETRY:</span> Calculate and track exact
-                        baseline emissions.
-                      </li>
-                      <li>
-                        <span className="text-white">PROTOCOLS:</span> Execute AI-generated
-                        reduction strategies tailored to your vectors.
-                      </li>
-                      <li>
-                        <span className="text-white">SYNCHRONIZATION:</span> Compare operational
-                        efficiency against peer nodes and global averages.
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h3 className="text-neon-amber font-bold mb-1">&gt; 04_DESIGN_ARCHITECTURE</h3>
-                    <p className="opacity-80">
-                      Designed as a tactical response terminal, ECO-LAB shifts the paradigm from
-                      passive ecological anxiety to active, gamified operational security. The
-                      interface is deliberately raw—treating climate action not as an abstract
-                      concept, but as a critical mission requiring systemic intervention.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-neon-green/30 text-[10px] text-neon-green/60">
-                  END OF TRANSMISSION. NODE AWARENESS CONFIRMED.
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        {isManifestoOpen && <ManifestoModal onClose={() => setIsManifestoOpen(false)} />}
 
         <nav className="flex-1 space-y-1">
           {links.map((link) => (
@@ -232,5 +150,235 @@ export default function Sidebar() {
         ))}
       </nav>
     </>
+  );
+}
+
+function ManifestoModal({ onClose }) {
+  const [typingStep, setTypingStep] = useState(0);
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+      <div className="bg-surface border-2 border-neon-green w-full max-w-2xl relative overflow-hidden flex flex-col max-h-[90vh]">
+        {/* Modal Header */}
+        <div className="bg-neon-green text-black px-4 py-2 flex justify-between items-center font-bold text-xs uppercase tracking-widest">
+          <span>[ TERMINAL_MANIFESTO_PROTOCOL ]</span>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onClose();
+            }}
+            className="hover:bg-black hover:text-neon-green px-2 py-0.5 transition-colors"
+          >
+            [X] ABORT
+          </button>
+        </div>
+
+        {/* Modal Content */}
+        <div className="p-6 md:p-8 space-y-6 overflow-y-auto telemetry-scroll text-neon-green">
+          <div className="space-y-2 border-b border-neon-green/30 pb-4">
+            <h2 className="text-xl md:text-2xl font-black terminal-glow uppercase">
+              The Eco-Lab Directive
+            </h2>
+            <p className="text-[10px] md:text-xs text-neon-amber">
+              <TextType
+                as="span"
+                text="DECRYPTING MISSION STATEMENT..."
+                typingSpeed={30}
+                showCursor={typingStep === 0}
+                cursorCharacter="_"
+                loop={false}
+                onSentenceComplete={() => setTypingStep(1)}
+              />
+            </p>
+          </div>
+
+          <div className="space-y-4 text-xs md:text-sm leading-relaxed">
+            {typingStep >= 1 && (
+              <div>
+                <h3 className="text-neon-amber font-bold mb-1">
+                  <TextType
+                    as="span"
+                    text="> 01_MOTIVE"
+                    typingSpeed={20}
+                    showCursor={typingStep === 1}
+                    cursorCharacter="_"
+                    loop={false}
+                    onSentenceComplete={() => setTypingStep(2)}
+                  />
+                </h3>
+                {typingStep >= 2 && (
+                  <p className="opacity-80">
+                    <TextType
+                      as="span"
+                      text="Our planetary system is facing critical thermal overload. The ECO-LAB V2.4 terminal is deployed to give nodes (users) direct, actionable telemetry on their personal carbon emission vectors."
+                      typingSpeed={8}
+                      showCursor={typingStep === 2}
+                      cursorCharacter="_"
+                      loop={false}
+                      onSentenceComplete={() => setTypingStep(3)}
+                    />
+                  </p>
+                )}
+              </div>
+            )}
+
+            {typingStep >= 3 && (
+              <div>
+                <h3 className="text-neon-amber font-bold mb-1">
+                  <TextType
+                    as="span"
+                    text="> 02_WHY_IT_WORKS"
+                    typingSpeed={20}
+                    showCursor={typingStep === 3}
+                    cursorCharacter="_"
+                    loop={false}
+                    onSentenceComplete={() => setTypingStep(4)}
+                  />
+                </h3>
+                {typingStep >= 4 && (
+                  <p className="opacity-80">
+                    <TextType
+                      as="span"
+                      text="Sustainability is often paralyzed by ambiguity. This interface works by breaking down monolithic carbon impact into precise, manageable sub-sectors (Transport, Nutrition, Residential, Externals). Visibility leads to accountability. Accountability leads to optimization."
+                      typingSpeed={8}
+                      showCursor={typingStep === 4}
+                      cursorCharacter="_"
+                      loop={false}
+                      onSentenceComplete={() => setTypingStep(5)}
+                    />
+                  </p>
+                )}
+              </div>
+            )}
+
+            {typingStep >= 5 && (
+              <div>
+                <h3 className="text-neon-amber font-bold mb-1">
+                  <TextType
+                    as="span"
+                    text="> 03_SYSTEM_USES"
+                    typingSpeed={20}
+                    showCursor={typingStep === 5}
+                    cursorCharacter="_"
+                    loop={false}
+                    onSentenceComplete={() => setTypingStep(6)}
+                  />
+                </h3>
+                {typingStep >= 6 && (
+                  <ul className="list-disc list-inside opacity-80 space-y-1 ml-2">
+                    <li>
+                      <span className="text-white">
+                        <TextType
+                          as="span"
+                          text="TELEMETRY: "
+                          typingSpeed={15}
+                          showCursor={false}
+                          loop={false}
+                        />
+                      </span>
+                      <TextType
+                        as="span"
+                        text="Calculate and track exact baseline emissions."
+                        typingSpeed={8}
+                        showCursor={typingStep === 6}
+                        cursorCharacter="_"
+                        loop={false}
+                        onSentenceComplete={() => setTypingStep(7)}
+                      />
+                    </li>
+                    {typingStep >= 7 && (
+                      <li>
+                        <span className="text-white">
+                          <TextType
+                            as="span"
+                            text="PROTOCOLS: "
+                            typingSpeed={15}
+                            showCursor={false}
+                            loop={false}
+                          />
+                        </span>
+                        <TextType
+                          as="span"
+                          text="Execute AI-generated reduction strategies tailored to your vectors."
+                          typingSpeed={8}
+                          showCursor={typingStep === 7}
+                          cursorCharacter="_"
+                          loop={false}
+                          onSentenceComplete={() => setTypingStep(8)}
+                        />
+                      </li>
+                    )}
+                    {typingStep >= 8 && (
+                      <li>
+                        <span className="text-white">
+                          <TextType
+                            as="span"
+                            text="SYNCHRONIZATION: "
+                            typingSpeed={15}
+                            showCursor={false}
+                            loop={false}
+                          />
+                        </span>
+                        <TextType
+                          as="span"
+                          text="Compare operational efficiency against peer nodes and global averages."
+                          typingSpeed={8}
+                          showCursor={typingStep === 8}
+                          cursorCharacter="_"
+                          loop={false}
+                          onSentenceComplete={() => setTypingStep(9)}
+                        />
+                      </li>
+                    )}
+                  </ul>
+                )}
+              </div>
+            )}
+
+            {typingStep >= 9 && (
+              <div>
+                <h3 className="text-neon-amber font-bold mb-1">
+                  <TextType
+                    as="span"
+                    text="> 04_DESIGN_ARCHITECTURE"
+                    typingSpeed={20}
+                    showCursor={typingStep === 9}
+                    cursorCharacter="_"
+                    loop={false}
+                    onSentenceComplete={() => setTypingStep(10)}
+                  />
+                </h3>
+                {typingStep >= 10 && (
+                  <p className="opacity-80">
+                    <TextType
+                      as="span"
+                      text="Designed as a tactical response terminal, ECO-LAB shifts the paradigm from passive ecological anxiety to active, gamified operational security. The interface is deliberately raw—treating climate action not as an abstract concept, but as a critical mission requiring systemic intervention."
+                      typingSpeed={8}
+                      showCursor={typingStep === 10}
+                      cursorCharacter="_"
+                      loop={false}
+                      onSentenceComplete={() => setTypingStep(11)}
+                    />
+                  </p>
+                )}
+              </div>
+            )}
+          </div>
+
+          {typingStep >= 11 && (
+            <div className="pt-4 border-t border-neon-green/30 text-[10px] text-neon-green/60">
+              <TextType
+                as="span"
+                text="END OF TRANSMISSION. NODE AWARENESS CONFIRMED."
+                typingSpeed={20}
+                showCursor={typingStep === 11}
+                cursorCharacter="_"
+                loop={false}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
