@@ -27,8 +27,8 @@
 
 | Service | URL |
 |---------|-----|
-| **Frontend** | https://storage.googleapis.com/eco-lab-frontend/index.html |
-| **Backend API** | https://eco-lab-server-543804667536.asia-south1.run.app |
+| **Frontend** | [https://storage.googleapis.com/eco-lab-frontend/index.html](https://storage.googleapis.com/eco-lab-frontend/index.html) |
+| **Backend API** | [https://eco-lab-server-543804667536.asia-south1.run.app](https://eco-lab-server-543804667536.asia-south1.run.app) |
 
 > Frontend is hosted on **Google Cloud Storage** (CDN-backed static hosting)  
 > Backend API is hosted on **Google Cloud Run** (serverless container, `asia-south1`)
