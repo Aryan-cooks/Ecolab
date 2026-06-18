@@ -208,6 +208,34 @@ npm run dev
 
 ---
 
+## ☁️ Deployment
+
+ECO-LAB is designed to be deployed on Google Cloud:
+
+### 1. Backend (Google Cloud Run)
+The Express API runs as a serverless container on Cloud Run.
+
+```bash
+cd server
+gcloud run deploy eco-lab-server --source . --region asia-south1 --platform managed --allow-unauthenticated
+```
+
+### 2. Frontend (Google Cloud Storage)
+The React SPA is built and hosted as a static website on a Google Cloud Storage bucket.
+
+```bash
+# First, update your production environment variables
+# .env.production: VITE_API_BASE_URL=https://your-cloud-run-url/api
+
+# Build the frontend
+npm run build
+
+# Upload to your public GCS bucket
+gcloud storage cp --recursive dist/* gs://your-bucket-name/
+```
+
+---
+
 ## 🔌 API Endpoints
 
 The Express server exposes the following REST API routes:
