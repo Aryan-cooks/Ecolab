@@ -14,7 +14,7 @@ export default function Sidebar() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/system/stats");
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api"}/system/stats`);
         setSysStats(res.data);
       } catch {
         // silently fallback or ignore on error

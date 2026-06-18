@@ -16,7 +16,7 @@ export default function GlobalTips() {
 
   const fetchTip = useCallback(async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/ai/tips");
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api"}/ai/tips`);
       if (res.data && res.data.tip) {
         setCurrentTip(res.data.tip);
         setIsVisible(true);

@@ -23,6 +23,18 @@
 
 ---
 
+## 🌐 Live Deployment
+
+| Service | URL |
+|---------|-----|
+| **Frontend** | https://storage.googleapis.com/eco-lab-frontend/index.html |
+| **Backend API** | https://eco-lab-server-543804667536.asia-south1.run.app |
+
+> Frontend is hosted on **Google Cloud Storage** (CDN-backed static hosting)  
+> Backend API is hosted on **Google Cloud Run** (serverless container, `asia-south1`)
+
+---
+
 ## 📡 Overview
 
 **ECO-LAB V2.4** is a full-stack carbon footprint tracking web application built with a cyberpunk terminal aesthetic. It empowers users (referred to as *nodes*) to calculate, track, and reduce their personal carbon emissions across transport, food, home energy, and lifestyle sectors.

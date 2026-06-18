@@ -2,7 +2,7 @@ import { create } from "zustand";
 import axios from "axios";
 import { calculateFootprint } from "../utils/calculationEngine";
 
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api";
 
 // Safe axios wrapper that falls back to mock logic if the server is offline
 const api = axios.create({
