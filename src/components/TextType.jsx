@@ -6,7 +6,7 @@ export default function TextType({
   as: ElementTag = "div",
   typingSpeed = 50,
   initialDelay = 0,
-  pauseDuration = 2000,
+  pauseDuration = 300,
   deletingSpeed = 30,
   loop = true,
   className = "",
