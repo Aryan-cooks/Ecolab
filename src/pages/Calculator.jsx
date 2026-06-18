@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useStore } from "../store/useStore";
 import { calculateFootprint } from "../utils/calculationEngine";
 import BorderGlow from "../components/BorderGlow";
+import ElasticSlider from "../components/ElasticSlider";
 
 export default function Calculator() {
   const { saveFootprintResult } = useStore();
@@ -128,16 +129,18 @@ export default function Calculator() {
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] uppercase text-on-surface/60">
-                  Transit_Share_Ratio ({transitPercent}%)
+                  Transit_Share_Ratio
                 </label>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  value={transitPercent}
-                  onChange={(e) => setTransitPercent(parseInt(e.target.value) || 0)}
-                  className="w-full h-1 bg-outline appearance-none cursor-pointer accent-primary mt-3"
-                />
+                <div className="pt-2">
+                  <ElasticSlider
+                    defaultValue={transitPercent}
+                    startingValue={0}
+                    maxValue={100}
+                    onChange={setTransitPercent}
+                    formatValue={(val) => `${Math.round(val)}%`}
+                    className="w-full"
+                  />
+                </div>
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] uppercase text-on-surface/60">
@@ -232,16 +235,18 @@ export default function Calculator() {
               </div>
               <div className="space-y-1 col-span-2">
                 <label className="text-[10px] uppercase text-on-surface/60">
-                  Local_Sourcing_Ratio ({localFoodPercent}%)
+                  Local_Sourcing_Ratio
                 </label>
-                <input
-                  type="range"
-                  min="0"
-                  max="100"
-                  value={localFoodPercent}
-                  onChange={(e) => setLocalFoodPercent(parseInt(e.target.value) || 0)}
-                  className="w-full h-1 bg-outline appearance-none cursor-pointer accent-primary mt-3"
-                />
+                <div className="pt-2">
+                  <ElasticSlider
+                    defaultValue={localFoodPercent}
+                    startingValue={0}
+                    maxValue={100}
+                    onChange={setLocalFoodPercent}
+                    formatValue={(val) => `${Math.round(val)}%`}
+                    className="w-full"
+                  />
+                </div>
               </div>
               <div className="col-span-2 flex items-center gap-4 bg-black/40 p-2 border border-outline/30 mt-2">
                 <div className="flex items-end gap-[2px] h-10">
