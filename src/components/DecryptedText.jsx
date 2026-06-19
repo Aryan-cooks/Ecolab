@@ -325,8 +325,6 @@ export default function DecryptedText({
     }
   };
 
-
-
   /* View Observer */
   useEffect(() => {
     if (animateOn !== "view" && animateOn !== "inViewHover") return;

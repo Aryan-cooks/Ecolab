@@ -7,6 +7,10 @@ import { fileURLToPath } from "url";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import os from "os";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 
 dotenv.config();
 
@@ -17,8 +21,23 @@ const DB_PATH = path.join(__dirname, "db.json");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(helmet());
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "https://storage.googleapis.com"],
+    credentials: true,
+  }),
+);
 app.use(express.json());
+
+// Rate limiter for authentication routes
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10, // Limit each IP to 10 requests per window
+  message: { error: "Too many authentication attempts, please try again after 15 minutes." },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // Database helper functions
 function readDb() {
@@ -45,13 +64,31 @@ function writeDb(data) {
   }
 }
 
+// Auth Middleware
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ error: "Unauthorized" });
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+    req.userId = decoded.uid;
+    next();
+  });
+}
+
 // Root health check (friendly message for direct visits)
 app.get("/", (req, res) => {
   res.json({
     service: "ECO-LAB V2.4 API",
     status: "ONLINE",
     message: "Node awareness confirmed. Access endpoints via /api",
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 });
 
@@ -93,9 +130,8 @@ app.get("/api/system/stats", (req, res) => {
     uptime: os.uptime(),
   });
 });
-
 // Auth: Register
-app.post("/api/auth/register", (req, res) => {
+app.post("/api/auth/register", authLimiter, async (req, res) => {
   const { email, password, displayName } = req.body;
   if (!email || !password || !displayName) {
     return res.status(400).json({ error: "Missing required fields" });
@@ -109,11 +145,12 @@ app.post("/api/auth/register", (req, res) => {
   }
 
   const uid = "user_" + uuidv4().substring(0, 8);
+  const hashedPassword = await bcrypt.hash(password, 10);
   const newUser = {
     uid,
     displayName,
     email,
-    password, // Storing in plain text for demo context (or basic hash)
+    password: hashedPassword,
     location: { city: "Unknown", state: "Unknown", country: "IN" },
     householdSize: 1,
     homeType: "apartment",
@@ -141,20 +178,64 @@ app.post("/api/auth/register", (req, res) => {
   // Exclude password from response
   const userWithoutPassword = { ...newUser };
   delete userWithoutPassword.password;
-  res.json({ user: userWithoutPassword });
+
+  // Generate JWT token
+  const token = jwt.sign({ uid: userWithoutPassword.uid }, process.env.JWT_SECRET, {
+    expiresIn: "7d",
+  });
+
+  res.json({ user: userWithoutPassword, token });
 });
 
 // Auth: Login
-app.post("/api/auth/login", (req, res) => {
+app.post("/api/auth/login", authLimiter, async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ error: "Missing email or password" });
   }
 
   const db = readDb();
-  const user = Object.values(db.users).find((u) => u.email === email && u.password === password);
+  let user;
+
+  // Handle fast boot simulator user bypass on backend
+  if (email === "operator.alpha@eco-impact.net" && password === "security_code_7") {
+    user = db.users["demo_operator_alpha"];
+    if (user) {
+      user.email = "operator.alpha@eco-impact.net";
+      if (!user.password) {
+        user.password = await bcrypt.hash("security_code_7", 10);
+      }
+      db.users["demo_operator_alpha"] = user;
+      writeDb(db);
+    }
+  }
 
   if (!user) {
+    user = Object.values(db.users).find((u) => u.email === email);
+  }
+
+  if (!user) {
+    return res.status(401).json({ error: "Invalid credentials" });
+  }
+
+  // Verify password (supporting bcrypt verification with migration for pre-existing plain text)
+  const isBcryptHash =
+    user.password && (user.password.startsWith("$2b$") || user.password.startsWith("$2a$"));
+  let passwordMatch;
+
+  if (isBcryptHash) {
+    passwordMatch = await bcrypt.compare(password, user.password);
+  } else {
+    passwordMatch = user.password === password;
+    if (passwordMatch) {
+      // Migrate plain text to bcrypt hash
+      user.password = await bcrypt.hash(password, 10);
+      db.users[user.uid] = user;
+      writeDb(db);
+    }
+  }
+
+  if (!passwordMatch) {
     return res.status(401).json({ error: "Invalid credentials" });
   }
 
@@ -165,7 +246,13 @@ app.post("/api/auth/login", (req, res) => {
 
   const userWithoutPassword = { ...user };
   delete userWithoutPassword.password;
-  res.json({ user: userWithoutPassword });
+
+  // Generate JWT token
+  const token = jwt.sign({ uid: userWithoutPassword.uid }, process.env.JWT_SECRET, {
+    expiresIn: "7d",
+  });
+
+  res.json({ user: userWithoutPassword, token });
 });
 
 // 2. Calculate footprint (in-memory, matching client calculation)
@@ -289,10 +376,14 @@ app.post("/api/footprint/calculate", (req, res) => {
 });
 
 // 3. Save footprint calculation to DB
-app.post("/api/footprint/save", (req, res) => {
+app.post("/api/footprint/save", authenticateToken, (req, res) => {
   const { uid, inputs, results } = req.body;
   if (!uid || !inputs || !results) {
     return res.status(400).json({ error: "Missing uid, inputs, or results" });
+  }
+
+  if (req.userId !== uid) {
+    return res.status(403).json({ error: "Forbidden" });
   }
 
   const db = readDb();
@@ -331,8 +422,11 @@ app.post("/api/footprint/save", (req, res) => {
 });
 
 // 4. Fetch footprint history
-app.get("/api/footprint/:uid/history", (req, res) => {
+app.get("/api/footprint/:uid/history", authenticateToken, (req, res) => {
   const { uid } = req.params;
+  if (req.userId !== uid) {
+    return res.status(403).json({ error: "Forbidden" });
+  }
   const db = readDb();
 
   if (!db.footprints[uid] || !db.footprints[uid].logs) {
@@ -351,8 +445,11 @@ app.get("/api/footprint/:uid/history", (req, res) => {
 });
 
 // 5. Generate AI Suggestions (Claude API Proxy with dynamic fallback)
-app.post("/api/ai/suggestions", async (req, res) => {
+app.post("/api/ai/suggestions", authenticateToken, async (req, res) => {
   const { uid, footprintData, userProfile } = req.body;
+  if (req.userId !== uid) {
+    return res.status(403).json({ error: "Forbidden" });
+  }
   if (!footprintData) {
     return res.status(400).json({ error: "Missing footprint data" });
   }
@@ -817,10 +914,14 @@ Output ONLY a raw JSON array of 5 strings. Do not include markdown blocks or any
 });
 
 // 7. Log a completed action
-app.post("/api/actions/log", (req, res) => {
+app.post("/api/actions/log", authenticateToken, (req, res) => {
   const { uid, actionId, actionData } = req.body;
   if (!uid || !actionId || !actionData) {
     return res.status(400).json({ error: "Missing uid, actionId, or actionData" });
+  }
+
+  if (req.userId !== uid) {
+    return res.status(403).json({ error: "Forbidden" });
   }
 
   const db = readDb();
@@ -908,10 +1009,14 @@ app.post("/api/actions/log", (req, res) => {
 });
 
 // 7.5 Add custom suggestion (manual protocol logged as pending)
-app.post("/api/suggestions/custom", (req, res) => {
+app.post("/api/suggestions/custom", authenticateToken, (req, res) => {
   const { uid, suggestion } = req.body;
   if (!uid || !suggestion) {
     return res.status(400).json({ error: "Missing uid or suggestion data" });
+  }
+
+  if (req.userId !== uid) {
+    return res.status(403).json({ error: "Forbidden" });
   }
 
   const db = readDb();
@@ -946,8 +1051,11 @@ app.get("/api/leaderboard", (req, res) => {
 });
 
 // 9. Fetch active completed actions
-app.get("/api/actions/:uid/completed", (req, res) => {
+app.get("/api/actions/:uid/completed", authenticateToken, (req, res) => {
   const { uid } = req.params;
+  if (req.userId !== uid) {
+    return res.status(403).json({ error: "Forbidden" });
+  }
   const db = readDb();
   if (!db.actions[uid] || !db.actions[uid].completed) {
     return res.json([]);
@@ -956,10 +1064,14 @@ app.get("/api/actions/:uid/completed", (req, res) => {
 });
 
 // 10. Update user profile details (onboarding)
-app.post("/api/users/profile", (req, res) => {
+app.post("/api/users/profile", authenticateToken, (req, res) => {
   const { uid, profile } = req.body;
   if (!uid || !profile) {
     return res.status(400).json({ error: "Missing uid or profile data" });
+  }
+
+  if (req.userId !== uid) {
+    return res.status(403).json({ error: "Forbidden" });
   }
 
   const db = readDb();
@@ -1012,8 +1124,11 @@ app.post("/api/users/profile", (req, res) => {
   res.json({ updated: true, user: db.users[uid] });
 });
 
-app.get("/api/users/:uid", (req, res) => {
+app.get("/api/users/:uid", authenticateToken, (req, res) => {
   const { uid } = req.params;
+  if (req.userId !== uid) {
+    return res.status(403).json({ error: "Forbidden" });
+  }
   const db = readDb();
   if (!db.users[uid]) {
     // Return mock register

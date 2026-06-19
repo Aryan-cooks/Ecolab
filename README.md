@@ -25,10 +25,10 @@
 
 ## 🌐 Live Deployment
 
-| Service | URL |
-|---------|-----|
-| **Frontend** | [https://storage.googleapis.com/eco-lab-frontend/index.html](https://storage.googleapis.com/eco-lab-frontend/index.html) |
-| **Backend API** | [https://eco-lab-server-543804667536.asia-south1.run.app](https://eco-lab-server-543804667536.asia-south1.run.app) |
+| Service         | URL                                                                                                                      |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| **Frontend**    | [https://storage.googleapis.com/eco-lab-frontend/index.html](https://storage.googleapis.com/eco-lab-frontend/index.html) |
+| **Backend API** | [https://eco-lab-server-543804667536.asia-south1.run.app](https://eco-lab-server-543804667536.asia-south1.run.app)       |
 
 > Frontend is hosted on **Google Cloud Storage** (CDN-backed static hosting)  
 > Backend API is hosted on **Google Cloud Run** (serverless container, `asia-south1`)
@@ -37,7 +37,7 @@
 
 ## 📡 Overview
 
-**ECO-LAB V2.4** is a full-stack carbon footprint tracking web application built with a cyberpunk terminal aesthetic. It empowers users (referred to as *nodes*) to calculate, track, and reduce their personal carbon emissions across transport, food, home energy, and lifestyle sectors.
+**ECO-LAB V2.4** is a full-stack carbon footprint tracking web application built with a cyberpunk terminal aesthetic. It empowers users (referred to as _nodes_) to calculate, track, and reduce their personal carbon emissions across transport, food, home energy, and lifestyle sectors.
 
 The interface is deliberately raw and tactical — treating climate action not as passive awareness, but as a **critical mission requiring systemic intervention.**
 
@@ -45,24 +45,25 @@ The interface is deliberately raw and tactical — treating climate action not a
 
 ## ✨ Features
 
-| Module | Description |
-|--------|-------------|
-| 🛸 **Landing Page** | Animated cyberpunk entry point with glitch effects and target cursor |
-| 🔐 **Authentication** | Firebase-based login & registration with persistent session |
-| 🗺️ **Onboarding** | Location setup for contextualised emissions data |
-| 📊 **Dashboard** | Live telemetry of footprint breakdown, history, AI tips, and peer comparison |
-| 🧮 **Calculator** | Data Analysis Lab — input 14 parameters across 4 sectors for live CO₂e calculation |
-| 🌿 **Suggestions** | AI-generated (Gemini API) personalised reduction protocols per user vector |
-| 📈 **Tracker** | Vector analytics with historical charts, streaks, and milestone tracking |
-| 💬 **Node Sync Chat** | Real-time AI-powered carbon reduction assistant |
-| 🏆 **Achievements** | Gamified mission milestones and badge system |
-| 📖 **Manifesto Modal** | Sequential terminal-typed mission statement in the sidebar |
+| Module                 | Description                                                                        |
+| ---------------------- | ---------------------------------------------------------------------------------- |
+| 🛸 **Landing Page**    | Animated cyberpunk entry point with glitch effects and target cursor               |
+| 🔐 **Authentication**  | Firebase-based login & registration with persistent session                        |
+| 🗺️ **Onboarding**      | Location setup for contextualised emissions data                                   |
+| 📊 **Dashboard**       | Live telemetry of footprint breakdown, history, AI tips, and peer comparison       |
+| 🧮 **Calculator**      | Data Analysis Lab — input 14 parameters across 4 sectors for live CO₂e calculation |
+| 🌿 **Suggestions**     | AI-generated (Gemini API) personalised reduction protocols per user vector         |
+| 📈 **Tracker**         | Vector analytics with historical charts, streaks, and milestone tracking           |
+| 💬 **Node Sync Chat**  | Real-time AI-powered carbon reduction assistant                                    |
+| 🏆 **Achievements**    | Gamified mission milestones and badge system                                       |
+| 📖 **Manifesto Modal** | Sequential terminal-typed mission statement in the sidebar                         |
 
 ---
 
 ## 🖥️ Tech Stack
 
 ### Frontend (Client)
+
 - **[React 18](https://react.dev)** — Component-based UI framework
 - **[Vite 8](https://vitejs.dev)** — Blazing-fast dev server & bundler
 - **[Tailwind CSS 3](https://tailwindcss.com)** — Utility-first styling with custom cyberpunk design tokens
@@ -74,6 +75,7 @@ The interface is deliberately raw and tactical — treating climate action not a
 - **[Firebase](https://firebase.google.com)** — Authentication
 
 ### Backend (Server)
+
 - **[Node.js](https://nodejs.org) + [Express 4](https://expressjs.com)** — REST API server
 - **[Gemini API](https://ai.google.dev)** — AI-generated sustainability suggestions & chat
 - **[JSON file store](./server/db.json)** — Lightweight persistent data storage
@@ -86,14 +88,14 @@ The interface is deliberately raw and tactical — treating climate action not a
 
 ECO-LAB features a set of premium interactive components translated from React Bits & Vue Bits:
 
-| Component | Description |
-|-----------|-------------|
-| **`TargetCursor`** | Custom GSAP-animated target-lock cursor that snaps to interactive elements |
-| **`DecryptedText`** | Scramble-decrypt text animation on hover/view |
-| **`TextType`** | Sequential terminal typewriter effect with GSAP cursor blinking |
-| **`ElasticSlider`** | Physics-based elastic slider with spring bounce and overflow stretching |
-| **`BorderGlow`** | Edge-sensitive glowing borders that react to cursor proximity |
-| **`LetterGlitch`** | Canvas-based background glitch animation |
+| Component           | Description                                                                |
+| ------------------- | -------------------------------------------------------------------------- |
+| **`TargetCursor`**  | Custom GSAP-animated target-lock cursor that snaps to interactive elements |
+| **`DecryptedText`** | Scramble-decrypt text animation on hover/view                              |
+| **`TextType`**      | Sequential terminal typewriter effect with GSAP cursor blinking            |
+| **`ElasticSlider`** | Physics-based elastic slider with spring bounce and overflow stretching    |
+| **`BorderGlow`**    | Edge-sensitive glowing borders that react to cursor proximity              |
+| **`LetterGlitch`**  | Canvas-based background glitch animation                                   |
 
 ---
 
@@ -201,9 +203,9 @@ GEMINI_API_KEY=your_gemini_api_key_here
 npm run dev
 ```
 
-| Service | URL |
-|---------|-----|
-| Frontend (Vite) | http://localhost:5173 |
+| Service           | URL                   |
+| ----------------- | --------------------- |
+| Frontend (Vite)   | http://localhost:5173 |
 | Backend (Express) | http://localhost:5000 |
 
 ---
@@ -213,6 +215,7 @@ npm run dev
 ECO-LAB is designed to be deployed on Google Cloud:
 
 ### 1. Backend (Google Cloud Run)
+
 The Express API runs as a serverless container on Cloud Run.
 
 ```bash
@@ -221,6 +224,7 @@ gcloud run deploy eco-lab-server --source . --region asia-south1 --platform mana
 ```
 
 ### 2. Frontend (Google Cloud Storage)
+
 The React SPA is built and hosted as a static website on a Google Cloud Storage bucket.
 
 ```bash
@@ -241,35 +245,40 @@ gcloud storage cp --recursive dist/* gs://your-bucket-name/
 The Express server exposes the following REST API routes:
 
 ### Footprint
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/footprint/save` | Save a new footprint snapshot |
-| `GET` | `/api/footprint/:uid` | Get all footprint history for a user |
-| `GET` | `/api/footprint/:uid/latest` | Get the most recent footprint |
+
+| Method | Endpoint                     | Description                          |
+| ------ | ---------------------------- | ------------------------------------ |
+| `POST` | `/api/footprint/save`        | Save a new footprint snapshot        |
+| `GET`  | `/api/footprint/:uid`        | Get all footprint history for a user |
+| `GET`  | `/api/footprint/:uid/latest` | Get the most recent footprint        |
 
 ### Suggestions
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/suggestions/generate` | Generate AI reduction suggestions |
-| `GET` | `/api/suggestions/:uid` | Retrieve cached suggestions |
-| `PATCH` | `/api/suggestions/:uid/:id` | Update suggestion status |
+
+| Method  | Endpoint                    | Description                       |
+| ------- | --------------------------- | --------------------------------- |
+| `POST`  | `/api/suggestions/generate` | Generate AI reduction suggestions |
+| `GET`   | `/api/suggestions/:uid`     | Retrieve cached suggestions       |
+| `PATCH` | `/api/suggestions/:uid/:id` | Update suggestion status          |
 
 ### Chat
-| Method | Endpoint | Description |
-|--------|----------|-------------|
+
+| Method | Endpoint    | Description                               |
+| ------ | ----------- | ----------------------------------------- |
 | `POST` | `/api/chat` | Send a message to the AI carbon assistant |
 
 ### System
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/api/system/stats` | Get live CPU load & server uptime |
-| `GET` | `/api/system/tips` | Get a random AI-generated green tip |
+
+| Method | Endpoint            | Description                         |
+| ------ | ------------------- | ----------------------------------- |
+| `GET`  | `/api/system/stats` | Get live CPU load & server uptime   |
+| `GET`  | `/api/system/tips`  | Get a random AI-generated green tip |
 
 ### Users
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/users` | Create or update a user profile |
-| `GET` | `/api/users/:uid` | Get user profile |
+
+| Method | Endpoint          | Description                     |
+| ------ | ----------------- | ------------------------------- |
+| `POST` | `/api/users`      | Create or update a user profile |
+| `GET`  | `/api/users/:uid` | Get user profile                |
 
 ---
 
@@ -277,11 +286,11 @@ The Express server exposes the following REST API routes:
 
 The `calculationEngine.js` utility computes annual CO₂ equivalent emissions across 4 sectors:
 
-| Sector | Inputs |
-|--------|--------|
-| 🚗 **Transport** | Vehicle type, weekly km, transit share %, annual flights |
-| 🥦 **Food** | Diet type, food waste level, local sourcing % |
-| ⚡ **Home** | Monthly kWh, LPG cylinders/month, home size (m²) |
+| Sector           | Inputs                                                     |
+| ---------------- | ---------------------------------------------------------- |
+| 🚗 **Transport** | Vehicle type, weekly km, transit share %, annual flights   |
+| 🥦 **Food**      | Diet type, food waste level, local sourcing %              |
+| ⚡ **Home**      | Monthly kWh, LPG cylinders/month, home size (m²)           |
 | 👟 **Lifestyle** | Monthly clothing spend, screen hours/day, recycling habits |
 
 Output includes: `totalKg`, `totalTons`, sector `breakdown`, `greenScore`, `level`, and `percentileRank`.
@@ -292,14 +301,14 @@ Output includes: `totalKg`, `totalTons`, sector `breakdown`, `greenScore`, `leve
 
 The cyberpunk theme is defined in `tailwind.config.js` with these core tokens:
 
-| Token | Value | Usage |
-|-------|-------|-------|
+| Token        | Value     | Usage                         |
+| ------------ | --------- | ----------------------------- |
 | `neon-green` | `#00FF41` | Primary accent, borders, text |
-| `neon-amber` | `#FFAA00` | Secondary labels and headers |
-| `neon-red` | `#FF3131` | Alerts, logout, warnings |
-| `surface` | `#0d0d0f` | Card & modal backgrounds |
-| `outline` | `#1f2a1f` | Borders and dividers |
-| `background` | `#000000` | Page background |
+| `neon-amber` | `#FFAA00` | Secondary labels and headers  |
+| `neon-red`   | `#FF3131` | Alerts, logout, warnings      |
+| `surface`    | `#0d0d0f` | Card & modal backgrounds      |
+| `outline`    | `#1f2a1f` | Borders and dividers          |
+| `background` | `#000000` | Page background               |
 
 Custom animations: `scanline`, `terminal-glow`, `glitch`, `matrix-rain`.
 
@@ -307,13 +316,13 @@ Custom animations: `scanline`, `terminal-glow`, `glitch`, `matrix-rain`.
 
 ## 🛠️ Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start both client + server in watch mode |
-| `npm run client` | Start only the Vite frontend |
-| `npm run build` | Build the production bundle |
-| `npm run lint` | Run ESLint across all source files |
-| `npm run preview` | Preview the production build locally |
+| Command           | Description                              |
+| ----------------- | ---------------------------------------- |
+| `npm run dev`     | Start both client + server in watch mode |
+| `npm run client`  | Start only the Vite frontend             |
+| `npm run build`   | Build the production bundle              |
+| `npm run lint`    | Run ESLint across all source files       |
+| `npm run preview` | Preview the production build locally     |
 
 ---
 
@@ -337,6 +346,6 @@ This project is licensed under the **MIT License**. See [LICENSE](LICENSE) for d
 
 **Built with ⚡ and a deep concern for planetary thermal overload.**
 
-*ECO-LAB V2.4 — NODE AWARENESS CONFIRMED.*
+_ECO-LAB V2.4 — NODE AWARENESS CONFIRMED._
 
 </div>

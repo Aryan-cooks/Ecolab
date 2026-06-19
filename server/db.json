@@ -138,6 +138,68 @@
         "completed": true,
         "targetDate": "2026-06-20T13:07:50.567Z"
       }
+    },
+    "user_d43b975a": {
+      "uid": "user_d43b975a",
+      "displayName": "User A",
+      "email": "test_user_a_1781856314101@example.com",
+      "password": "$2b$10$hsRFWjs03NJ9N8Ob0CsUpub.m4TstL.7D2/2ECEkjBP6moL/OR6U.",
+      "location": {
+        "city": "Unknown",
+        "state": "Unknown",
+        "country": "IN"
+      },
+      "householdSize": 1,
+      "homeType": "apartment",
+      "primaryCommute": "transit",
+      "dietType": "vegetarian",
+      "primaryGoal": "Become carbon neutral",
+      "greenScore": 500,
+      "level": "sapling",
+      "streakDays": 1,
+      "lastStreakDate": "2026-06-19T08:05:14.171Z",
+      "badges": [
+        "first_step"
+      ],
+      "createdAt": "2026-06-19T08:05:14.171Z",
+      "lastActiveAt": "2026-06-19T08:05:14.629Z",
+      "weeklyChallenge": {
+        "id": "challenge_w1",
+        "title": "Log your first carbon offset protocol.",
+        "completed": false,
+        "targetDate": "2026-06-26T08:05:14.171Z"
+      }
+    },
+    "user_9d98c612": {
+      "uid": "user_9d98c612",
+      "displayName": "User B",
+      "email": "test_user_b_1781856314101@example.com",
+      "password": "$2b$10$FpotgLSMNGmAyrbzQTYvyu07Z66Ttfpqomz8Jt6NCZtyPc6AnOKbm",
+      "location": {
+        "city": "Unknown",
+        "state": "Unknown",
+        "country": "IN"
+      },
+      "householdSize": 1,
+      "homeType": "apartment",
+      "primaryCommute": "transit",
+      "dietType": "vegetarian",
+      "primaryGoal": "Become carbon neutral",
+      "greenScore": 500,
+      "level": "sapling",
+      "streakDays": 1,
+      "lastStreakDate": "2026-06-19T08:05:14.227Z",
+      "badges": [
+        "first_step"
+      ],
+      "createdAt": "2026-06-19T08:05:14.227Z",
+      "lastActiveAt": "2026-06-19T08:05:14.227Z",
+      "weeklyChallenge": {
+        "id": "challenge_w1",
+        "title": "Log your first carbon offset protocol.",
+        "completed": false,
+        "targetDate": "2026-06-26T08:05:14.227Z"
+      }
     }
   },
   "footprints": {
@@ -1457,8 +1519,8 @@
   },
   "suggestions": {
     "demo_operator_alpha": {
-      "generatedAt": "2026-06-18T10:24:13.670Z",
-      "expiresAt": "2026-06-25T10:24:13.670Z",
+      "generatedAt": "2026-06-18T10:59:30.360Z",
+      "expiresAt": "2026-06-25T10:59:30.360Z",
       "modelVersion": "rules-based-fallback",
       "suggestions": [
         {
@@ -1512,7 +1574,7 @@
           "timeToImplement": "This Month",
           "savingKgPerYear": 820,
           "category": "home",
-          "id": "26b6db1f-15b7-4d58-bdb3-5a7c04a220b3",
+          "id": "50601700-8ea1-4f2b-a4e5-94934df6b1f4",
           "status": "pending"
         },
         {
@@ -1522,7 +1584,7 @@
           "timeToImplement": "This Week",
           "savingKgPerYear": 480,
           "category": "transport",
-          "id": "43e8a300-f23b-4edb-bdc2-ce62923ec8c9",
+          "id": "48041b8e-4e77-445d-90d0-5a2b87983d36",
           "status": "pending"
         },
         {
@@ -1532,7 +1594,7 @@
           "timeToImplement": "Immediate",
           "savingKgPerYear": 320,
           "category": "transport",
-          "id": "e04521c0-d0d7-4b7f-ac61-1a741ceffeff",
+          "id": "a1e3bc40-9f03-4d80-aa02-6a873d84e112",
           "status": "pending"
         },
         {
@@ -1542,7 +1604,7 @@
           "timeToImplement": "Immediate",
           "savingKgPerYear": 180,
           "category": "food",
-          "id": "36bdd2cd-b100-4f2e-9add-b01b33483923",
+          "id": "c49f680c-53ea-43d0-b96d-bc6d2825f0a4",
           "status": "pending"
         },
         {
@@ -1552,7 +1614,7 @@
           "timeToImplement": "This Week",
           "savingKgPerYear": 120,
           "category": "food",
-          "id": "4e8479f9-c3d4-4ac3-9e1d-67e9424e16d9",
+          "id": "bfb67ed7-30bc-4f08-bca1-4c351fee71bc",
           "status": "pending"
         },
         {
@@ -1562,7 +1624,7 @@
           "timeToImplement": "This Month",
           "savingKgPerYear": 340,
           "category": "lifestyle",
-          "id": "8c01cf05-7841-42b4-a1cf-123ddaa15ca6",
+          "id": "7266be05-b961-4735-9484-6fb5409ff0be",
           "status": "pending"
         }
       ]

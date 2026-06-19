@@ -12,6 +12,7 @@ const api = axios.create({
 
 export const useStore = create((set, get) => ({
   user: null,
+  token: null,
   footprint: null,
   suggestions: [],
   progress: [],
@@ -33,6 +34,11 @@ export const useStore = create((set, get) => ({
       set({ offlineMode: true });
     }
 
+    const savedToken = localStorage.getItem("eco_token");
+    if (savedToken) {
+      set({ token: savedToken });
+    }
+
     const savedUser = localStorage.getItem("eco_user");
     if (savedUser) {
       const parsedUser = JSON.parse(savedUser);
@@ -52,7 +58,7 @@ export const useStore = create((set, get) => ({
         set({ footprint: get().progress[0].results });
       }
     } else {
-      set({ user: null, footprint: null });
+      set({ user: null, token: null, footprint: null });
     }
     set({ isLoading: false });
   },
@@ -68,8 +74,9 @@ export const useStore = create((set, get) => ({
           password,
           displayName,
         });
-        set({ user: res.data.user });
+        set({ user: res.data.user, token: res.data.token });
         localStorage.setItem("eco_user", JSON.stringify(res.data.user));
+        localStorage.setItem("eco_token", res.data.token);
       } catch (err) {
         console.error("API signup failed.", err);
         set({
@@ -94,8 +101,13 @@ export const useStore = create((set, get) => ({
   login: async (email, password) => {
     set({ isLoading: true, error: null });
 
-    // Auto-demo bypass check
-    if (email === "operator.alpha@eco-impact.net" && password === "security_code_7") {
+    // Auto-demo bypass check: only bypass online requests if offlineMode is true.
+    // If online, let the backend handle the authentication to receive a real JWT.
+    if (
+      email === "operator.alpha@eco-impact.net" &&
+      password === "security_code_7" &&
+      get().offlineMode
+    ) {
       const defaultUser = {
         uid: "demo_operator_alpha",
         displayName: "Alex Rivera",
@@ -118,8 +130,9 @@ export const useStore = create((set, get) => ({
           targetDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
         },
       };
-      set({ user: defaultUser });
+      set({ user: defaultUser, token: null });
       localStorage.setItem("eco_user", JSON.stringify(defaultUser));
+      localStorage.removeItem("eco_token");
       await get().fetchHistory();
       await get().fetchSuggestions();
       await get().fetchLeaderboard();
@@ -131,8 +144,9 @@ export const useStore = create((set, get) => ({
     if (!get().offlineMode) {
       try {
         const res = await api.post("/auth/login", { email, password });
-        set({ user: res.data.user });
+        set({ user: res.data.user, token: res.data.token });
         localStorage.setItem("eco_user", JSON.stringify(res.data.user));
+        localStorage.setItem("eco_token", res.data.token);
 
         await get().fetchHistory();
         await get().fetchSuggestions();
@@ -162,12 +176,14 @@ export const useStore = create((set, get) => ({
   logout: () => {
     set({
       user: null,
+      token: null,
       footprint: null,
       suggestions: [],
       progress: [],
       actions: [],
     });
     localStorage.removeItem("eco_user");
+    localStorage.removeItem("eco_token");
     localStorage.removeItem("eco_footprint");
   },
 
@@ -816,3 +832,27 @@ function mockChatReply(userText, context) {
 
   return `Understood. Analyzing parameters for "${userText}". To reduce your dominant emissions vector (${topCat}), I suggest looking at your active suggestions checklist or adopting energy efficiency protocols. What specific sub-sector would you like to debug next?`;
 }
+
+api.interceptors.request.use(
+  (config) => {
+    const token = useStore.getState().token || localStorage.getItem("eco_token");
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+      useStore.getState().logout();
+      window.location.hash = "/signup";
+    }
+    return Promise.reject(error);
+  },
+);

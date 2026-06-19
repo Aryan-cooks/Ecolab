@@ -157,6 +157,8 @@ export default function App() {
     initStore();
   }, [initStore]);
 
+  console.log("ECO-LAB V2.4 Initialized");
+
   return (
     <Router>
       <TargetCursor
