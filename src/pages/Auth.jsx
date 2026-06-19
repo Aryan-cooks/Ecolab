@@ -9,6 +9,7 @@ export default function Auth() {
   const [isRegister, setIsRegister] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [displayName, setDisplayName] = useState("");
   const [localError, setLocalError] = useState("");
 
@@ -111,14 +112,26 @@ export default function Auth() {
               <label className="text-[10px] uppercase text-neon-green/60">
                 Clearance Passcode (Password)
               </label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full text-sm py-2 px-3 focus:outline-none"
-                placeholder="••••••••"
-                disabled={isLoading}
-              />
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full text-sm py-2 px-3 pr-10 focus:outline-none"
+                  placeholder="••••••••"
+                  disabled={isLoading}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-neon-green/60 hover:text-neon-green focus:outline-none flex items-center justify-center transition-colors"
+                  title={showPassword ? "Hide Passcode" : "Show Passcode"}
+                >
+                  <span className="material-symbols-outlined text-[18px]">
+                    {showPassword ? "visibility_off" : "visibility"}
+                  </span>
+                </button>
+              </div>
             </div>
 
             <div className="pt-2">

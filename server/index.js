@@ -21,7 +21,9 @@ const DB_PATH = path.join(__dirname, "db.json");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(helmet());
+app.set("trust proxy", 1);
+
+app.use(helmet({ crossOriginResourcePolicy: false }));
 app.use(
   cors({
     origin: ["http://localhost:5173", "https://storage.googleapis.com"],
